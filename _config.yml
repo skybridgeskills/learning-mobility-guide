@@ -1,0 +1,47 @@
+# Jekyll configuration for GitHub Pages
+
+title: Digital Credentialing Issuance, Interoperability, and Verification Guide for Learning Mobility
+description: Technical specification for interoperable digital credentialing systems that power learning mobility
+url: "" # Leave empty for GitHub Pages
+baseurl: "" # Leave empty if repository name is the site name
+
+# GitHub Pages settings
+github: [metadata]
+
+# Markdown processor
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - GITHUB_PAGES_PUBLISHING_PLAN.md
+  - .git
+  - .gitignore
+  - .github
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+
+# Include files that start with underscore
+include:
+  - _pages
+
+# Permalink style
+permalink: pretty
+
+# Theme (using minimal theme for clean look)
+theme: minima
+
+# Site settings
+show_excerpts: true
+

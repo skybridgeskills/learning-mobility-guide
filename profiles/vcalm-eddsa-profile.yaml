@@ -21,9 +21,9 @@ metadata:
     - employers
     - credential wallet providers
   compliance_notes:
-    - "MUST" indicates mandatory requirements for conformance
-    - "SHOULD" indicates recommended practices
-    - "MAY" indicates optional capabilities
+    - \"MUST\" indicates mandatory requirements for conformance
+    - \"SHOULD\" indicates recommended practices
+    - \"MAY\" indicates optional capabilities
 
 # Role-specific requirements
 roles:
