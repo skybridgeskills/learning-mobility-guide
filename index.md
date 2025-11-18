@@ -9,7 +9,7 @@ permalink: /
 
 1. [Introduction and Purpose](#introduction-and-purpose)
 2. [Core Concepts](#core-concepts)
-3. [Workflow Sections](#workflow-sections)
+3. [Workflows](#workflows)
    - [Credential Issuance Workflow](#credential-issuance-workflow)
    - [Credential Storage and Management Workflow](#credential-storage-and-management-workflow)
    - [Credential Presentation Workflow](#credential-presentation-workflow)
@@ -17,6 +17,12 @@ permalink: /
 4. [Component Specifications](#component-specifications)
 5. [Interoperability Profiles](#interoperability-profiles)
 6. [Implementation Guidance](#implementation-guidance)
+   - [Using Profiles in RFPs](#using-profiles-in-rfps)
+   - [Assessing Your Capabilities](#assessing-your-capabilities)
+   - [Organizing Vendor Development Work](#organizing-vendor-development-work)
+   - [Documenting Your System's Supported Profiles](#documenting-your-systems-supported-profiles)
+   - [Growing Networks Organically](#growing-networks-organically)
+7. [Conclusion](#conclusion)
 
 ---
 
