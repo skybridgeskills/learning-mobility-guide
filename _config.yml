@@ -17,16 +17,15 @@ kramdown:
 
 # Plugins
 plugins:
-  - jekyll-feed
   - jekyll-sitemap
 
 # Exclude files from processing
 exclude:
   - README.md
-  - GITHUB_PAGES_PUBLISHING_PLAN.md
   - .git
   - .gitignore
   - .github
+  - .cursor-rules
   - Gemfile
   - Gemfile.lock
   - node_modules

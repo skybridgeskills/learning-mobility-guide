@@ -1,4 +1,9 @@
-# Digital Credentialing Issuance, Interoperability, and Verification Guide for Learning Mobility
+---
+title: Digital Credentialing Issuance, Interoperability, and Verification Guide for Learning Mobility
+description: Guide to organizing interoperable digital credentialing systems that power learning mobility. Defines standardized interoperability profiles for seamless credential exchange across vendors and platforms.
+layout: default
+permalink: /
+---
 
 ## Table of Contents
 
@@ -17,17 +22,19 @@
 
 ## Introduction and Purpose
 
-Learning mobility is the ability for people to carry, build, and articulate their learning—knowledge, skills, competencies, and credentials—across fragmented education and employment systems and throughout their lives. Achieving that vision requires digital credentialing infrastructure that keeps data flowing across the Learning Mobility Framework’s institutional verticals: Skills/Competency Articulation, Micro-Credentialing, Credit for Prior Learning (CPL), Transfer & Credit Mobility, and Workforce Alignment.
+Learning mobility is the ability for people to carry, build, and articulate their learning—knowledge, skills, competencies, and credentials—across fragmented education and employment systems and throughout their lives. Achieving that vision requires digital credentialing infrastructure that keeps data flowing across the Learning Mobility Framework's institutional verticals: Skills/Competency Articulation, Micro-Credentialing, Credit for Prior Learning (CPL), Transfer & Credit Mobility, and Workforce Alignment.
 
-The Digital Credentialing Issuance, Interoperability, and Verification Guide for Learning Mobility translates that framework into procurement-ready specifications for interoperable digital credentialing systems. It defines standardized interoperability profiles that ensure seamless credential exchange across different vendors and platforms so learners can confidently move their verified achievements wherever opportunity takes them.
+Digital credentials are foundational infrastructure for both learning mobility and skills-based hiring systems. They enable learners to carry verified achievements across institutions and employers, while simultaneously enabling employers to identify qualified candidates based on verified competencies rather than traditional proxies like degrees or resumes. This dual function—supporting learner agency while enabling skills-based hiring—makes interoperable digital credentials critical infrastructure for modern education and workforce systems.
 
-Digital credentials act as vehicles that make learning mobility real. When issuers, holders, and verifiers all implement a common interoperability profile, credentials can move from learning environments to transfer evaluators and hiring systems without friction. The guidance in this document helps state, regional, and institutional leaders align their procurement, integration, and implementation activities with the Learning Mobility Framework so every workflow reinforces learner agency.
+The Digital Credentialing Issuance, Interoperability, and Verification Guide for Learning Mobility translates that framework into procurement-ready specifications for interoperable digital credentialing systems. It defines standardized interoperability profiles that ensure seamless credential exchange across different vendors and platforms so learners can confidently move their verified achievements wherever opportunity takes them—whether to transfer institutions, employers, or other verifiers.
+
+Digital credentials act as vehicles that make learning mobility real. When issuers, holders, and verifiers all implement a common interoperability profile, credentials can move from learning environments to transfer evaluators and hiring systems without friction. The guidance in this document helps state, regional, and institutional leaders align their procurement, integration, and implementation activities with the Learning Mobility Framework so every workflow reinforces learner agency and enables skills-based hiring practices.
 
 This guide builds on iterative development work in the digital credentials ecosystem, including interoperability assessments performed as part of the [SkillsFWD](https://skillsfwd.org) program. These assessments confirmed that projects were able to successfully move credentials through end-to-end workflows by implementing interoperability profiles. The SkillsFWD assessments demonstrated a flexible approach that allowed each project to choose its own interoperability profile while ensuring that essential workflows were complete and that the rights and responsibilities defined by the program were fulfilled. This guide codifies those lessons learned into standardized profiles and assessment processes that enable implementers to self-assess and report their readiness to participate in all necessary workflows for their role.
 
 ### Purpose
 
-This guide serves as a technical specification that can be directly incorporated into Request for Proposals (RFPs) and procurement documents. It enables funders and implementing organizations to specify exact technical requirements that ensure interoperability across the entire learning mobility ecosystem.
+This guide serves to organize technical requirements that can be directly incorporated into Request for Proposals (RFPs) and procurement documents. It enables funders and implementing organizations to specify exact technical requirements that ensure interoperability across the entire learning mobility ecosystem. By ensuring credentials can be reliably verified across systems, this guide enables skills-based hiring practices that match candidates to opportunities based on verified competencies rather than traditional credentials alone.
 
 ### Interoperability Profiles for Digital Credentials
 
@@ -38,6 +45,14 @@ An interoperability profile defines a specific combination of standards-based te
 - Exchange protocols for issuance and presentation
 - Status verification methods
 - Trust infrastructure requirements
+
+**How Profiles Enable Digital Credential Exchange**
+
+Interoperability profiles ensure seamless credential exchange across vendors and platforms by standardizing the technical choices that systems must implement. When different vendors' systems—whether issuer platforms, holder wallets, or verifier systems—all conform to the same interoperability profile, they can exchange credentials without requiring custom integrations or bilateral agreements. This standardization eliminates the friction that would otherwise exist when credentials need to move between different technology providers.
+
+**The Power of Community Alignment**
+
+When a community like a state system, regional consortium, or institutional network consistently adopts a particular interoperability profile, digital credentials can be moved effectively between institutions, learners, and employers to support learning mobility workflows. For example, when all institutions in a transfer network implement the same profile, learners can seamlessly carry their verified achievements from one institution to another. When employers in a region adopt the same profile used by local educational institutions, they can confidently verify and accept credentials from any participating issuer. This community-wide alignment transforms digital credentials from isolated technical achievements into infrastructure that powers learning mobility and skills-based hiring.
 
 When a solution or product is compatible with a particular profile, it means that for the roles it occupies (e.g., holder credential management/wallet, issuer system, verifier system), it supports all required operations defined in the interoperability profile for that role.
 
@@ -60,9 +75,24 @@ The digital credentials ecosystem consists of three primary roles:
 - **Holders**: Individuals who receive, store, and present their credentials (learners, workers, job seekers)
 - **Verifiers**: Organizations that request and verify credentials (employers, educational institutions, licensing boards)
 
+### Skills-Based Hiring and Advancement with Digital Credentials
+
+Digital credentials enable skills-based hiring by providing verifiable, machine-readable evidence of competencies that can be matched to job requirements. Unlike traditional resumes or degree requirements, verifiable credentials:
+
+- Provide cryptographic proof of authenticity and current status
+- Enable automated skills matching between candidate credentials and job requirements
+- Support selective disclosure, allowing candidates to share relevant credentials while maintaining privacy
+- Maintain integrity across different hiring platforms and applicant tracking systems
+
+When hiring systems implement interoperability profiles, they can confidently accept and verify credentials from diverse issuers—educational institutions, training providers, certification bodies—enabling a shift from degree-based to skills-based hiring practices. This transformation requires the same interoperable infrastructure that supports learning mobility, making digital credentials critical infrastructure for both educational and workforce systems.
+
 ### Interoperability Profiles
 
 Interoperability profiles solve the challenge of ensuring that different systems can work together seamlessly. Rather than requiring all systems to support every possible standard and protocol combination, profiles define specific, tested combinations that are known to work together. The two initial profiles included in this guide are based on patterns seen in the real world among leading implementers of the W3C Verifiable Credentials and Open Badges standards for learning mobility purposes.
+
+**How Profiles Emerge**
+
+Interoperability profiles emerge from real-world implementation patterns. When multiple organizations implement digital credentials using similar combinations of standards and protocols, and those implementations successfully enable credential exchange, a pattern emerges that can be codified into an interoperability profile. New profiles are typically proposed and documented by communities of implementers who have successfully demonstrated interoperability using a particular combination of standards. These profiles are then validated through real-world testing and may be incorporated into guides like this one to enable broader adoption.
 
 Each profile includes:
 - **Mandatory requirements**: Features that MUST be implemented for conformance
@@ -530,19 +560,65 @@ Both profiles require trust registry integration for issuer validation:
 - Mobile wallet applications
 - Government-issued credentials
 
-### Profile Selection Guidance
+### Selecting an Interoperability Profile for Your Community
 
-**Choose Profile 1 (VCALM-EdDSA) when:**
-- Browser-based credential exchange is preferred
-- EdDSA signatures provide sufficient security
-- Integration with existing web applications is required
-- Educational institutions are primary issuers
+When coordinating a learning mobility ecosystem, selecting the right interoperability profile is critical for minimizing implementation effort while maximizing interoperability. Follow this process:
 
-**Choose Profile 2 (OID4-ECDSA) when:**
-- OAuth 2.0 integration is required
-- ECDSA signatures are mandated by policy
-- Enterprise identity systems are in use
-- Government or regulated industry compliance is required
+**Step 1: Identify Community Participants and Their Roles**
+
+- List all organizations participating in your learning mobility initiative
+- For each organization, identify:
+  - Which workflows they need to participate in (Issuance, Storage/Management, Presentation, Verification)
+  - What roles they will play in each workflow (Issuer, Holder/Wallet, Verifier)
+  - Whether they will use integrated systems (e.g., issuer + wallet in one platform) or separate systems
+
+**Step 2: Inventory Existing Technology Platforms**
+
+- Survey participating organizations to identify:
+  - What credentialing platforms they currently use
+  - What digital credential capabilities they already have implemented
+  - What standards and protocols their existing systems support
+  - Whether they have any vendor relationships or contracts that influence technology choices
+
+**Step 3: Assess Profile Support Across Existing Systems**
+
+- For each candidate interoperability profile, evaluate:
+  - How many existing platforms already support the profile (or key components of it)
+  - What implementation effort would be required for platforms that don't currently support it
+  - Whether any existing systems have dependencies (e.g., specific trust registries, identity providers) that favor one profile over another
+
+**Step 4: Evaluate Implementation Effort**
+
+- For each candidate profile, estimate the total implementation effort across all participants:
+  - Count how many systems would need new implementations vs. configuration changes
+  - Identify which vendors/platforms would require the most development work
+  - Consider whether any participants have constraints (budget, timeline, technical capacity) that limit their ability to implement certain profiles
+
+**Step 5: Select the Best Fit Profile**
+
+- Choose the profile that:
+  - Has the widest support across existing platforms (minimizing new development)
+  - Requires the least total implementation effort across all participants
+  - Meets the technical requirements of your learning mobility goals
+  - Aligns with any policy or compliance requirements
+
+**Technical Considerations:**
+
+- The **VCALM-EdDSA Profile** may be preferable when:
+  - Integration with existing Open Badges tools is desired, as EdDSA is the most widely adopted securing mechanism in the Open Badges ecosystem.
+  - Educational institutions are primary issuers
+
+- The **OID4-ECDSA Profile** may be preferable when:
+  - ECDSA signatures are mandated by policy
+  - Enterprise identity systems are in use
+  - Government or regulated industry compliance on cryptographic sigantures is required
+  - HSM (Hardware Security Module) is required for key storage and management
+
+**Step 6: Document Profile Selection Decision**
+
+- Document which profile was selected and why
+- Record which vendors/platforms already support it and which need to implement it
+- Establish implementation timelines and milestones for systems that need to add support
 
 ### Profile Compatibility Matrix
 
@@ -596,6 +672,47 @@ Each interoperability profile includes checklists organized by workflow and role
 3. **Select Checklists**: Use the checklists that correspond to the system's role(s) in each relevant workflow
 
 For example, a wallet system that participates in both Credential Issuance (as holder) and Credential Presentation (as holder) would need to complete the holder checklists for both workflows.
+
+#### Documenting Profile Support Across a Network
+
+When coordinating multiple vendors and platforms in a learning mobility network, you need to document profile support both for individual vendors and across the entire network.
+
+**For Individual Vendors:**
+
+1. Identify the vendor's system roles across all workflows
+2. For each role, determine which checklists apply
+3. Complete or request vendor self-assessment for each relevant checklist
+4. Document:
+   - Which profile(s) the vendor supports
+   - Which workflows and roles are supported
+   - Implementation status (Fully Implemented / Partially Implemented / Planned / Not Supported)
+   - Any limitations or constraints
+
+**Across Multiple Vendors in a Network:**
+
+1. Create a network-wide profile support matrix:
+   - List all vendors/platforms in the network
+   - For each vendor, document their supported profiles and roles
+   - Identify gaps where no vendor supports a required role for a workflow
+   - Highlight vendors that support multiple roles (e.g., issuer + wallet)
+
+2. Assess network completeness:
+   - Verify that all required workflows have at least one vendor supporting each necessary role
+   - Identify if multiple vendors support the same role (providing redundancy and choice)
+   - Document any dependencies between vendors (e.g., wallet must work with specific issuer platforms)
+
+3. Plan network growth:
+   - Identify which additional vendors or capabilities would strengthen the network
+   - Document which profiles new vendors should support to maximize interoperability
+   - Create a roadmap for expanding network coverage
+
+**Example Network Documentation:**
+
+| Vendor | Profile Support | Issuer Role | Holder Role | Verifier Role | Notes |
+|--------|----------------|-------------|-------------|--------------|-------|
+| Platform A | VCALM-EdDSA | ✓ Full | ✓ Full | - | Primary issuer platform |
+| Platform B | VCALM-EdDSA | - | ✓ Full | ✓ Full | Wallet + verifier |
+| Platform C | OID4-ECDSA | ✓ Partial | - | - | Needs wallet integration |
 
 #### Self-Testing Conformance
 
@@ -694,6 +811,15 @@ When evaluating vendors, use a three-stage process:
    - Verify compliance with all profile requirements for the vendor's roles
    - Confirm that rights and responsibilities are fulfilled
 
+### Organizing Vendor Development Work
+
+Vendors can use this guide to organize their product development and engineering work as they implement support for an interoperability profile. The workflow-by-role checklists provide a structured way to break down implementation work, track progress, and ensure conformance before release.
+
+- **Identify target profile and roles**: Determine which interoperability profile your product needs to support and which roles your system will play in which workflows
+- **Map requirements to development sprints**: Use the role-specific checklists to group related requirements into logical development units, prioritizing mandatory requirements before optional extensions
+- **Track implementation progress**: Use checklists to track which requirements are implemented, in development, or planned, and identify any blockers
+- **Validate conformance before release**: Complete self-assessment against all relevant checklists, conduct end-to-end workflow testing with other profile-conformant systems, and prepare conformance documentation
+
 ### Documenting Your System's Supported Profiles
 
 To enable organic network growth:
@@ -736,10 +862,10 @@ With clear profile requirements, networks can grow organically:
 
 ## Conclusion
 
-The Digital Credentialing Issuance, Interoperability, and Verification Guide for Learning Mobility provides the technical foundation for interoperable digital credentialing systems that power learning mobility. By defining specific interoperability profiles with mandatory requirements, this guide enables reliable credential exchange across different vendors and platforms.
+This guide provides the technical foundation for interoperable digital credentialing systems that power learning mobility and enable skills-based hiring and advancement. By defining specific interoperability profiles with mandatory requirements, this guide enables reliable credential exchange across different vendors and platforms, supporting both learner agency and employer access to verified competency data.
 
-The two defined profiles (VCALM-EdDSA and OID4-ECDSA) cover the most common use cases in learning mobility ecosystems, providing clear technical specifications that can be directly incorporated into procurement documents and implementation plans.
+The two defined profiles (VCALM-EdDSA and OID4-ECDSA) cover most common use cases in learning mobility ecosystems, providing clear technical specifications that can be directly incorporated into procurement documents and implementation plans. These profiles enable credentials to flow seamlessly from educational institutions to hiring systems, supporting the transition to skills-based hiring and advancement practices that match candidates to opportunities based on verified competencies.
 
-Organizations using this guide can confidently specify technical requirements that ensure interoperability, assess vendor capabilities against clear criteria, and build networks that grow organically with new participants able to understand exactly what technical requirements they must meet to participate.
+Organizations using this guide can confidently select technical requirements that ensure interoperability, assess vendor capabilities against clear criteria, and build networks that grow organically with new participants able to understand exactly what technical requirements they must meet to participate. Whether supporting learning mobility across institutions or enabling skills-based hiring in workforce systems, interoperable digital credentials provide the infrastructure needed for modern education and employment ecosystems.
 
-The foundation established by this guide enables the future development of automated testing tools and conformance validation systems that will further reduce the complexity of achieving and maintaining interoperability across learning mobility ecosystems.
+The foundation established by this guide enables the future development of automated testing tools and conformance validation systems that will further reduce the complexity of achieving and maintaining interoperability across learning mobility ecosystems and skills-based hiring systems.

@@ -1,4 +1,6 @@
-# LER Ecosystem Coordination and Interoperability Standards: Current State Analysis
+---
+title: Project Background
+---
 
 The Learning and Employment Records ecosystem has matured significantly as of 2025, with established standards, active implementations, and demonstrated interoperability—yet critical gaps remain in coordination, conformance testing, and trust infrastructure that a comprehensive coordination guide must address.
 
