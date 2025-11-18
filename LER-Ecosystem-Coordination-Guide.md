@@ -1,4 +1,4 @@
-# LER Ecosystem Implementation Coordination Guide
+# Digital Credentialing Issuance, Interoperability, and Verification Guide for Learning Mobility
 
 ## Table of Contents
 
@@ -17,15 +17,21 @@
 
 ## Introduction and Purpose
 
-This LER Ecosystem Implementation Coordination Guide provides procurement-ready specifications for interoperable Learning and Employment Records (LER) systems. The guide defines standardized interoperability profiles that ensure seamless credential exchange across different vendors and platforms.
+Learning mobility is the ability for people to carry, build, and articulate their learning—knowledge, skills, competencies, and credentials—across fragmented education and employment systems and throughout their lives. Achieving that vision requires digital credentialing infrastructure that keeps data flowing across the Learning Mobility Framework’s institutional verticals: Skills/Competency Articulation, Micro-Credentialing, Credit for Prior Learning (CPL), Transfer & Credit Mobility, and Workforce Alignment.
+
+The Digital Credentialing Issuance, Interoperability, and Verification Guide for Learning Mobility translates that framework into procurement-ready specifications for interoperable digital credentialing systems. It defines standardized interoperability profiles that ensure seamless credential exchange across different vendors and platforms so learners can confidently move their verified achievements wherever opportunity takes them.
+
+Digital credentials act as vehicles that make learning mobility real. When issuers, holders, and verifiers all implement a common interoperability profile, credentials can move from learning environments to transfer evaluators and hiring systems without friction. The guidance in this document helps state, regional, and institutional leaders align their procurement, integration, and implementation activities with the Learning Mobility Framework so every workflow reinforces learner agency.
+
+This guide builds on iterative development work in the digital credentials ecosystem, including interoperability assessments performed as part of the [SkillsFWD](https://skillsfwd.org) program. These assessments confirmed that projects were able to successfully move credentials through end-to-end workflows by implementing interoperability profiles. The SkillsFWD assessments demonstrated a flexible approach that allowed each project to choose its own interoperability profile while ensuring that essential workflows were complete and that the rights and responsibilities defined by the program were fulfilled. This guide codifies those lessons learned into standardized profiles and assessment processes that enable implementers to self-assess and report their readiness to participate in all necessary workflows for their role.
 
 ### Purpose
 
-This guide serves as a technical specification that can be directly incorporated into Request for Proposals (RFPs) and procurement documents. It enables funders and implementing organizations to specify exact technical requirements that ensure interoperability across the entire LER ecosystem.
+This guide serves as a technical specification that can be directly incorporated into Request for Proposals (RFPs) and procurement documents. It enables funders and implementing organizations to specify exact technical requirements that ensure interoperability across the entire learning mobility ecosystem.
 
-### Interoperability Profiles
+### Interoperability Profiles for Digital Credentials
 
-An interoperability profile defines a specific combination of standards-based technology choices that work together to provide complete end-to-end LER workflows. Each profile specifies:
+An interoperability profile defines a specific combination of standards-based technology choices that work together to provide complete end-to-end learning mobility workflows. Each profile specifies:
 
 - Credential formats and schemas
 - Cryptographic proof mechanisms
@@ -46,9 +52,9 @@ When a solution or product is compatible with a particular profile, it means tha
 
 ## Core Concepts
 
-### Learning and Employment Records Ecosystem
+### Digital Credentials for Learning Mobility
 
-The LER ecosystem consists of three primary roles:
+The digital credentials ecosystem consists of three primary roles:
 
 - **Issuers**: Organizations that create and issue verifiable credentials (educational institutions, certification bodies, employers)
 - **Holders**: Individuals who receive, store, and present their credentials (learners, workers, job seekers)
@@ -56,7 +62,7 @@ The LER ecosystem consists of three primary roles:
 
 ### Interoperability Profiles
 
-Interoperability profiles solve the challenge of ensuring that different systems can work together seamlessly. Rather than requiring all systems to support every possible standard and protocol combination, profiles define specific, tested combinations that are known to work together. The two initial profiles included in this guide are based on patterns seen in the real world among leading implementers of the W3C Verifiable Credentials and Open Badges standards for LER purposes.
+Interoperability profiles solve the challenge of ensuring that different systems can work together seamlessly. Rather than requiring all systems to support every possible standard and protocol combination, profiles define specific, tested combinations that are known to work together. The two initial profiles included in this guide are based on patterns seen in the real world among leading implementers of the W3C Verifiable Credentials and Open Badges standards for learning mobility purposes.
 
 Each profile includes:
 - **Mandatory requirements**: Features that MUST be implemented for conformance
@@ -70,11 +76,11 @@ As the ecosystem matures, more interoperability profiles will be created to cove
 - **Conformance**: A system that implements all mandatory requirements of a profile
 - **Compatibility**: A system that can interoperate with conformant systems but may not implement all profile requirements itself
 
-This guide focuses on conformance requirements to ensure reliable interoperability. Conformance is sometimes relative to a specific specification and is sometimes measured by an official body related to that standard. For example, the 1EdTech Consortium provides a conformance certification program for Open Badges 3.0 and CLR 2.0. The interoperability profiles here build on these certification programs by going deeper in to the details of the combinations of specifications that may be chosen for the various implementation options within OB and CLR to better ensure end-to-end interoperability across all the implementation roles necessary within a specific LER ecosystem that implements one of the included profiles.
+This guide focuses on role-based conformance requirements to ensure reliable interoperability. Conformance is sometimes relative to a specific specification and is sometimes measured by an official body related to that standard. For example, the 1EdTech Consortium provides a conformance certification program for Open Badges 3.0 and CLR 2.0. The interoperability profiles here build on these certification programs by going deeper into the combinations of specifications that may be chosen for the various implementation options within OB and CLR to better ensure end-to-end interoperability across all the implementation roles necessary within learning mobility ecosystems that implement one of the included profiles.
 
 ---
 
-## Workflow Sections
+## Workflows
 
 ### Credential Issuance Workflow
 
@@ -469,24 +475,119 @@ When incorporating this guide into procurement documents:
    - Include milestones for testing and validation
    - Define acceptance criteria for profile implementation
 
-### Assessing Vendor Capabilities
+### Assessing Your Capabilities
 
-Use the provided vendor checklists to evaluate vendor capabilities:
+This section describes how to assess vendor capabilities using workflow-by-role checklists. Often each technology provider will self-assess, but the same items could be documented by  learning mobility coordinator through an interview process. Interoperability profiles are organized into workflows (such as Credential Issuance, Credential Presentation, Credential Verification) and for each workflow, there are role-specific checklists that define the requirements for each system participating in that workflow.
+
+#### Understanding Workflow-by-Role Checklists
+
+Each interoperability profile includes checklists organized by workflow and role. To determine which checklists apply to a vendor's system:
+
+1. **Identify Workflows**: Determine which workflows are needed for the overall learning mobility strategy and which workflows the vendor's system participates in. For example, in a project to implement credit mobility using digital credentials, the players are educational institutions and learner wallets or persistence applications. The institutions fulfill roles of both issuer and verifier, and a participating wallet integrates with them to complete credential issuance and presentation workflows.
+2. **Identify Roles**: For each workflow, identify the role(s) the system plays:
+   - **Issuer**: Creates and issues credentials
+   - **Holder Wallet or Persistence Application**: Receives, stores, and manages credentials
+   - **Verifier**: Requests and verifies credentials
+3. **Select Checklists**: Use the checklists that correspond to the system's role(s) in each relevant workflow
+
+For example, a wallet system that participates in both Credential Issuance (as holder) and Credential Presentation (as holder) would need to complete the holder checklists for both workflows.
+
+#### Self-Testing Conformance
+
+Vendors can self-test their conformance with a profile by following these steps:
+
+1. **Select the Appropriate Checklist**
+
+   - Choose the interoperability profile your system needs to support or the profiles that the learning mobility coordinator is considering for the project
+   - Map the learning mobility vertical to digital credentials workflows described in the profile. For example, recognizing that a Credit for Prior Leearning (CPL) project may involve an institution issuing fresh credentials to learners based on documentation of their past experience and it may also involve that institution verifying previously issued credentials held by the learner. 
+   - Identify which workflows and which roles in those workflows your system participates in
+   - Select the role-specific checklists for your system's role(s) in each workflow
+
+2. **Complete the Self-Assessment**
+
+For each requirement in the selected checklists, document:
+   - Implementation status (Implemented/Planned/Not Supported)
+   - Any relevant notes or technical details of your implementation or plan; keep it brief to ensure it is quick to complete and review
+   - Timeline for planned implementations
+   - Any limitations or constraints
+
+3. **Test End-to-End Workflows**
+
+   - Demonstrate each workflow your system participates in:
+     - **For Issuers**: Show credential creation and delivery to a holder
+     - **For Holders**: Show credential reception, storage, and presentation to a verifier
+     - **For Verifiers**: Show credential request, reception, and verification
+   - Document the workflow with screenshots or video walkthroughs
+   - Provide example credentials in the standardized format
+
+4. **Assess Workflow Completeness Against Project Goals**
+
+   Assessment ensures that implementations support the learning mobility goals of your project. The SkillsFWD program provides a useful example of how workflow-by-role assessment validates that essential workflows are complete and that project goals can be accomplished. Rather than prescribing specific rights and responsibilities, SkillsFWD created modular checklists for each workflow role, allowing each project to choose its own interoperability profile while ensuring that learners can effectively use their credentials.
+
+#### Example: Learner Control Over Credential Sharing
+
+   To illustrate how this works, consider the principle of learner control over credential sharing. SkillsFWD assessment items verify that learners can share credentials in VC format without substantial restrictions, which supports this principle. The assessment plan includes specific items such as:
+   - Assessing whether learners can share credentials in VC format
+   - Assessing whether learners can export credentials in VC format
+   - Verifying that learners can share credentials in VC format without substantial restrictions
+
+   These assessment items are organized into modular checklists for each workflow role. For example, in the Credential Presentation workflow, holder systems are assessed on their ability to share credentials, while in the Credential Storage and Management workflow, holder systems are assessed on their ability to export credentials. This modular approach allows projects to demonstrate compliance even when credential persistence platforms are integrated into the same software as issuer systems—the assessment verifies that workflows involving learners exporting credentials in interoperable formats can still occur, regardless of system architecture.
+
+   The SkillsFWD program accommodated various workflow configurations, including fully integrated systems where issuer, holder, and verifier roles all exist within a single platform. Even in these cases, the assessment ensured that learners could still export credentials in standardized formats (such as JSON or baked PNG/SVG images) so they could share credentials with verifiers beyond the original project ecosystem. For detailed information on the SkillsFWD assessment methodology and modular checklist approach, see the [SkillsFWD Interoperability Assessment Guide](https://docs.google.com/document/d/1MQ5RNTsOqmrkExzbRIK_nLmI-LVIzN8asYcOO3wFgys/edit?tab=t.0) and [SkillsFWD Technical Interoperability Assessment Plan](https://docs.google.com/document/d/1QvCWeleKYGUtVl5vE-4Qw-fNiwXuyk7_ecFjS1M_ScM/edit?tab=t.0#heading=h.2ilmtyerr4i).
+
+#### Example: State Workforce Agency Micro-Credentialing Initiative
+
+   Consider a state workforce agency planning to execute a learning mobility strategy focused on micro-credentialing for employment. The agency is gathering both higher education institutions and professional continuing learning organizations to offer skills-based micro-credentials that will be consumed within employer and applicant-facing talent marketplace tools.
+
+   **Step 1: Identify Project Goals and Required Workflows**
+   The agency identifies that their micro-credentialing initiative requires:
+   - Credential Issuance workflow (institutions issue micro-credentials to learners)
+   - Credential Presentation workflow (learners present credentials to talent marketplace tools)
+   - Credential Verification workflow (talent marketplace tools verify credentials)
+
+   **Step 2: Map Participants to Workflow Roles**
+   The agency identifies:
+   - **Issuers**: Higher education institutions and professional continuing learning organizations
+   - **Holders**: Learners/workers who earn micro-credentials
+   - **Verifiers**: Talent marketplace platforms used by employers and applicants
+
+   **Step 3: Inventory Existing Technology Platforms**
+   The agency surveys participating institutions and organizations to identify:
+   - Which technology platforms they already use for credential issuance
+   - Whether any platforms integrate multiple roles (e.g., issuer + wallet in same system)
+   - What capabilities existing platforms already support
+
+   **Step 4: Vet and Recommend Technology Partners**
+   The agency identifies two candidate interoperability profiles that could work for their ecosystem. They vet several interested vendors that might be recommended to organizations needing a technology partner. For each vendor, the agency:
+   - Identifies which workflows the vendor's platform participates in
+   - Maps each platform to the roles it needs to fill in the identified workflows
+   - Invites vendors to self-assess against the role-specific checklists for both candidate profiles
+
+   **Step 5: Select Profile and Establish Commitments**
+   After reviewing vendor self-assessments, the agency finds that one interoperability profile has wider support across existing platforms and candidate vendors. This reduces implementation effort and increases the likelihood of successful adoption. The agency then drafts memoranda of understanding (MOUs) with participating institutions, specifying that they must support all requirements of the relevant role-specific checklists by the program launch date.
+
+   This approach ensures that the agency's learning mobility goal—enabling learners to share skills-based micro-credentials with talent marketplace tools—can be accomplished through interoperable credential exchange, while accommodating the diverse technology platforms already in use across participating organizations.
+
+#### Vendor Evaluation Process
+
+When evaluating vendors, use a three-stage process:
 
 1. **Self-Assessment**
-   - Provide vendors with profile-specific checklists
+   - Provide vendors with profile-specific, workflow-by-role checklists
    - Require detailed responses for each capability
-   - Request evidence of existing implementations
+   - Review self-assessment documentation for completeness
 
 2. **Technical Validation**
    - Conduct technical interviews on profile requirements
    - Review vendor architecture and implementation plans
    - Validate understanding of mandatory vs. optional requirements
+   - Verify that workflow-by-role checklists have been correctly applied
 
 3. **Interoperability Testing**
    - Test vendor systems with other profile-conformant systems
    - Validate end-to-end credential workflows
-   - Verify compliance with all profile requirements
+   - Verify compliance with all profile requirements for the vendor's roles
+   - Confirm that rights and responsibilities are fulfilled
 
 ### Documenting Your System's Supported Profiles
 
@@ -530,10 +631,10 @@ With clear profile requirements, networks can grow organically:
 
 ## Conclusion
 
-This LER Ecosystem Implementation Coordination Guide provides the technical foundation for interoperable Learning and Employment Records systems. By defining specific interoperability profiles with mandatory requirements, this guide enables reliable credential exchange across different vendors and platforms.
+The Digital Credentialing Issuance, Interoperability, and Verification Guide for Learning Mobility provides the technical foundation for interoperable digital credentialing systems that power learning mobility. By defining specific interoperability profiles with mandatory requirements, this guide enables reliable credential exchange across different vendors and platforms.
 
-The two defined profiles (VCALM-EdDSA and OID4-ECDSA) cover the most common use cases in the LER ecosystem, providing clear technical specifications that can be directly incorporated into procurement documents and implementation plans.
+The two defined profiles (VCALM-EdDSA and OID4-ECDSA) cover the most common use cases in learning mobility ecosystems, providing clear technical specifications that can be directly incorporated into procurement documents and implementation plans.
 
 Organizations using this guide can confidently specify technical requirements that ensure interoperability, assess vendor capabilities against clear criteria, and build networks that grow organically with new participants able to understand exactly what technical requirements they must meet to participate.
 
-The foundation established by this guide enables the future development of automated testing tools and conformance validation systems that will further reduce the complexity of achieving and maintaining interoperability across the LER ecosystem.
+The foundation established by this guide enables the future development of automated testing tools and conformance validation systems that will further reduce the complexity of achieving and maintaining interoperability across learning mobility ecosystems.
