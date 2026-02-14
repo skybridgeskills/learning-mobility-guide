@@ -28,19 +28,19 @@ permalink: /
 
 ## Introduction and Purpose
 
-Learning mobility is the ability for people to carry, build, and articulate their learning—knowledge, skills, competencies, and credentials—across fragmented education and employment systems and throughout their lives. Achieving that vision requires digital credentialing infrastructure that keeps data flowing across the Learning Mobility Framework's institutional verticals: Skills/Competency Articulation, Micro-Credentialing, Credit for Prior Learning (CPL), Transfer & Credit Mobility, and Workforce Alignment.
+Learning mobility is the ability for people to carry, build, and articulate their learning—knowledge, skills, competencies, and credentials—across education and employment systems and throughout their lives. Achieving that vision requires digital credentialing infrastructure that keeps data flowing across the Learning Mobility Framework's institutional verticals: Skills/Competency Articulation, Micro-Credentialing, Credit for Prior Learning (CPL), Transfer & Credit Mobility, and Workforce Alignment.
 
-Digital credentials are foundational infrastructure for both learning mobility and skills-based hiring systems. They enable learners to carry verified achievements across institutions and employers, while simultaneously enabling employers to identify qualified candidates based on verified competencies rather than traditional proxies like degrees or resumes. This dual function—supporting learner agency while enabling skills-based hiring—makes interoperable digital credentials critical infrastructure for modern education and workforce systems.
+Digital credentials are an element of foundational infrastructure for both learning mobility and skills-based hiring systems. They enable learners to carry verified achievements across institutions and employers, while simultaneously enabling employers to identify qualified candidates based on verified competencies rather than traditional proxies like degrees or resumes. This dual function—supporting learner agency while enabling skills-based hiring—makes interoperable digital credentials critical infrastructure for modern education and workforce systems.
 
-The Digital Credentialing Issuance, Interoperability, and Verification Guide for Learning Mobility translates that framework into procurement-ready specifications for interoperable digital credentialing systems. It defines standardized interoperability profiles that ensure seamless credential exchange across different vendors and platforms so learners can confidently move their verified achievements wherever opportunity takes them—whether to transfer institutions, employers, or other verifiers.
+This guide translates that framework into procurement-ready specifications for interoperable digital credentialing systems. It defines standardized interoperability profiles that ensure seamless credential exchange across different vendors and platforms so learners can confidently move their verified achievements wherever opportunity takes them—whether to transfer institutions, employers, or other verifiers.
 
-Digital credentials act as vehicles that make learning mobility real. When issuers, holders, and verifiers all implement a common interoperability profile, credentials can move from learning environments to transfer evaluators and hiring systems without friction. The guidance in this document helps state, regional, and institutional leaders align their procurement, integration, and implementation activities with the Learning Mobility Framework so every workflow reinforces learner agency and enables skills-based hiring practices.
+Digital credentials act as vehicles that make learning mobility real. When issuers, holders, and verifiers all implement a common interoperability profile, credentials can move from learning environments to transfer evaluators and hiring systems without friction. The guidance in this document helps state, regional, and institutional leaders align their procurement, integration, and implementation activities with the Learning Mobility Framework so every workflow reinforces learner agency and enables skills-based hiring practices. The recommendations in the guide might apply to applications run by educational institutions that issue digital credentials, verification tools operated by employers, or credential holder-facing tools like digital wallets. These wallets may be mobile applications or web applications, but their need to interoperate with other systems is the same.
 
 This guide builds on iterative development work in the digital credentials ecosystem, including interoperability assessments performed as part of the [SkillsFWD](https://skillsfwd.org) program. These assessments confirmed that projects were able to successfully move credentials through end-to-end workflows by implementing interoperability profiles. The SkillsFWD assessments demonstrated a flexible approach that allowed each project to choose its own interoperability profile while ensuring that essential workflows were complete and that the rights and responsibilities defined by the program were fulfilled. This guide codifies those lessons learned into standardized profiles and assessment processes that enable implementers to self-assess and report their readiness to participate in all necessary workflows for their role.
 
 ### Purpose
 
-This guide serves to organize technical requirements that can be directly incorporated into Request for Proposals (RFPs) and procurement documents. It enables funders and implementing organizations to specify exact technical requirements that ensure interoperability across the entire learning mobility ecosystem. By ensuring credentials can be reliably verified across systems, this guide enables skills-based hiring practices that match candidates to opportunities based on verified competencies rather than traditional credentials alone.
+This guide serves to organize technical requirements that can be directly incorporated into Request for Proposals (RFPs) and procurement documents. It enables funders and implementing organizations to specify exact technical requirements that ensure interoperability across the entire learning mobility ecosystem. By ensuring credentials can be reliably verified across systems, this guide enables skills-based hiring practices that match candidates to opportunities based on verified skills or competencies rather than traditional credentials alone.
 
 ### Interoperability Profiles for Digital Credentials
 
@@ -54,7 +54,7 @@ An interoperability profile defines a specific combination of standards-based te
 
 **How Profiles Enable Digital Credential Exchange**
 
-Interoperability profiles ensure seamless credential exchange across vendors and platforms by recommending technical choices that systems must implement. When different vendors' systems—whether issuer platforms, holder wallets, or verifier systems—all conform to the same interoperability profile, they can exchange credentials without requiring custom integrations or bilateral agreements. This standardization eliminates the friction that would otherwise exist when credentials need to move between different technology providers.
+Interoperability profiles ensure seamless credential exchange across vendors and platforms by recommending technical choices that systems must implement. When different vendors' systems—whether issuer platforms, holder wallets, or verifier systems—all conform to the same interoperability profile, they can exchange credentials without requiring custom integrations or direct agreements between every individual pairing of organizations. This standardization eliminates the friction that would otherwise exist when credentials need to move between different technology providers.
 
 **The Power of Community Alignment**
 
@@ -73,7 +73,7 @@ When a solution or product is compatible with a particular profile, it means tha
 
 ## Core Concepts
 
-### Digital Credentials for Learning Mobility
+### Application Roles in a Learning Mobility Ecosystem
 
 The digital credentials ecosystem consists of three primary roles:
 
@@ -83,14 +83,16 @@ The digital credentials ecosystem consists of three primary roles:
 
 ### Skills-Based Hiring and Advancement with Digital Credentials
 
-Digital credentials enable skills-based hiring by providing verifiable, machine-readable evidence of competencies that can be matched to job requirements. Unlike traditional resumes or degree requirements, verifiable credentials:
+Digital credentials enable skills-based hiring by providing verifiable, machine-readable evidence of skills or competencies that can be matched to job requirements. Different organizations may use different terms to describe related concepts like skills, competencies, or capabilities. For the purpose of this guide, we may use these terms interchangeably to describe a person's capability that could be recognized using a digital credential or that may be required to perform a particular job role. 
+
+Unlike traditional resumes or degree requirements, verifiable credentials enable skills-based hiring in more powerful ways:
 
 - Provide cryptographic proof of authenticity and current status
 - Enable automated skills matching between candidate credentials and job requirements
-- Support selective disclosure, allowing candidates to share relevant credentials while maintaining privacy
+- Support some forms of selective disclosure, allowing candidates to share relevant credentials without necessarily exposing less relevant data.
 - Maintain integrity across different hiring platforms and applicant tracking systems
 
-When hiring systems implement interoperability profiles, they can confidently accept and verify credentials from diverse issuers—educational institutions, training providers, certification bodies—enabling a shift from degree-based to skills-based hiring practices. This transformation requires the same interoperable infrastructure that supports learning mobility, making digital credentials critical infrastructure for both educational and workforce systems.
+When hiring systems implement an interoperability profile in a verifier role, they can confidently accept and verify credentials from diverse issuers—educational institutions, training providers, and certification bodies that use that profile. 
 
 ### Interoperability Profiles
 
@@ -103,7 +105,6 @@ Interoperability profiles emerge from real-world implementation patterns. When m
 Each profile includes:
 - **Mandatory requirements**: Features that MUST be implemented for conformance
 - **Optional extensions**: Features that MAY be implemented for enhanced functionality
-- **Deprecated features**: Features that SHOULD NOT be used in new implementations
 
 As the ecosystem matures, more interoperability profiles will be created to cover specific use cases and requirements as well as to take advantage of new standards and protocols that are developed, such as cryptographic signatures with more advanced protections against quantum computing attacks. 
 
