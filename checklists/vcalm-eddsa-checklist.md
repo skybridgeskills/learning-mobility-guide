@@ -289,21 +289,6 @@ For each requirement:
 [Please provide detailed technical information about your trust registry integration implementation]
 ```
 
-#### Audit Logging
-
-**Description:** Maintain audit logs for verification activities
-
-**Requirements:**
-- [ ] MUST log all credential verification attempts
-- [ ] MUST log verification results and decisions
-- [ ] MUST maintain audit trail for compliance
-- [ ] MUST implement secure log storage and retention
-
-**Implementation Details:**
-```
-[Please provide detailed technical information about your audit logging implementation]
-```
-
 ---
 
 ## Protocol Support
@@ -392,7 +377,6 @@ For each requirement:
 - [ ] Encryption at rest
 - [ ] Encryption in transit
 - [ ] Access controls
-- [ ] Audit logging
 
 ### Privacy
 - [ ] User consent mechanisms
@@ -414,12 +398,6 @@ For each requirement:
 - [ ] Profile-specific conformance tests
 - [ ] Interoperability testing with other systems
 - [ ] Test results documentation
-
-### Security Testing
-- [ ] Security audit completed
-- [ ] Penetration testing completed
-- [ ] Vulnerability disclosure process
-- [ ] Security incident response plan
 
 ---
 

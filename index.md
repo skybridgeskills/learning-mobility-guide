@@ -54,7 +54,7 @@ An interoperability profile defines a specific combination of standards-based te
 
 **How Profiles Enable Digital Credential Exchange**
 
-Interoperability profiles ensure seamless credential exchange across vendors and platforms by standardizing the technical choices that systems must implement. When different vendors' systems—whether issuer platforms, holder wallets, or verifier systems—all conform to the same interoperability profile, they can exchange credentials without requiring custom integrations or bilateral agreements. This standardization eliminates the friction that would otherwise exist when credentials need to move between different technology providers.
+Interoperability profiles ensure seamless credential exchange across vendors and platforms by recommending technical choices that systems must implement. When different vendors' systems—whether issuer platforms, holder wallets, or verifier systems—all conform to the same interoperability profile, they can exchange credentials without requiring custom integrations or bilateral agreements. This standardization eliminates the friction that would otherwise exist when credentials need to move between different technology providers.
 
 **The Power of Community Alignment**
 
@@ -367,7 +367,6 @@ This workflow involves one primary role:
 - MUST check credential status using Bitstring Status List
 - MUST verify issuer identity and authorization
 - MUST implement trust registry integration
-- MUST provide audit logging for verification activities
 
 **Profile-Specific Requirements:**
 
@@ -409,13 +408,11 @@ The verification process uses profile-specific cryptographic suites, but the ove
   - [Signature Verification](checklists/vcalm-eddsa-checklist.md#signature-verification-1)
   - [Status Verification](checklists/vcalm-eddsa-checklist.md#status-verification)
   - [Trust Registry Integration](checklists/vcalm-eddsa-checklist.md#trust-registry-integration)
-  - [Audit Logging](checklists/vcalm-eddsa-checklist.md#audit-logging)
 - Profile 2 (OID4-ECDSA): See [Verifier System Requirements](checklists/oid4-ecdsa-checklist.md#verifier-system-requirements) in OID4-ECDSA checklist, specifically:
   - [Credential Validation](checklists/oid4-ecdsa-checklist.md#credential-validation-1)
   - [Signature Verification](checklists/oid4-ecdsa-checklist.md#signature-verification-2)
   - [Status Verification](checklists/oid4-ecdsa-checklist.md#status-verification-1)
   - [Trust Registry Integration](checklists/oid4-ecdsa-checklist.md#trust-registry-integration-1)
-  - [Audit Logging](checklists/oid4-ecdsa-checklist.md#audit-logging-1)
 
 ---
 
@@ -520,7 +517,6 @@ Both profiles require trust registry integration for issuer validation:
 - MUST implement trust registry query protocols
 - MUST cache trust registry data for performance
 - MUST handle trust registry unavailability
-- MUST provide audit logging for trust decisions
 
 ---
 

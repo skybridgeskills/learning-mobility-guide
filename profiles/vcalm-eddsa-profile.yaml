@@ -176,13 +176,6 @@ roles:
             - MUST check for issuer revocation or suspension
             - MUST maintain current trust registry data
             - MUST implement trust registry query protocols
-      - audit_logging:
-          description: "Maintain audit logs for verification activities"
-          requirements:
-            - MUST log all credential verification attempts
-            - MUST log verification results and decisions
-            - MUST maintain audit trail for compliance
-            - MUST implement secure log storage and retention
     protocols:
       - name: VCALM Exchanges
         version: "1.0"
@@ -289,7 +282,6 @@ security:
     - MUST implement data encryption at rest
     - MUST implement data encryption in transit
     - MUST implement proper access controls
-    - MUST implement audit logging
   
   privacy:
     - MUST implement user consent mechanisms
@@ -314,11 +306,6 @@ testing:
     - MUST participate in interoperability testing events
     - MUST demonstrate end-to-end credential workflows
     - MUST validate cross-vendor compatibility
-  
-  security_testing:
-    - MUST undergo security audit and penetration testing
-    - MUST implement vulnerability disclosure process
-    - MUST maintain security incident response plan
 
 # Implementation notes
 implementation_notes:

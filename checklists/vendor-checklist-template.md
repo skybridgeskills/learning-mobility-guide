@@ -155,7 +155,6 @@ Please provide detailed responses for each capability, including:
 - [ ] Encryption at rest
 - [ ] Encryption in transit
 - [ ] Access controls
-- [ ] Audit logging
 
 ### Privacy
 - [ ] User consent mechanisms
@@ -177,12 +176,6 @@ Please provide detailed responses for each capability, including:
 - [ ] Profile-specific conformance tests
 - [ ] Interoperability testing with other systems
 - [ ] Test results documentation
-
-### Security Testing
-- [ ] Security audit completed
-- [ ] Penetration testing completed
-- [ ] Vulnerability disclosure process
-- [ ] Security incident response plan
 
 ---
 
