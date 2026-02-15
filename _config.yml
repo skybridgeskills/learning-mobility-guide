@@ -30,6 +30,8 @@ exclude:
   - Gemfile.lock
   - node_modules
   - vendor
+  - docker-compose.yml
+  - docs
 
 # Include files that start with underscore
 include:
