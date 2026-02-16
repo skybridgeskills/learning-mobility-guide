@@ -1,25 +1,26 @@
-profile_id: vcalm-eddsa-v1
-profile_name: VCALM EdDSA Profile
+profile_id: ob3-direct-delivery-v1
+profile_name: OB 3.0 Direct Delivery Profile
 version: 0.0.1
 description: |
-  Profile using VCALM Exchanges for credential issuance and presentation with EdDSA signatures.
-  This profile is optimized for browser-based credential exchange workflows.
+  Profile using EdDSA cryptographic signatures with Open Badges 3.0 schema for direct credential issuance and verification.
+  This profile supports direct-download/copy JSON and upload/paste workflows without protocol-based delivery.
+  Uses email address-based identifiers for recipients in credentialSubject.
 
-last_updated: 2025-10-15
+last_updated: 2026-02-14
 status: active
 
 # Profile metadata
 metadata:
   use_cases:
-    - browser-based credential exchange
-    - educational credential issuance and verification
-    - skills-based hiring workflows
-    - cross-institutional credential transfer
+    - direct credential download and file sharing
+    - email-based credential delivery
+    - copy-paste credential workflows
+    - simple credential issuance without wallet integration
   target_audience:
     - educational institutions
     - certification bodies
     - employers
-    - credential wallet providers
+    - credential verification systems
   compliance_notes:
     - \"MUST\" indicates mandatory requirements for conformance
     - \"SHOULD\" indicates recommended practices
@@ -27,8 +28,8 @@ metadata:
 
 # Workflow-based requirements
 workflows:
-  credential_issuance:
-    description: "Workflow for issuers to create and deliver credentials to holders"
+  direct_credential_issuance:
+    description: "Workflow for issuers to create and deliver credentials directly as downloadable files or copy-paste JSON"
     participating_roles: [issuer]
     interoperability_requirements:
       issuer:
@@ -40,6 +41,7 @@ workflows:
               - MUST include all mandatory Open Badges 3.0 fields
               - MUST support credential expiration dates
               - MUST implement credential versioning
+              - MUST use email address-based identifiers for credentialSubject (per Open Badges 3.0 spec)
         - cryptographic_signing:
             description: "Sign credentials using EdDSA with RDF Dataset Canonicalization"
             requirements:
@@ -47,14 +49,13 @@ workflows:
               - MUST use Ed25519 signature algorithm
               - MUST include proof creation date in Data Integrity proof
               - MUST include verification method reference in proof
-        - vcalm_exchanges:
-            description: "Implement VCALM Exchanges protocol for credential delivery"
+        - credential_delivery:
+            description: "Provide credentials as downloadable files or copy-paste JSON"
             requirements:
-              - MUST implement VCALM Exchanges specification
-              - MUST support credential offer generation
-              - MUST handle credential request processing
-              - MUST provide credential delivery endpoint
-              - MUST implement proper error handling and status codes
+              - MUST provide credential as downloadable file (JSON format)
+              - MUST provide credential as copy-paste JSON text
+              - MUST ensure credential can be saved and shared by recipients
+              - MUST implement proper file format validation
         - status_management:
             description: "Implement Bitstring Status List for credential status"
             requirements:
@@ -69,10 +70,6 @@ workflows:
               - MUST include verification methods for Ed25519 keys
               - MUST support DID resolution
               - MAY support DID documents with multiple verification methods
-        - encryption_in_transit:
-            description: "Ensure secure transmission of credentials"
-            requirements:
-              - MUST implement data encryption in transit
     internal_practices:
       issuer:
         - key_rotation_policies:
@@ -86,98 +83,25 @@ workflows:
             requirements:
               - SHOULD handle status list versioning
               - SHOULD update status list when credentials are revoked
-    protocols:
-      - name: VCALM Exchanges
-        version: "1.0"
-        specification: "https://w3c.github.io/vc-api/"
-        endpoints:
-          - credential_offer: "/credential-offer"
-          - credential_request: "/credential-request"
-          - credential_delivery: "/credential-delivery"
-          - status_list: "/status-list"
+        - user_authentication:
+            description: "Internal user authentication for credential requests"
+            requirements:
+              - SHOULD implement secure user authentication (SSO/login)
+              - SHOULD verify user identity before credential issuance
+    protocols: []
 
-  credential_acceptance:
-    description: "Workflow for holders to receive and accept credentials from issuers"
-    participating_roles: [holder]
-    interoperability_requirements:
-      holder:
-        - credential_reception:
-            description: "Receive credentials via VCALM Exchanges protocol"
-            requirements:
-              - MUST implement VCALM Exchanges specification
-              - MUST handle credential offers from issuers
-              - MUST implement user consent mechanisms
-        - signature_verification:
-            description: "Verify EdDSA signatures on received credentials"
-            requirements:
-              - MUST verify eddsa-rdfc-2022 signatures
-              - MUST resolve issuer DIDs to obtain verification keys
-              - MUST validate proof creation dates and expiration
-              - MUST handle signature verification failures gracefully
-        - status_checking:
-            description: "Check credential status using Bitstring Status List"
-            requirements:
-              - MUST implement Bitstring Status List checking
-              - MUST provide real-time status verification
-              - MUST cache status information appropriately
-              - MUST handle status service unavailability
-        - credential_export:
-            description: "Export credentials in standard formats"
-            requirements:
-              - MUST support credential export in standard formats
-              - MUST preserve original credential proofs and signatures
-        - did_management:
-            description: "Manage holder identity using supported DID methods"
-            requirements:
-              - MUST support did:web or did:key DID methods
-              - MUST generate and manage Ed25519 key pairs
-              - MUST maintain current DID document
-              - MUST support DID resolution
-        - encryption_in_transit:
-            description: "Ensure secure transmission of credentials"
-            requirements:
-              - MUST implement data encryption in transit
-    internal_practices:
-      holder:
-        - credential_storage:
-            description: "Internal credential storage and management"
-            requirements:
-              - SHOULD provide secure storage for W3C Verifiable Credentials
-              - SHOULD support credential organization and categorization
-              - SHOULD provide credential sharing controls
-        - credential_display:
-            description: "Internal credential display and user interface"
-            requirements:
-              - SHOULD render Open Badges 3.0 credentials with proper formatting
-              - SHOULD display credential metadata and evidence
-              - SHOULD show credential status and expiration
-              - SHOULD provide credential sharing interface
-    protocols:
-      - name: VCALM Exchanges
-        version: "1.0"
-        specification: "https://w3c.github.io/vc-api/"
-        capabilities:
-          - credential_reception
-
-  credential_request_and_verification:
-    description: "Workflow for verifiers to request credentials from holders and validate received credentials"
+  direct_credential_verification:
+    description: "Workflow for verifiers to validate credentials received as files or copy-paste JSON"
     participating_roles: [verifier]
     interoperability_requirements:
       verifier:
-        - request_creation:
-            description: "Create and send credential requests"
+        - credential_import:
+            description: "Import credentials from files or copy-paste JSON"
             requirements:
-              - MUST implement VCALM Exchanges specification
-              - MUST generate credential requests with proper scopes
-              - MUST provide credential request endpoint
-              - MUST implement proper error handling and status codes
-              - MUST construct presentation requests asking for specific credential types and attributes
-        - presentation_reception:
-            description: "Receive verifiable presentations from holders"
-            requirements:
-              - MUST handle credential presentations from wallets
-              - MUST validate presentation structure and format
-              - MUST extract credentials from presentations
+              - MUST accept credentials as JSON files
+              - MUST accept credentials as copy-paste JSON text
+              - MUST validate JSON structure before processing
+              - MUST handle malformed credentials gracefully
         - credential_validation:
             description: "Validate received verifiable credentials"
             requirements:
@@ -214,10 +138,6 @@ workflows:
               - MUST implement protection against replay attacks
               - MUST implement protection against credential forgery
               - MUST implement protection against status list manipulation
-        - encryption_in_transit:
-            description: "Ensure secure transmission of requests and credentials"
-            requirements:
-              - MUST implement data encryption in transit
     internal_practices:
       verifier:
         - error_logging:
@@ -228,46 +148,6 @@ workflows:
             description: "Internal trust registry data management"
             requirements:
               - SHOULD maintain current trust registry data
-    protocols:
-      - name: VCALM Exchanges
-        version: "1.0"
-        specification: "https://w3c.github.io/vc-api/"
-        endpoints:
-          - credential_request: "/credential-request"
-          - credential_presentation: "/credential-presentation"
-
-  credential_presentation:
-    description: "Workflow for holders to present credentials to verifiers"
-    participating_roles: [holder]
-    interoperability_requirements:
-      holder:
-        - presentation_creation:
-            description: "Create and send credential presentations"
-            requirements:
-              - MUST implement VCALM Exchanges specification
-              - MUST process credential requests from verifiers
-              - MUST provide credential presentation interface
-              - MUST implement user consent mechanisms
-              - MUST create verifiable presentations with EdDSA signatures
-        - did_management:
-            description: "Manage holder identity for presentations"
-            requirements:
-              - MUST support did:web or did:key DID methods
-              - MUST generate and manage Ed25519 key pairs for presentations
-              - MUST maintain current DID document
-              - MUST support DID resolution
-        - encryption_in_transit:
-            description: "Ensure secure transmission of presentations"
-            requirements:
-              - MUST implement data encryption in transit
-    internal_practices:
-      holder: []
-    protocols:
-      - name: VCALM Exchanges
-        version: "1.0"
-        specification: "https://w3c.github.io/vc-api/"
-        capabilities:
-          - credential_presentation
 
 # Internal operation requirements
 # These requirements cannot be tested via interoperability workflows but may be important for procurement
@@ -293,30 +173,6 @@ internal_operation_requirements:
         description: "Internal audit and logging"
         requirements:
           - SHOULD implement audit logging
-  holder:
-    - credential_storage:
-        description: "Internal credential storage"
-        requirements:
-          - SHOULD provide secure storage for W3C Verifiable Credentials
-          - SHOULD support credential organization and categorization
-          - SHOULD provide credential sharing controls
-    - credential_display:
-        description: "Internal credential display"
-        requirements:
-          - SHOULD render Open Badges 3.0 credentials with proper formatting
-          - SHOULD display credential metadata and evidence
-          - SHOULD show credential status and expiration
-          - SHOULD provide credential sharing interface
-    - data_protection:
-        description: "Internal data protection"
-        requirements:
-          - SHOULD implement data encryption at rest
-          - SHOULD implement proper access controls
-    - privacy:
-        description: "Internal privacy practices"
-        requirements:
-          - SHOULD implement data minimization
-          - SHOULD comply with applicable privacy regulations
   verifier:
     - data_protection:
         description: "Internal data protection"
@@ -364,6 +220,7 @@ credential_format:
     - MUST validate credential expiration dates
     - MUST validate issuer DID format
     - MUST validate credential subject structure
+    - MUST validate email-based identifiers in credentialSubject
 
 # Cryptographic specifications
 cryptography:
@@ -422,10 +279,11 @@ testing:
 
 # Implementation notes
 implementation_notes:
-  - "This profile is optimized for browser-based credential exchange"
+  - "This profile supports direct credential download and file sharing workflows"
   - "EdDSA signatures provide strong security with efficient performance"
-  - "VCALM Exchanges enable seamless web application integration"
+  - "Email-based identifiers enable simple credential delivery without wallet integration"
   - "Profile conformance requires implementation of all mandatory requirements"
   - "Optional extensions may be implemented for enhanced functionality"
   - "Requirements are organized by workflow to clarify interoperability testing scope"
   - "Internal operation requirements cannot be tested via interoperability but may be important for procurement"
+  - "No protocol-based delivery is required - credentials are provided as files or JSON text"

@@ -25,51 +25,69 @@ metadata:
     - '"SHOULD" indicates recommended practices'
     - '"MAY" indicates optional capabilities'
 
-# Role-specific requirements
-roles:
-  issuer:
-    required_capabilities:
-      - credential_creation:
-          description: "Create W3C Verifiable Credentials with Open Badges 3.0 schema"
-          requirements:
-            - MUST generate W3C Verifiable Credentials Data Model 2.0 compliant credentials
-            - MUST use Open Badges 3.0 credential schema
-            - MUST include all mandatory Open Badges 3.0 fields
-            - MUST support credential expiration dates
-            - MUST implement credential versioning
-      - cryptographic_signing:
-          description: "Sign credentials using ECDSA with RDF Dataset Canonicalization"
-          requirements:
-            - MUST use ecdsa-rdfc-2019 cryptographic suite
-            - MUST use P-256 signature algorithm
-            - MUST include proof creation date in Data Integrity proof
-            - MUST include verification method reference in proof
-            - MUST support key rotation and revocation
-      - oid4vci:
-          description: "Implement OID4VCI v1.0 for credential issuance"
-          requirements:
-            - MUST implement OID4VCI v1.0 specification
-            - MUST support authorization code flow
-            - MUST support pre-authorized code flow
-            - MUST provide credential issuer metadata endpoint
-            - MUST implement OAuth 2.0 protected credential endpoint
-            - MUST handle credential request processing
-            - MUST implement proper error handling and status codes
-      - status_management:
-          description: "Implement Bitstring Status List for credential status"
-          requirements:
-            - MUST maintain current Bitstring Status List
-            - MUST sign status list with issuer key
-            - MUST provide status list endpoint
-            - MUST update status list when credentials are revoked
-            - MUST handle status list versioning
-      - did_management:
-          description: "Manage issuer identity using supported DID methods"
-          requirements:
-            - MUST support did:web or did:key DID methods
-            - MUST maintain current DID document
-            - MUST include verification methods for P-256 keys
-            - MUST support DID resolution
+# Workflow-based requirements
+workflows:
+  credential_issuance:
+    description: "Workflow for issuers to create and deliver credentials to holders"
+    participating_roles: [issuer]
+    interoperability_requirements:
+      issuer:
+        - credential_creation:
+            description: "Create W3C Verifiable Credentials with Open Badges 3.0 schema"
+            requirements:
+              - MUST generate W3C Verifiable Credentials Data Model 2.0 compliant credentials
+              - MUST use Open Badges 3.0 credential schema
+              - MUST include all mandatory Open Badges 3.0 fields
+              - MUST support credential expiration dates
+              - MUST implement credential versioning
+        - cryptographic_signing:
+            description: "Sign credentials using ECDSA with RDF Dataset Canonicalization"
+            requirements:
+              - MUST use ecdsa-rdfc-2019 cryptographic suite
+              - MUST use P-256 signature algorithm
+              - MUST include proof creation date in Data Integrity proof
+              - MUST include verification method reference in proof
+        - oid4vci:
+            description: "Implement OID4VCI v1.0 for credential issuance"
+            requirements:
+              - MUST implement OID4VCI v1.0 specification
+              - MUST support authorization code flow
+              - MUST support pre-authorized code flow
+              - MUST provide credential issuer metadata endpoint
+              - MUST implement OAuth 2.0 protected credential endpoint
+              - MUST handle credential request processing
+              - MUST implement proper error handling and status codes
+        - status_management:
+            description: "Implement Bitstring Status List for credential status"
+            requirements:
+              - MUST maintain current Bitstring Status List
+              - MUST sign status list with issuer key
+              - MUST provide status list endpoint
+        - did_management:
+            description: "Manage issuer identity using supported DID methods"
+            requirements:
+              - MUST support did:web or did:key DID methods
+              - MUST maintain current DID document
+              - MUST include verification methods for P-256 keys
+              - MUST support DID resolution
+              - MAY support DID documents with multiple verification methods
+        - encryption_in_transit:
+            description: "Ensure secure transmission of credentials"
+            requirements:
+              - MUST implement data encryption in transit
+    internal_practices:
+      issuer:
+        - key_rotation_policies:
+            description: "Internal key management practices"
+            requirements:
+              - SHOULD implement key rotation policies
+              - SHOULD implement secure key backup and recovery
+              - SHOULD support hardware security module integration
+        - status_list_versioning:
+            description: "Internal status list management"
+            requirements:
+              - SHOULD handle status list versioning
+              - SHOULD update status list when credentials are revoked
     protocols:
       - name: OID4VCI
         version: "1.0"
@@ -81,64 +99,67 @@ roles:
           - credential: "/credential"
           - status_list: "/status-list"
 
-  wallet:
-    required_capabilities:
-      - credential_storage:
-          description: "Securely store and manage verifiable credentials"
-          requirements:
-            - MUST provide secure storage for W3C Verifiable Credentials
-            - MUST preserve original credential proofs and signatures
-            - MUST support credential organization and categorization
-            - MUST implement credential backup and recovery
-            - MUST provide credential sharing controls
-      - credential_display:
-          description: "Display Open Badges 3.0 credentials to users"
-          requirements:
-            - MUST render Open Badges 3.0 credentials with proper formatting
-            - MUST display credential metadata and evidence
-            - MUST show credential status and expiration
-            - MUST provide credential sharing interface
-            - MUST support credential export in standard formats
-      - oid4vci:
-          description: "Implement OID4VCI v1.0 for credential reception"
-          requirements:
-            - MUST implement OID4VCI v1.0 specification
-            - MUST support authorization code flow
-            - MUST support pre-authorized code flow
-            - MUST handle credential issuer metadata discovery
-            - MUST implement OAuth 2.0 client functionality
-            - MUST process credential responses
-            - MUST implement proper error handling
-      - oid4vp:
-          description: "Implement OID4VP v1.0 for credential presentation"
-          requirements:
-            - MUST implement OID4VP v1.0 specification
-            - MUST support authorization code flow
-            - MUST handle presentation requests from verifiers
-            - MUST provide credential presentation interface
-            - MUST implement user consent mechanisms
-            - MUST support selective disclosure
-      - signature_verification:
-          description: "Verify ECDSA signatures on received credentials"
-          requirements:
-            - MUST verify ecdsa-rdfc-2019 signatures
-            - MUST resolve issuer DIDs to obtain verification keys
-            - MUST validate proof creation dates and expiration
-            - MUST handle signature verification failures gracefully
-      - status_checking:
-          description: "Check credential status using Bitstring Status List"
-          requirements:
-            - MUST implement Bitstring Status List checking
-            - MUST provide real-time status verification
-            - MUST cache status information appropriately
-            - MUST handle status service unavailability
-      - did_management:
-          description: "Manage holder identity using supported DID methods"
-          requirements:
-            - MUST support did:web or did:key DID methods
-            - MUST generate and manage P-256 key pairs
-            - MUST maintain current DID document
-            - MUST support DID resolution
+  credential_acceptance:
+    description: "Workflow for holders to receive and accept credentials from issuers"
+    participating_roles: [holder]
+    interoperability_requirements:
+      holder:
+        - credential_reception:
+            description: "Receive credentials via OID4VCI protocol"
+            requirements:
+              - MUST implement OID4VCI v1.0 specification
+              - MUST support authorization code flow
+              - MUST support pre-authorized code flow
+              - MUST handle credential issuer metadata discovery
+              - MUST implement OAuth 2.0 client functionality
+              - MUST process credential responses
+              - MUST implement proper error handling
+              - MUST implement user consent mechanisms
+        - signature_verification:
+            description: "Verify ECDSA signatures on received credentials"
+            requirements:
+              - MUST verify ecdsa-rdfc-2019 signatures
+              - MUST resolve issuer DIDs to obtain verification keys
+              - MUST validate proof creation dates and expiration
+              - MUST handle signature verification failures gracefully
+        - status_checking:
+            description: "Check credential status using Bitstring Status List"
+            requirements:
+              - MUST implement Bitstring Status List checking
+              - MUST provide real-time status verification
+              - MUST cache status information appropriately
+              - MUST handle status service unavailability
+        - credential_export:
+            description: "Export credentials in standard formats"
+            requirements:
+              - MUST support credential export in standard formats
+              - MUST preserve original credential proofs and signatures
+        - did_management:
+            description: "Manage holder identity using supported DID methods"
+            requirements:
+              - MUST support did:web or did:key DID methods
+              - MUST generate and manage P-256 key pairs
+              - MUST maintain current DID document
+              - MUST support DID resolution
+        - encryption_in_transit:
+            description: "Ensure secure transmission of credentials"
+            requirements:
+              - MUST implement data encryption in transit
+    internal_practices:
+      holder:
+        - credential_storage:
+            description: "Internal credential storage and management"
+            requirements:
+              - SHOULD provide secure storage for W3C Verifiable Credentials
+              - SHOULD support credential organization and categorization
+              - SHOULD provide credential sharing controls
+        - credential_display:
+            description: "Internal credential display and user interface"
+            requirements:
+              - SHOULD render Open Badges 3.0 credentials with proper formatting
+              - SHOULD display credential metadata and evidence
+              - SHOULD show credential status and expiration
+              - SHOULD provide credential sharing interface
     protocols:
       - name: OID4VCI
         version: "1.0"
@@ -147,71 +168,187 @@ roles:
           - credential_reception
           - authorization_code_flow
           - pre_authorized_code_flow
-      - name: OID4VP
-        version: "1.0"
-        specification: "https://openid.net/specs/openid-4-verifiable-presentations-1_0.html"
-        capabilities:
-          - credential_presentation
-          - selective_disclosure
-          - authorization_code_flow
 
-  verifier:
-    required_capabilities:
-      - credential_validation:
-          description: "Validate received verifiable credentials"
-          requirements:
-            - MUST validate W3C Verifiable Credentials Data Model 2.0 compliance
-            - MUST verify Open Badges 3.0 schema compliance
-            - MUST check required fields and data types
-            - MUST validate credential expiration dates
-            - MUST implement comprehensive validation error handling
-      - signature_verification:
-          description: "Verify ECDSA signatures on received credentials"
-          requirements:
-            - MUST verify ecdsa-rdfc-2019 signatures
-            - MUST resolve issuer DIDs to obtain verification keys
-            - MUST validate proof creation dates and expiration
-            - MUST handle signature verification failures gracefully
-            - MUST implement proper error logging and reporting
-      - oid4vp:
-          description: "Implement OID4VP v1.0 for credential requests"
-          requirements:
-            - MUST implement OID4VP v1.0 specification
-            - MUST support authorization code flow
-            - MUST generate presentation requests with proper scopes
-            - MUST handle credential presentations from wallets
-            - MUST implement proper error handling and status codes
-            - MUST provide presentation request endpoint
-      - status_verification:
-          description: "Verify credential status using Bitstring Status List"
-          requirements:
-            - MUST implement Bitstring Status List verification
-            - MUST check credential status before acceptance
-            - MUST validate status list signature and freshness
-            - MUST handle status service unavailability
-            - MUST cache status information appropriately
-      - trust_registry_integration:
-          description: "Integrate with trust registries for issuer validation"
-          requirements:
-            - MUST query trust registries for issuer authorization
-            - MUST validate issuer credentials and accreditation
-            - MUST check for issuer revocation or suspension
-            - MUST maintain current trust registry data
-            - MUST implement trust registry query protocols
-      - audit_logging:
-          description: "Maintain audit logs for verification activities"
-          requirements:
-            - MUST log all credential verification attempts
-            - MUST log verification results and decisions
-            - MUST maintain audit trail for compliance
-            - MUST implement secure log storage and retention
+  credential_request_and_verification:
+    description: "Workflow for verifiers to request credentials from holders and validate received credentials"
+    participating_roles: [verifier]
+    interoperability_requirements:
+      verifier:
+        - request_creation:
+            description: "Create and send presentation requests"
+            requirements:
+              - MUST implement OID4VP v1.0 specification
+              - MUST support authorization code flow
+              - MUST generate presentation requests with proper scopes
+              - MUST provide presentation request endpoint
+              - MUST implement proper error handling and status codes
+              - MUST construct presentation requests asking for specific credential types and attributes
+        - presentation_reception:
+            description: "Receive verifiable presentations from holders"
+            requirements:
+              - MUST handle credential presentations from wallets
+              - MUST validate presentation structure and format
+              - MUST extract credentials from presentations
+        - credential_validation:
+            description: "Validate received verifiable credentials"
+            requirements:
+              - MUST validate W3C Verifiable Credentials Data Model 2.0 compliance
+              - MUST verify Open Badges 3.0 schema compliance
+              - MUST check required fields and data types
+              - MUST validate credential expiration dates
+              - MUST implement comprehensive validation error handling
+        - signature_verification:
+            description: "Verify ECDSA signatures on received credentials"
+            requirements:
+              - MUST verify ecdsa-rdfc-2019 signatures
+              - MUST resolve issuer DIDs to obtain verification keys
+              - MUST validate proof creation dates and expiration
+              - MUST handle signature verification failures gracefully
+        - status_verification:
+            description: "Verify credential status using Bitstring Status List"
+            requirements:
+              - MUST implement Bitstring Status List verification
+              - MUST check credential status before acceptance
+              - MUST validate status list signature and freshness
+              - MUST handle status service unavailability
+              - MUST cache status information appropriately
+        - trust_registry_integration:
+            description: "Integrate with trust registries for issuer validation"
+            requirements:
+              - MUST query trust registries for issuer authorization
+              - MUST validate issuer credentials and accreditation
+              - MUST check for issuer revocation or suspension
+              - MUST implement trust registry query protocols
+        - threat_mitigation:
+            description: "Protect against common attacks"
+            requirements:
+              - MUST implement protection against replay attacks
+              - MUST implement protection against credential forgery
+              - MUST implement protection against status list manipulation
+        - encryption_in_transit:
+            description: "Ensure secure transmission of requests and credentials"
+            requirements:
+              - MUST implement data encryption in transit
+    internal_practices:
+      verifier:
+        - error_logging:
+            description: "Internal error logging and reporting"
+            requirements:
+              - SHOULD implement proper error logging and reporting
+        - trust_registry_maintenance:
+            description: "Internal trust registry data management"
+            requirements:
+              - SHOULD maintain current trust registry data
     protocols:
       - name: OID4VP
         version: "1.0"
         specification: "https://openid.net/specs/openid-4-verifiable-presentations-1_0.html"
         endpoints:
           - presentation_request: "/presentation-request"
-          - presentation_response: "/presentation-response"
+          - credential_presentation: "/credential-presentation"
+
+  credential_presentation:
+    description: "Workflow for holders to present credentials to verifiers"
+    participating_roles: [holder]
+    interoperability_requirements:
+      holder:
+        - presentation_creation:
+            description: "Create and send credential presentations"
+            requirements:
+              - MUST implement OID4VP v1.0 specification
+              - MUST support authorization code flow
+              - MUST handle presentation requests from verifiers
+              - MUST provide credential presentation interface
+              - MUST implement user consent mechanisms
+              - MUST create verifiable presentations with ECDSA signatures
+        - did_management:
+            description: "Manage holder identity for presentations"
+            requirements:
+              - MUST support did:web or did:key DID methods
+              - MUST generate and manage P-256 key pairs for presentations
+              - MUST maintain current DID document
+              - MUST support DID resolution
+        - encryption_in_transit:
+            description: "Ensure secure transmission of presentations"
+            requirements:
+              - MUST implement data encryption in transit
+    internal_practices:
+      holder: []
+    protocols:
+      - name: OID4VP
+        version: "1.0"
+        specification: "https://openid.net/specs/openid-4-verifiable-presentations-1_0.html"
+        capabilities:
+          - credential_presentation
+          - authorization_code_flow
+
+# Internal operation requirements
+# These requirements cannot be tested via interoperability workflows but may be important for procurement
+internal_operation_requirements:
+  issuer:
+    - key_management:
+        description: "Internal key management operations"
+        requirements:
+          - SHOULD support key rotation and revocation policies
+          - SHOULD implement secure key backup and recovery
+          - SHOULD support hardware security module integration
+    - status_management:
+        description: "Internal status list management"
+        requirements:
+          - SHOULD update status list when credentials are revoked
+          - SHOULD handle status list versioning
+    - data_protection:
+        description: "Internal data protection"
+        requirements:
+          - SHOULD implement data encryption at rest
+          - SHOULD implement proper access controls
+    - audit_logging:
+        description: "Internal audit and logging"
+        requirements:
+          - SHOULD implement audit logging
+  holder:
+    - credential_storage:
+        description: "Internal credential storage"
+        requirements:
+          - SHOULD provide secure storage for W3C Verifiable Credentials
+          - SHOULD support credential organization and categorization
+          - SHOULD provide credential sharing controls
+    - credential_display:
+        description: "Internal credential display"
+        requirements:
+          - SHOULD render Open Badges 3.0 credentials with proper formatting
+          - SHOULD display credential metadata and evidence
+          - SHOULD show credential status and expiration
+          - SHOULD provide credential sharing interface
+    - data_protection:
+        description: "Internal data protection"
+        requirements:
+          - SHOULD implement data encryption at rest
+          - SHOULD implement proper access controls
+    - privacy:
+        description: "Internal privacy practices"
+        requirements:
+          - SHOULD implement data minimization
+          - SHOULD comply with applicable privacy regulations
+  verifier:
+    - data_protection:
+        description: "Internal data protection"
+        requirements:
+          - SHOULD implement data encryption at rest
+          - SHOULD implement proper access controls
+    - error_logging:
+        description: "Internal error logging"
+        requirements:
+          - SHOULD implement proper error logging and reporting
+    - trust_registry_maintenance:
+        description: "Internal trust registry management"
+        requirements:
+          - SHOULD maintain current trust registry data
+    - privacy:
+        description: "Internal privacy practices"
+        requirements:
+          - SHOULD implement data minimization
+          - SHOULD comply with applicable privacy regulations
 
 # Technical specifications
 credential_format:
@@ -249,12 +386,6 @@ cryptography:
   key_types:
     - "EcdsaSecp256r1VerificationKey2019"
     - "JsonWebKey2020"
-  
-  key_management:
-    - MUST support key generation and storage
-    - MUST support key rotation and revocation
-    - MUST implement secure key backup and recovery
-    - MUST support hardware security module integration
 
 # DID specifications
 did_methods:
@@ -270,25 +401,11 @@ did_methods:
         - MUST use P-256 keys
         - MUST follow did:key specification for key encoding
         - MUST include verification methods in DID document
-        - MUST support key rotation
 
 # Status management
 status_method:
   type: "Bitstring Status List"
   specification: "https://w3c.github.io/vc-status-list-2021/"
-  
-  issuer_requirements:
-    - MUST maintain current status list
-    - MUST sign status list with issuer key
-    - MUST provide status list endpoint
-    - MUST update status list when credentials are revoked
-    - MUST handle status list versioning
-  
-  verifier_requirements:
-    - MUST check credential status before acceptance
-    - MUST validate status list signature
-    - MUST handle status service unavailability
-    - MUST cache status information appropriately
 
 # Trust infrastructure
 trust_registry:
@@ -298,32 +415,11 @@ trust_registry:
     - issuer_authorization_query
     - issuer_credential_validation
     - issuer_revocation_check
-    - trust_registry_data_maintenance
   
   protocols:
     - "Trust Registry Query Protocol (TRQP)"
     - "OpenID Federation"
     - "X.509 certificate chains"
-
-# Security requirements
-security:
-  data_protection:
-    - MUST implement data encryption at rest
-    - MUST implement data encryption in transit
-    - MUST implement proper access controls
-    - MUST implement audit logging
-  
-  privacy:
-    - MUST implement user consent mechanisms
-    - MUST support selective disclosure
-    - MUST implement data minimization
-    - MUST comply with applicable privacy regulations
-  
-  threat_mitigation:
-    - MUST implement protection against replay attacks
-    - MUST implement protection against credential forgery
-    - MUST implement protection against key compromise
-    - MUST implement protection against status list manipulation
 
 # Testing and validation
 testing:
@@ -336,11 +432,6 @@ testing:
     - MUST participate in interoperability testing events
     - MUST demonstrate end-to-end credential workflows
     - MUST validate cross-vendor compatibility
-  
-  security_testing:
-    - MUST undergo security audit and penetration testing
-    - MUST implement vulnerability disclosure process
-    - MUST maintain security incident response plan
 
 # Implementation notes
 implementation_notes:
@@ -349,3 +440,5 @@ implementation_notes:
   - "OID4VCI/OID4VP enable seamless integration with existing OAuth 2.0 infrastructure"
   - "Profile conformance requires implementation of all mandatory requirements"
   - "Optional extensions may be implemented for enhanced functionality"
+  - "Requirements are organized by workflow to clarify interoperability testing scope"
+  - "Internal operation requirements cannot be tested via interoperability but may be important for procurement"

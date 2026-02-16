@@ -1,10 +1,10 @@
 ---
-title: VCALM EdDSA Profile
+title: OB 3.0 Direct Delivery Profile
 ---
 
-An Open Badges 3.0 interoperability profile using VCALM Exchanges for credential issuance and presentation with EdDSA signatures.
+An Open Badges 3.0 interoperability profile using EdDSA cryptographic signatures with Open Badges 3.0 schema for direct credential issuance and verification.
 
-**Profile ID:** vcalm-eddsa-v1  
+**Profile ID:** ob3-direct-delivery-v1  
 **Version:** 1.0.0  
 **Assessment Date:** [DATE]  
 **Vendor/Organization:** [VENDOR_NAME]  
@@ -14,7 +14,7 @@ An Open Badges 3.0 interoperability profile using VCALM Exchanges for credential
 
 ## Instructions
 
-This checklist assesses vendor capabilities against the VCALM EdDSA Profile. This profile uses VCALM Exchanges for credential issuance and presentation with EdDSA signatures, optimized for browser-based credential exchange workflows.
+This checklist assesses vendor capabilities against the OB 3.0 Direct Delivery Profile. This profile uses EdDSA cryptographic signatures with Open Badges 3.0 schema for direct credential issuance and verification. It supports direct-download/copy JSON and upload/paste workflows without protocol-based delivery, using email address-based identifiers for recipients in credentialSubject.
 
 Requirements are organized by workflow to clarify which capabilities can be tested via interoperability workflows versus those that are internal implementation details.
 
@@ -28,20 +28,18 @@ For each requirement:
 ## Workflow Assessment
 
 **Please indicate which workflows your system participates in:**
-- [ ] Credential Issuance (Issuer role)
-- [ ] Credential Acceptance (Holder role)
-- [ ] Credential Request and Verification (Verifier role)
-- [ ] Credential Presentation (Holder role)
+- [ ] Direct Credential Issuance (Issuer role)
+- [ ] Direct Credential Verification (Verifier role)
 
 ---
 
 ## Workflow Requirements
 
-### Credential Issuance Workflow
+### Direct Credential Issuance Workflow
 
 **Participating Role:** Issuer
 
-This workflow focuses on the issuer's ability to create, sign, and deliver credentials using VCALM Exchanges protocol.
+This workflow focuses on the issuer's ability to create, sign, and deliver credentials directly as downloadable files or copy-paste JSON without protocol-based delivery.
 
 #### Interoperability Requirements
 
@@ -55,6 +53,7 @@ This workflow focuses on the issuer's ability to create, sign, and deliver crede
 - [ ] MUST include all mandatory Open Badges 3.0 fields
 - [ ] MUST support credential expiration dates
 - [ ] MUST implement credential versioning
+- [ ] MUST use email address-based identifiers for credentialSubject (per Open Badges 3.0 spec)
 
 **Implementation Details:**
 ```
@@ -76,20 +75,19 @@ This workflow focuses on the issuer's ability to create, sign, and deliver crede
 [Please provide detailed technical information about your cryptographic signing implementation]
 ```
 
-##### VCALM Exchanges
+##### Credential Delivery
 
-**Description:** Implement VCALM Exchanges protocol for credential delivery
+**Description:** Provide credentials as downloadable files or copy-paste JSON
 
 **Requirements:**
-- [ ] MUST implement VCALM Exchanges specification
-- [ ] MUST support credential offer generation
-- [ ] MUST handle credential request processing
-- [ ] MUST provide credential delivery endpoint
-- [ ] MUST implement proper error handling and status codes
+- [ ] MUST provide credential as downloadable file (JSON format)
+- [ ] MUST provide credential as copy-paste JSON text
+- [ ] MUST ensure credential can be saved and shared by recipients
+- [ ] MUST implement proper file format validation
 
 **Implementation Details:**
 ```
-[Please provide detailed technical information about your VCALM Exchanges implementation]
+[Please provide detailed technical information about your credential delivery implementation]
 ```
 
 ##### Status Management
@@ -122,18 +120,6 @@ This workflow focuses on the issuer's ability to create, sign, and deliver crede
 [Please provide detailed technical information about your DID management implementation]
 ```
 
-##### Encryption in Transit
-
-**Description:** Ensure secure transmission of credentials
-
-**Requirements:**
-- [ ] MUST implement data encryption in transit
-
-**Implementation Details:**
-```
-[Please provide detailed technical information about your encryption implementation]
-```
-
 #### Internal Practices
 
 **Note:** These requirements cannot be tested via interoperability workflows but may be important for procurement.
@@ -143,154 +129,35 @@ This workflow focuses on the issuer's ability to create, sign, and deliver crede
 - [ ] SHOULD support hardware security module integration
 - [ ] SHOULD handle status list versioning
 - [ ] SHOULD update status list when credentials are revoked
+- [ ] SHOULD implement secure user authentication (SSO/login)
+- [ ] SHOULD verify user identity before credential issuance
 
 ---
 
-### Credential Acceptance Workflow
-
-**Participating Role:** Holder
-
-This workflow focuses on the holder's ability to receive, verify, and accept credentials from issuers.
-
-#### Interoperability Requirements
-
-##### Credential Reception
-
-**Description:** Receive credentials via VCALM Exchanges protocol
-
-**Requirements:**
-- [ ] MUST implement VCALM Exchanges specification
-- [ ] MUST handle credential offers from issuers
-- [ ] MUST implement user consent mechanisms
-
-**Implementation Details:**
-```
-[Please provide detailed technical information about your credential reception implementation]
-```
-
-##### Signature Verification
-
-**Description:** Verify EdDSA signatures on received credentials
-
-**Requirements:**
-- [ ] MUST verify eddsa-rdfc-2022 signatures
-- [ ] MUST resolve issuer DIDs to obtain verification keys
-- [ ] MUST validate proof creation dates and expiration
-- [ ] MUST handle signature verification failures gracefully
-
-**Implementation Details:**
-```
-[Please provide detailed technical information about your signature verification implementation]
-```
-
-##### Status Checking
-
-**Description:** Check credential status using Bitstring Status List
-
-**Requirements:**
-- [ ] MUST implement Bitstring Status List checking
-- [ ] MUST provide real-time status verification
-- [ ] MUST cache status information appropriately
-- [ ] MUST handle status service unavailability
-
-**Implementation Details:**
-```
-[Please provide detailed technical information about your status checking implementation]
-```
-
-##### Credential Export
-
-**Description:** Export credentials in standard formats
-
-**Requirements:**
-- [ ] MUST support credential export in standard formats
-- [ ] MUST preserve original credential proofs and signatures
-
-**Implementation Details:**
-```
-[Please provide detailed technical information about your credential export implementation]
-```
-
-##### DID Management
-
-**Description:** Manage holder identity using supported DID methods
-
-**Requirements:**
-- [ ] MUST support did:web or did:key DID methods
-- [ ] MUST generate and manage Ed25519 key pairs
-- [ ] MUST maintain current DID document
-- [ ] MUST support DID resolution
-
-**Implementation Details:**
-```
-[Please provide detailed technical information about your DID management implementation]
-```
-
-##### Encryption in Transit
-
-**Description:** Ensure secure transmission of credentials
-
-**Requirements:**
-- [ ] MUST implement data encryption in transit
-
-**Implementation Details:**
-```
-[Please provide detailed technical information about your encryption implementation]
-```
-
-#### Internal Practices
-
-**Note:** These requirements cannot be tested via interoperability workflows but may be important for procurement.
-
-- [ ] SHOULD provide secure storage for W3C Verifiable Credentials
-- [ ] SHOULD support credential organization and categorization
-- [ ] SHOULD provide credential sharing controls
-- [ ] SHOULD render Open Badges 3.0 credentials with proper formatting
-- [ ] SHOULD display credential metadata and evidence
-- [ ] SHOULD show credential status and expiration
-- [ ] SHOULD provide credential sharing interface
-
----
-
-### Credential Request and Verification Workflow
+### Direct Credential Verification Workflow
 
 **Participating Role:** Verifier
 
-This workflow focuses on the verifier's complete end-to-end role in requesting credentials from holders and validating received credentials, including request creation, presentation reception, credential verification, and trust registry integration.
+This workflow focuses on the verifier's ability to validate credentials received as files or copy-paste JSON, including signature verification, status checking, and trust registry integration.
 
 #### Interoperability Requirements
 
-##### Request Creation
+##### Credential Import
 
-**Description:** Create and send credential requests
+**Description:** Import credentials from files or copy-paste JSON
 
 **Requirements:**
-- [ ] MUST implement VCALM Exchanges specification
-- [ ] MUST generate credential requests with proper scopes
-- [ ] MUST provide credential request endpoint
-- [ ] MUST implement proper error handling and status codes
-- [ ] MUST construct presentation requests asking for specific credential types and attributes
+- [ ] MUST accept credentials as JSON files
+- [ ] MUST accept credentials as copy-paste JSON text
+- [ ] MUST validate JSON structure before processing
+- [ ] MUST handle malformed credentials gracefully
 
 **Implementation Details:**
 ```
-[Please provide detailed technical information about your credential request implementation]
+[Please provide detailed technical information about your credential import implementation]
 ```
 
-##### Presentation Reception
-
-**Description:** Receive verifiable presentations from holders
-
-**Requirements:**
-- [ ] MUST handle credential presentations from wallets
-- [ ] MUST validate presentation structure and format
-- [ ] MUST extract credentials from presentations
-
-**Implementation Details:**
-```
-[Please provide detailed technical information about your presentation reception implementation]
-```
-
-##### Credential Verification
+##### Credential Validation
 
 **Description:** Validate received verifiable credentials
 
@@ -366,83 +233,12 @@ This workflow focuses on the verifier's complete end-to-end role in requesting c
 [Please provide detailed technical information about your threat mitigation implementation]
 ```
 
-##### Encryption in Transit
-
-**Description:** Ensure secure transmission of requests and credentials
-
-**Requirements:**
-- [ ] MUST implement data encryption in transit
-
-**Implementation Details:**
-```
-[Please provide detailed technical information about your encryption implementation]
-```
-
 #### Internal Practices
 
 **Note:** These requirements cannot be tested via interoperability workflows but may be important for procurement.
 
 - [ ] SHOULD implement proper error logging and reporting
 - [ ] SHOULD maintain current trust registry data
-
----
-
-### Credential Presentation Workflow
-
-**Participating Role:** Holder
-
-This workflow focuses on the holder's ability to create and send credential presentations to verifiers.
-
-#### Interoperability Requirements
-
-##### Presentation Creation
-
-**Description:** Create and send credential presentations
-
-**Requirements:**
-- [ ] MUST implement VCALM Exchanges specification
-- [ ] MUST process credential requests from verifiers
-- [ ] MUST provide credential presentation interface
-- [ ] MUST implement user consent mechanisms
-- [ ] MUST create verifiable presentations with EdDSA signatures
-
-**Implementation Details:**
-```
-[Please provide detailed technical information about your credential presentation implementation]
-```
-
-##### DID Management
-
-**Description:** Manage holder identity for presentations
-
-**Requirements:**
-- [ ] MUST support did:web or did:key DID methods
-- [ ] MUST generate and manage Ed25519 key pairs for presentations
-- [ ] MUST maintain current DID document
-- [ ] MUST support DID resolution
-
-**Implementation Details:**
-```
-[Please provide detailed technical information about your DID management implementation]
-```
-
-##### Encryption in Transit
-
-**Description:** Ensure secure transmission of presentations
-
-**Requirements:**
-- [ ] MUST implement data encryption in transit
-
-**Implementation Details:**
-```
-[Please provide detailed technical information about your encryption implementation]
-```
-
-#### Internal Practices
-
-**Note:** These requirements cannot be tested via interoperability workflows but may be important for procurement.
-
-None specified for this workflow.
 
 ---
 
@@ -461,20 +257,6 @@ None specified for this workflow.
 - [ ] SHOULD implement proper access controls
 - [ ] SHOULD implement audit logging
 
-### Holder Internal Requirements
-
-- [ ] SHOULD provide secure storage for W3C Verifiable Credentials
-- [ ] SHOULD support credential organization and categorization
-- [ ] SHOULD provide credential sharing controls
-- [ ] SHOULD render Open Badges 3.0 credentials with proper formatting
-- [ ] SHOULD display credential metadata and evidence
-- [ ] SHOULD show credential status and expiration
-- [ ] SHOULD provide credential sharing interface
-- [ ] SHOULD implement data encryption at rest
-- [ ] SHOULD implement proper access controls
-- [ ] SHOULD implement data minimization
-- [ ] SHOULD comply with applicable privacy regulations
-
 ### Verifier Internal Requirements
 
 - [ ] SHOULD implement data encryption at rest
@@ -483,31 +265,6 @@ None specified for this workflow.
 - [ ] SHOULD maintain current trust registry data
 - [ ] SHOULD implement data minimization
 - [ ] SHOULD comply with applicable privacy regulations
-
----
-
-## Protocol Support
-
-### VCALM Exchanges v1.0
-
-**Specification:** https://w3c.github.io/vc-api/
-
-**Supported Capabilities:**
-- [ ] Credential offer generation
-- [ ] Credential request processing
-- [ ] Credential delivery
-- [ ] Credential presentation
-- [ ] User consent mechanisms
-
-**Implementation Details:**
-```
-[Please provide detailed information about your VCALM Exchanges implementation]
-```
-
-**Endpoints/Interfaces:**
-```
-[Please list relevant endpoints or interfaces]
-```
 
 ---
 
@@ -524,6 +281,10 @@ None specified for this workflow.
 - [ ] Full compliance with specification
 - [ ] Partial compliance (please specify limitations)
 - [ ] Custom extensions (please describe)
+
+**Credential Subject Identifiers:**
+- [ ] Email address-based identifiers (required)
+- [ ] Other identifier types (please specify)
 
 ### Cryptographic Support
 
@@ -573,7 +334,8 @@ None specified for this workflow.
 ### Data Protection
 
 **Interoperability-Testable:**
-- [ ] Encryption in transit
+- [ ] Credential file format validation
+- [ ] JSON structure validation
 
 **Internal Practices:**
 - [ ] Encryption at rest
@@ -582,7 +344,7 @@ None specified for this workflow.
 ### Privacy
 
 **Interoperability-Testable:**
-- [ ] User consent mechanisms (via protocol flow)
+- [ ] Email identifier validation
 
 **Internal Practices:**
 - [ ] Data minimization
