@@ -131,14 +131,14 @@ This table provides a quick reference for learning mobility coordinators to iden
 | Workflow | Role | Use Cases (Learning Mobility Framework verticals) | Profile Support |
 |----------|-------------------|--------------------------------------|----------------|
 | **Issue to Wallet** | | | |
-| Credential Issuance | Issuer | Creating and delivering credentials to holders (Micro-Credentialing, Workforce Alignment) | [VCALM-EdDSA](checklists/vcalm-eddsa-checklist.md#credential-issuance-workflow), [OID4-ECDSA](checklists/oid4-ecdsa-checklist.md#credential-issuance-workflow) |
-| Credential Acceptance | Holder | Receiving and accepting credentials from issuers (Transfer & Credit Mobility, Credit for Prior Learning) | [VCALM-EdDSA](checklists/vcalm-eddsa-checklist.md#credential-acceptance-workflow), [OID4-ECDSA](checklists/oid4-ecdsa-checklist.md#credential-acceptance-workflow) |
+| Credential Issuance | Issuer | Creating and delivering credentials to holders (Micro-Credentialing, Workforce Alignment) | [VCALM-EdDSA](profiles/vcalm-eddsa.md#credential-issuance-workflow), [OID4-ECDSA](profiles/oid4-ecdsa.md#credential-issuance-workflow) |
+| Credential Acceptance | Holder | Receiving and accepting credentials from issuers (Transfer & Credit Mobility, Credit for Prior Learning) | [VCALM-EdDSA](profiles/vcalm-eddsa.md#credential-acceptance-workflow), [OID4-ECDSA](profiles/oid4-ecdsa.md#credential-acceptance-workflow) |
 | **Verify from Wallet** | | | |
-| Credential Request and Verification | Verifier | Requesting credentials from holders and validating received credentials (Workforce Alignment, Transfer & Credit Mobility, Skills/Competency Articulation, All verticals) | [VCALM-EdDSA](checklists/vcalm-eddsa-checklist.md#credential-request-and-verification-workflow), [OID4-ECDSA](checklists/oid4-ecdsa-checklist.md#credential-request-and-verification-workflow) |
-| Credential Presentation | Holder | Presenting credentials to verifiers (Workforce Alignment, Transfer & Credit Mobility) | [VCALM-EdDSA](checklists/vcalm-eddsa-checklist.md#credential-presentation-workflow), [OID4-ECDSA](checklists/oid4-ecdsa-checklist.md#credential-presentation-workflow) |
+| Credential Request and Verification | Verifier | Requesting credentials from holders and validating received credentials (Workforce Alignment, Transfer & Credit Mobility, Skills/Competency Articulation, All verticals) | [VCALM-EdDSA](profiles/vcalm-eddsa.md#credential-request-and-verification-workflow), [OID4-ECDSA](profiles/oid4-ecdsa.md#credential-request-and-verification-workflow) |
+| Credential Presentation | Holder | Presenting credentials to verifiers (Workforce Alignment, Transfer & Credit Mobility) | [VCALM-EdDSA](profiles/vcalm-eddsa.md#credential-presentation-workflow), [OID4-ECDSA](profiles/oid4-ecdsa.md#credential-presentation-workflow) |
 | **Standalone Operations** | | | |
-| Direct Credential Issuance | Issuer | Creating and delivering credentials as downloadable files or copy-paste JSON (Micro-Credentialing, Workforce Alignment) | [OB 3.0 Direct Delivery](checklists/ob3-direct-delivery-checklist.md#direct-credential-issuance-workflow) |
-| Direct Credential Verification | Verifier | Validating credentials received as files or copy-paste JSON (Skills/Competency Articulation, All verticals) | [OB 3.0 Direct Delivery](checklists/ob3-direct-delivery-checklist.md#direct-credential-verification-workflow) |
+| Direct Credential Issuance | Issuer | Creating and delivering credentials as downloadable files or copy-paste JSON (Micro-Credentialing, Workforce Alignment) | [OB 3.0 Direct Delivery](profiles/ob-3.0-direct-delivery.md#direct-credential-issuance-workflow) |
+| Direct Credential Verification | Verifier | Validating credentials received as files or copy-paste JSON (Skills/Competency Articulation, All verticals) | [OB 3.0 Direct Delivery](profiles/ob-3.0-direct-delivery.md#direct-credential-verification-workflow) |
 
 ### Issue to Wallet
 
@@ -160,8 +160,8 @@ This workflow is implemented by the issuer:
 #### Quick Checklist Guide
 
 **For Issuer Systems:**
-- VCALM-EdDSA Profile: See [Credential Issuance Workflow](checklists/vcalm-eddsa-checklist.md#credential-issuance-workflow) in VCALM-EdDSA checklist
-- OID4-ECDSA Profile: See [Credential Issuance Workflow](checklists/oid4-ecdsa-checklist.md#credential-issuance-workflow) in OID4-ECDSA checklist
+- VCALM-EdDSA Profile: See [Credential Issuance Workflow](profiles/vcalm-eddsa.md#credential-issuance-workflow) in VCALM-EdDSA profile
+- OID4-ECDSA Profile: See [Credential Issuance Workflow](profiles/oid4-ecdsa.md#credential-issuance-workflow) in OID4-ECDSA profile
 
 #### Step-by-Step Process Flow
 
@@ -198,8 +198,8 @@ This workflow is implemented by holder systems like wallet mobile apps and web a
 #### Quick Checklist Guide
 
 **For Holder Wallets:**
-- VCALM-EdDSA Profile: See [Credential Acceptance Workflow](checklists/vcalm-eddsa-checklist.md#credential-acceptance-workflow) in VCALM-EdDSA checklist
-- OID4-ECDSA Profile: See [Credential Acceptance Workflow](checklists/oid4-ecdsa-checklist.md#credential-acceptance-workflow) in OID4-ECDSA checklist
+- VCALM-EdDSA Profile: See [Credential Acceptance Workflow](profiles/vcalm-eddsa.md#credential-acceptance-workflow) in VCALM-EdDSA profile
+- OID4-ECDSA Profile: See [Credential Acceptance Workflow](profiles/oid4-ecdsa.md#credential-acceptance-workflow) in OID4-ECDSA profile
 
 ### Verify from Wallet
 
@@ -221,8 +221,8 @@ This workflow involves one primary role:
 ##### Quick Checklist Guide
 
 **For Verifier Systems:**
-- VCALM-EdDSA Profile: See [Credential Request and Verification Workflow](checklists/vcalm-eddsa-checklist.md#credential-request-and-verification-workflow) in VCALM-EdDSA checklist
-- OID4-ECDSA Profile: See [Credential Request and Verification Workflow](checklists/oid4-ecdsa-checklist.md#credential-request-and-verification-workflow) in OID4-ECDSA checklist
+- VCALM-EdDSA Profile: See [Credential Request and Verification Workflow](profiles/vcalm-eddsa.md#credential-request-and-verification-workflow) in VCALM-EdDSA profile
+- OID4-ECDSA Profile: See [Credential Request and Verification Workflow](profiles/oid4-ecdsa.md#credential-request-and-verification-workflow) in OID4-ECDSA profile
 
 ##### Step-by-Step Process Flow
 
@@ -278,8 +278,8 @@ This workflow involves one primary role:
 #### Quick Checklist Guide
 
 **For Holder Wallets:**
-- VCALM-EdDSA Profile: See [Credential Presentation Workflow](checklists/vcalm-eddsa-checklist.md#credential-presentation-workflow) in VCALM-EdDSA checklist
-- OID4-ECDSA Profile: See [Credential Presentation Workflow](checklists/oid4-ecdsa-checklist.md#credential-presentation-workflow) in OID4-ECDSA checklist
+- VCALM-EdDSA Profile: See [Credential Presentation Workflow](profiles/vcalm-eddsa.md#credential-presentation-workflow) in VCALM-EdDSA profile
+- OID4-ECDSA Profile: See [Credential Presentation Workflow](profiles/oid4-ecdsa.md#credential-presentation-workflow) in OID4-ECDSA profile
 
 #### Step-by-Step Process Flow
 
@@ -317,7 +317,7 @@ This workflow is implemented by the issuer:
 ##### Quick Checklist Guide
 
 **For Issuer Systems:**
-- OB 3.0 Direct Delivery Profile: See [Direct Credential Issuance Workflow](checklists/ob3-direct-delivery-checklist.md#direct-credential-issuance-workflow) in OB 3.0 Direct Delivery checklist
+- OB 3.0 Direct Delivery Profile: See [Direct Credential Issuance Workflow](profiles/ob-3.0-direct-delivery.md#direct-credential-issuance-workflow) in OB 3.0 Direct Delivery profile
 
 ##### Step-by-Step Process Flow
 
@@ -352,7 +352,7 @@ This workflow involves one primary role:
 ##### Quick Checklist Guide
 
 **For Verifier Systems:**
-- OB 3.0 Direct Delivery Profile: See [Direct Credential Verification Workflow](checklists/ob3-direct-delivery-checklist.md#direct-credential-verification-workflow) in OB 3.0 Direct Delivery checklist
+- OB 3.0 Direct Delivery Profile: See [Direct Credential Verification Workflow](profiles/ob-3.0-direct-delivery.md#direct-credential-verification-workflow) in OB 3.0 Direct Delivery profile
 
 ##### Step-by-Step Process Flow
 
