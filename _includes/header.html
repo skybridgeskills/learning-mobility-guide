@@ -1,0 +1,77 @@
+<header class="site-header" role="banner">
+  <div class="wrapper">
+    <div class="flex items-center gap-4 mb-2 pt-2">
+      <a href="https://learningmobilitycollaborative.org/" class="flex-shrink-0">
+        <img src="https://learningmobilitycollaborative.org/logo.png" alt="National Learning Mobility Collaborative" class="h-[60px] w-auto">
+      </a>
+      <a class="site-title text-primary hover:text-accent transition-colors leading-tight sm:leading-normal" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+    </div>
+    
+    {%- if page.description or site.description -%}
+    <p class="site-description text-sm text-gray-600 mt-1 mb-4">{{ page.description | default: site.description | escape }}</p>
+    {%- endif -%}
+    
+    <nav class="custom-nav">
+      <section class="bg-gradient-to-br from-primary via-secondary to-accent text-white py-6 lg:py-8 rounded-lg mt-4 sm:block">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 w-full px-4 md:max-w-5xl md:mx-auto">
+          
+          <!-- Learning Mobility Collaborative Card -->
+          <a href="https://learningmobilitycollaborative.org/" class="key-tile bg-primary/90 backdrop-blur rounded-xl p-4 lg:p-5 text-center group hover:bg-white/30 hover:-translate-y-1 hover:shadow-lg hover:no-underline transition-all duration-200 w-full sm:w-auto">
+            <div class="w-12 h-12 bg-white/20 rounded-lg hidden sm:flex items-center justify-center mx-auto mb-3 group-hover:bg-white/30 transition text-white">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-white text-sm group-hover:text-white">Learning Mobility Collaborative</h3>
+            <p class="text-white/70 text-xs mt-1 group-hover:text-white/70">Framework and principles</p>
+          </a>
+          
+          <!-- Interoperability Guide Card -->
+          <a href="{{ "/" | relative_url }}" class="key-tile bg-secondary/90 backdrop-blur rounded-xl p-4 lg:p-5 text-center group hover:bg-white/30 hover:-translate-y-1 hover:shadow-lg hover:no-underline transition-all duration-200 w-full sm:w-auto">
+            <div class="w-12 h-12 bg-white/20 rounded-lg hidden sm:flex items-center justify-center mx-auto mb-3 group-hover:bg-white/30 transition text-white">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-white text-sm group-hover:text-white">Interoperability Guide Home</h3>
+            <p class="text-white/70 text-xs mt-1 group-hover:text-white/70">Technical specifications</p>
+          </a>
+          
+          <!-- VCALM-EdDSA Profile Card -->
+          <a href="{{ "/checklists/vcalm-eddsa-checklist/" | relative_url }}" class="key-tile bg-accent/90 backdrop-blur rounded-xl p-4 lg:p-5 text-center group hover:bg-white/30 hover:-translate-y-1 hover:shadow-lg hover:no-underline transition-all duration-200 w-full sm:w-auto">
+            <div class="w-12 h-12 bg-white/20 rounded-lg hidden sm:flex items-center justify-center mx-auto mb-3 group-hover:bg-white/30 transition text-white">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-white text-sm group-hover:text-white">VCALM-EdDSA</h3>
+            <p class="text-white/70 text-xs mt-1 group-hover:text-white/70">Interoperability Profile</p>
+          </a>
+          
+          <!-- OID4-ECDSA Profile Card -->
+          <a href="{{ "/checklists/oid4-ecdsa-checklist/" | relative_url }}" class="key-tile bg-tertiary/90 backdrop-blur rounded-xl p-4 lg:p-5 text-center group hover:bg-white/30 hover:-translate-y-1 hover:shadow-lg hover:no-underline transition-all duration-200 w-full sm:w-auto">
+            <div class="w-12 h-12 bg-white/20 rounded-lg hidden sm:flex items-center justify-center mx-auto mb-3 group-hover:bg-white/30 transition text-white">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-white text-sm group-hover:text-white">OID4-ECDSA</h3>
+            <p class="text-white/70 text-xs mt-1 group-hover:text-white/70">Interoperability Profile</p>
+          </a>
+          
+          <!-- OB 3.0 Direct Delivery Profile Card -->
+          <a href="{{ "/checklists/ob3-direct-delivery-checklist/" | relative_url }}" class="key-tile bg-purple-500/90 backdrop-blur rounded-xl p-4 lg:p-5 text-center group hover:bg-white/30 hover:-translate-y-1 hover:shadow-lg hover:no-underline transition-all duration-200 w-full sm:w-auto">
+            <div class="w-12 h-12 bg-white/20 rounded-lg hidden sm:flex items-center justify-center mx-auto mb-3 group-hover:bg-white/30 transition text-white">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+              </svg>
+            </div>
+            <h3 class="font-semibold text-white text-sm group-hover:text-white">OB 3.0 Direct</h3>
+            <p class="text-white/70 text-xs mt-1 group-hover:text-white/70">Interoperability Profile</p>
+          </a>
+          
+        </div>
+      </section>
+    </nav>
+  </div>
+</header>

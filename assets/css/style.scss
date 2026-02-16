@@ -1,0 +1,217 @@
+---
+---
+
+// Brand colors
+$primary: #0d4f6e;
+$secondary: #0e7490;
+$accent: #14b8a6;
+$tertiary: #10b981;
+
+.site-header {
+  .site-description {
+    font-size: 0.875rem;
+    color: #666;
+    margin-top: 0.25rem;
+    margin-bottom: 1rem;
+    font-weight: normal;
+    line-height: 1.5;
+  }
+
+  .site-nav {
+    // Navigation cards are now styled with Tailwind classes
+    // Keeping this for any future custom nav styles
+  }
+
+  .custom-nav {
+    // Ensure no absolute positioning interference
+    position: relative;
+
+    // Below 600px: full-width button layout, hide gradient background
+    @media (max-width: 599px) {
+      section {
+        background: transparent !important;
+        padding: 0 !important;
+        margin-top: 0.5rem;
+      }
+
+      .key-tile {
+        width: 100%;
+        display: block;
+        margin-bottom: 0.75rem;
+        
+        h3, p {
+          color: inherit;
+        }
+      }
+    }
+
+    // 600px-799px: ensure proper alignment
+    @media (min-width: 600px) and (max-width: 799px) {
+      section {
+        width: 100%;
+      }
+    }
+
+    // 800px+: fine-tune if needed
+    @media (min-width: 800px) {
+      // Additional adjustments if Tailwind classes aren't sufficient
+    }
+  }
+}
+
+// Typography styles for markdown content
+.page-content {
+  // Headings
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 1.75rem;
+    margin-bottom: 0.875rem;
+    line-height: 1.4;
+    color: $primary;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-top: 1.5rem;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+    color: $primary;
+  }
+
+  h4 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-top: 1.25rem;
+    margin-bottom: 0.625rem;
+    line-height: 1.5;
+    color: $primary;
+  }
+
+  h5 {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+
+  h6 {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin-top: 0.875rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.5;
+  }
+
+  // Links
+  a {
+    color: $primary;
+    text-decoration: none;
+    transition: color 0.2s;
+
+    &:hover {
+      color: $accent;
+      text-decoration: underline;
+    }
+
+    &:visited {
+      color: $primary;
+    }
+  }
+
+  // Body text
+  p {
+    color: #374151; // gray-700
+    line-height: 1.75;
+
+    &:not(:last-child) {
+      margin-bottom: 1rem;
+    }
+  }
+
+  // Ordered lists
+  ol {
+    list-style-type: decimal;
+    padding-left: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: #374151; // gray-700
+
+    li {
+      margin-bottom: 0.5rem;
+
+      // Nested unordered lists
+      ul {
+        list-style-type: disc;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        padding-left: 1.5rem;
+
+        li {
+          margin-bottom: 0.25rem;
+
+          // Deeper nesting
+          ul {
+            list-style-type: circle;
+          }
+        }
+      }
+
+      // Nested ordered lists
+      ol {
+        list-style-type: lower-alpha;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+
+  // Unordered lists
+  ul {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    color: #374151; // gray-700
+
+    li {
+      margin-bottom: 0.5rem;
+
+      // Nested lists
+      ul {
+        list-style-type: circle;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        padding-left: 1.5rem;
+      }
+
+      ol {
+        list-style-type: lower-alpha;
+        margin-top: 0.5rem;
+        margin-bottom: 0.5rem;
+        padding-left: 1.5rem;
+      }
+    }
+  }
+
+  // Task list checkboxes
+  .task-list-item-checkbox {
+    margin-right: 0.5rem;
+  }
+
+  // Code blocks
+  code {
+    color: $primary;
+  }
+}
+

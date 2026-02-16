@@ -1,6 +1,6 @@
 # Jekyll configuration for GitHub Pages
 
-title: Digital Credentialing Issuance, Interoperability, and Verification Guide for Learning Mobility
+title: Interoperability Guide for Learning Mobility
 description: Technical specification for interoperable digital credentialing systems that power learning mobility
 url: "" # Leave empty for GitHub Pages
 baseurl: "" # Leave empty if repository name is the site name
@@ -26,6 +26,7 @@ exclude:
   - .gitignore
   - .github
   - .cursor-rules
+  - .cursor
   - Gemfile
   - Gemfile.lock
   - node_modules
@@ -45,4 +46,3 @@ theme: minima
 
 # Site settings
 show_excerpts: true
-
