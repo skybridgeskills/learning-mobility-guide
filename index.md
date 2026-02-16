@@ -526,7 +526,7 @@ When incorporating this guide into procurement documents:
 
 This section describes how to assess vendor capabilities using workflow-by-role checklists. Often each technology provider will self-assess, but the same items could be documented by  learning mobility coordinator through an interview process. Interoperability profiles are organized into workflows (such as Credential Issuance, Credential Acceptance, Credential Request and Verification, Credential Presentation) and for each workflow, there are role-specific checklists that define the requirements for each system participating in that workflow.
 
-#### Understanding Workflow-by-Role Checklists
+#### How to Select Interoperability Profile Checklists
 
 Each interoperability profile includes checklists organized by workflow and role. To determine which checklists apply to a vendor's system:
 
@@ -573,12 +573,14 @@ When coordinating multiple vendors and platforms in a learning mobility network,
    - Create a roadmap for expanding network coverage
 
 **Example Network Documentation:**
+Here is a set of fictitious product names and how you might track their support for the profiles and roles in the workflows. With this example set of vendors, the learning mobility coordinator would likely identify `VCALM-EdDSA` as the best fit profile for the network.
 
-| Vendor | Profile Support | ExampleCreds (Issuer) | SomeWallet (Holder) | TalentX (Verifier) | Notes |
+| Vendor | Profile Support | Issuer role | Holder role | Verifier role | Notes |
 |--------|----------------|-------------|-------------|--------------|-------|
-| Platform A | VCALM-EdDSA | ✓ Full | ✓ Full | - | Primary issuer platform |
-| Platform B | VCALM-EdDSA | - | ✓ Full | ✓ Full | Wallet + verifier |
-| Platform C | OID4-ECDSA | ✓ Partial | - | - | Needs wallet integration |
+| ExampleCreds | VCALM-EdDSA | ✓ Full | ✓ Full | - | Primary issuer platform with integrated wallet |
+| ExampleCreds | OID4-ECDSA | ✓ Full | - | - | Implements OID4 alternative flow only as issuer |
+| TalentWallet | VCALM-EdDSA | - | ✓ Full | ✓ Full | Wallet + verifier/talent marketplace |
+| SkillAssessX | OID4-ECDSA | ✓ Partial | - | - | Needs wallet integration |
 
 #### Self-Testing Conformance
 
@@ -612,14 +614,11 @@ For each requirement in the selected checklists, document:
 
    Assessment ensures that implementations support the learning mobility goals of your project. The SkillsFWD program provides a useful example of how workflow-by-role assessment validates that essential workflows are complete and that project goals can be accomplished. Rather than prescribing specific rights and responsibilities, SkillsFWD created modular checklists for each workflow role, allowing each project to choose its own interoperability profile while ensuring that learners can effectively use their credentials.
 
-#### Example: Learner Control Over Credential Sharing
+#### Case Study: Learner Control Over Credential Sharing
 
-   To illustrate how this works, consider the principle of learner control over credential sharing. SkillsFWD assessment items verify that learners can share credentials in VC format without substantial restrictions, which supports this principle. The assessment plan includes specific items such as:
-   - Assessing whether learners can share credentials in VC format
-   - Assessing whether learners can export credentials in VC format
-   - Verifying that learners can share credentials in VC format without substantial restrictions
+   To illustrate how this works, consider the principle of learner control over credential sharing. A SkillsFWD assessment was drafted to verify that learners can share credentials in VC format without substantial restrictions, which supports this principle. The assessment plan included an item to verify that learners can share or export credentials in VC format without substantial restrictions.
 
-   These assessment items are organized into modular checklists for each workflow role. For example, in the Credential Presentation workflow, holder systems are assessed on their ability to share credentials, while in the Credential Acceptance workflow, holder systems are assessed on their ability to receive and export credentials. This modular approach allows projects to demonstrate compliance even when credential persistence platforms are integrated into the same software as issuer systems—the assessment verifies that workflows involving learners exporting credentials in interoperable formats can still occur, regardless of system architecture.
+   These assessment items are organized into modular checklists for each workflow role. For example, in the Credential Presentation workflow, holder systems were assessed on their ability to share credentials, while in the Credential Acceptance workflow, holder systems were assessed on their ability to receive and export credentials. This modular approach allows projects to demonstrate compliance even when credential persistence platforms are integrated into the same software as issuer systems—the assessment verifies that workflows involving learners exporting credentials in interoperable formats can still occur, regardless of system architecture.
 
    The SkillsFWD program accommodated various workflow configurations, including fully integrated systems where issuer, holder, and verifier roles all exist within a single platform. Even in these cases, the assessment ensured that learners could still export credentials in standardized formats (such as JSON or baked PNG/SVG images) so they could share credentials with verifiers beyond the original project ecosystem. For detailed information on the SkillsFWD assessment methodology and modular checklist approach, see the [SkillsFWD Interoperability Assessment Guide](https://docs.google.com/document/d/1MQ5RNTsOqmrkExzbRIK_nLmI-LVIzN8asYcOO3wFgys/edit?tab=t.0) and [SkillsFWD Technical Interoperability Assessment Plan](https://docs.google.com/document/d/1QvCWeleKYGUtVl5vE-4Qw-fNiwXuyk7_ecFjS1M_ScM/edit?tab=t.0#heading=h.2ilmtyerr4i).
 
