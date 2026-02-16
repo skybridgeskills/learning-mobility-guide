@@ -125,6 +125,14 @@ workflows:
               - MUST validate status list signature and freshness
               - MUST handle status service unavailability
               - MUST cache status information appropriately
+        - recipient_identity_verification:
+            description: "Verify recipient identity by comparing credential identifiers to authenticated user identifiers"
+            requirements:
+              - MUST extract identifiers from credential credentialSubject
+              - MUST compare credential identifiers to authenticated user identifiers
+              - SHOULD send email confirmation codes when email verification is required
+              - SHOULD handle cases where email addresses in credentials are no longer accessible to users
+              - SHOULD provide clear guidance when strong proof of control verification cannot be achieved
         - trust_registry_integration:
             description: "Integrate with trust registries for issuer validation"
             requirements:
@@ -287,3 +295,5 @@ implementation_notes:
   - "Requirements are organized by workflow to clarify interoperability testing scope"
   - "Internal operation requirements cannot be tested via interoperability but may be important for procurement"
   - "No protocol-based delivery is required - credentials are provided as files or JSON text"
+  - "Users may lose access to email addresses in credentials (e.g., institutional emails after graduation)"
+  - "When strong proof of control verification is required, consider protocol-based profiles with verifiable presentations"

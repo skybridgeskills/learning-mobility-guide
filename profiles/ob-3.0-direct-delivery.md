@@ -31,6 +31,25 @@ This profile ensures that when different vendors' systems—whether issuer platf
 
 Conformance with this profile is not tested or certified by any official body at this time.
 
+### Limitations and Considerations
+
+**Email Address Control Limitations**
+
+Users may no longer have control over email addresses that appear in their credentials. This is a common scenario that affects credential verification:
+
+- **Institutional Email Addresses**: College and university email addresses are often deactivated within 6 months after graduation. Credentials issued to these addresses cannot be verified through email confirmation once access is lost.
+- **Former Employer Email Addresses**: Email addresses at former employers may no longer be accessible to users after employment ends. Credentials issued to these addresses may not support strong proof of control verification.
+
+**Implications for Verification**
+
+When email addresses in credentials are no longer accessible to users, strong proof of control verification may not be possible using this profile. Verifiers implementing this profile should:
+
+- Accept that email verification may fail for legitimate credentials with older identifiers
+- Provide clear guidance to users when email verification cannot be completed
+- Consider alternative verification methods when email confirmation is not possible
+
+If strong proof of control verification is required, consider switching to profiles that use verifiable presentations. These protocol-based profiles enable verifiers to cryptographically verify that the presenter controls the DID associated with the credential, providing stronger assurance than email-based verification alone.
+
 ### Specifications Used
 
 This interoperability profile builds on the following specifications:
@@ -274,7 +293,22 @@ This workflow enables verifiers to validate credentials received as files or cop
 - [ ] MUST handle status service unavailability
 - [ ] MUST cache status information appropriately
 
-#### Step 5: Validate Issuer Authorization
+#### Step 5: Verify Recipient Identity
+
+**Verifier Actions:**
+- Extract identifiers from credential (email addresses from credentialSubject)
+- Compare extracted identifiers to authenticated identifiers for the user submitting the credential
+- Send email confirmation codes if necessary for verification
+- Handle cases where email verification is not possible
+
+**Requirements Checklist:**
+- [ ] MUST extract identifiers from credential credentialSubject
+- [ ] MUST compare credential identifiers to authenticated user identifiers
+- [ ] SHOULD send email confirmation codes when email verification is required
+- [ ] SHOULD handle cases where email addresses in credentials are no longer accessible to users
+- [ ] SHOULD provide clear guidance when strong proof of control verification cannot be achieved
+
+#### Step 6: Validate Issuer Authorization
 
 **Verifier Actions:**
 - Query trust registries for issuer authorization

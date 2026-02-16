@@ -148,30 +148,22 @@ The Issue to Wallet flow pairs Credential Issuance and Credential Acceptance wor
 
 The credential issuance workflow defines how credentials are created and delivered by issuers. This workflow focuses on the issuer's role in creating, signing, and delivering verifiable credentials to holder wallets using interoperability protocols.
 
-#### Example Scenario: Micro-Credentialing
+**Example Scenario: Micro-Credentialing**: A community college offers a series of stackable micro-credentials in cybersecurity. When a student completes a course module demonstrating proficiency in network security, the college's learning management system automatically issues a digital micro-credential. The issuer system creates a W3C Verifiable Credential with Open Badges 3.0 schema, signs it using EdDSA cryptographic signatures, and delivers it via VCALM Exchanges protocol. The credential is cryptographically signed and verifiable, ensuring that regardless of which wallet receives it or which employer platform reviews it, the micro-credential maintains its integrity and can be verified across different systems.
 
-A community college offers a series of stackable micro-credentials in cybersecurity. When a student completes a course module demonstrating proficiency in network security, the college's learning management system automatically issues a digital micro-credential. The issuer system creates a W3C Verifiable Credential with Open Badges 3.0 schema, signs it using EdDSA cryptographic signatures, and delivers it via VCALM Exchanges protocol. The credential is cryptographically signed and verifiable, ensuring that regardless of which wallet receives it or which employer platform reviews it, the micro-credential maintains its integrity and can be verified across different systems.
+#### Implementation Requirements
 
-#### Participating Roles
-This workflow is implemented by the issuer:
-- **Issuer**: The organization or system that creates and delivers credentials (e.g., educational institutions, certification bodies, employers)
-- **Holder**: The individual or system that receives and stores credentials (e.g., learners, workers using digital wallets or persistence applications)
-
-#### Quick Checklist Guide
-
-**For Issuer Systems:**
-- VCALM-EdDSA Profile: See [Credential Issuance Workflow](profiles/vcalm-eddsa.md#credential-issuance-workflow) in VCALM-EdDSA profile
-- OID4-ECDSA Profile: See [Credential Issuance Workflow](profiles/oid4-ecdsa.md#credential-issuance-workflow) in OID4-ECDSA profile
+This workflow is implemented by **issuer systems** as they interact with holder wallets. See implementation requirements in supported profiles:
+- VCALM-EdDSA Profile: See [Credential Issuance Workflow](profiles/vcalm-eddsa.md#credential-issuance-workflow)
+- OID4-ECDSA Profile: See [Credential Issuance Workflow](profiles/oid4-ecdsa.md#credential-issuance-workflow)
 
 #### Step-by-Step Process Flow
 
 1. **Credential Request Initiation**
    - Holder initiates credential request through wallet interface OR through SSO login to issuer platform (e.g., SIS interface)
-   - Wallet or issuer system establishes connection using profile-specific protocol
+   - Wallet or issuer system accesses credential request using protocol-specific endpoint
 
-2. **Authentication and Authorization**
-   - Issuer authenticates holder identity
-   - Issuer authorizes credential issuance based on holder's achievements/qualifications
+2. **Authentication**
+   - Issuer authenticates holder DID identifier
 
 3. **Credential Generation**
    - Issuer creates credential with required schema and proof mechanisms
@@ -186,20 +178,13 @@ This workflow is implemented by the issuer:
 
 This workflow defines how holders receive and accept credentials from issuers. This workflow focuses on the holder's role in receiving credentials via interoperability protocols, verifying their authenticity, and ensuring they can be exported for use in other systems.
 
-#### Example Scenario: Transfer & Credit Mobility / Credit for Prior Learning
+**Example Scenario: Transfer & Credit Mobility / Credit for Prior Learning**: A student has earned credentials from multiple institutions: an associate degree from a community college, industry certifications from professional training programs, and micro-credentials from online learning platforms. Each credential is delivered to the student's digital wallet via VCALM Exchanges or OID4VCI protocol. The wallet verifies each credential's cryptographic signature, checks its status, and ensures it can be exported in standard formats. When the student applies to transfer to a four-year university, they can export their credentials and share them with the receiving institution's transfer evaluation system, which can verify each credential's authenticity and status. This interoperability ensures that credentials from different issuers can be reliably accepted, verified, and used across different systems.
 
-A student has earned credentials from multiple institutions: an associate degree from a community college, industry certifications from professional training programs, and micro-credentials from online learning platforms. Each credential is delivered to the student's digital wallet via VCALM Exchanges or OID4VCI protocol. The wallet verifies each credential's cryptographic signature, checks its status, and ensures it can be exported in standard formats. When the student applies to transfer to a four-year university, they can export their credentials and share them with the receiving institution's transfer evaluation system, which can verify each credential's authenticity and status. This interoperability ensures that credentials from different issuers can be reliably accepted, verified, and used across different systems.
+#### Implementation Requirements
 
-#### Participating Roles
-
-This workflow is implemented by holder systems like wallet mobile apps and web apps.
-- **Holder**: The individual or system that receives and accepts credentials (e.g., learners using digital wallets, persistence applications, or integrated credential management systems)
-
-#### Quick Checklist Guide
-
-**For Holder Wallets:**
-- VCALM-EdDSA Profile: See [Credential Acceptance Workflow](profiles/vcalm-eddsa.md#credential-acceptance-workflow) in VCALM-EdDSA profile
-- OID4-ECDSA Profile: See [Credential Acceptance Workflow](profiles/oid4-ecdsa.md#credential-acceptance-workflow) in OID4-ECDSA profile
+This workflow is implemented by **holder wallets** as they interact with issuer systems. See implementation requirements in supported profiles:
+- VCALM-EdDSA Profile: See [Credential Acceptance Workflow](profiles/vcalm-eddsa.md#credential-acceptance-workflow)
+- OID4-ECDSA Profile: See [Credential Acceptance Workflow](profiles/oid4-ecdsa.md#credential-acceptance-workflow)
 
 ### Verify from Wallet
 
@@ -207,22 +192,15 @@ The Verify from Wallet flow consists of a verifier making a Credential Request, 
 
 #### Credential Request and Verification Workflow
 
-The credential request and verification workflow defines the end-to-end in requesting credentials from holders and validating received credentials. This workflow covers the verifier's role in creating and sending credential requests, receiving verifiable presentations from wallets, and verifying the authenticity and validity of those credentials.
+The credential request and verification workflow defines the end-to-end process of requesting credentials from holders and validating received credentials. This workflow covers the verifier's role in creating and sending credential requests, receiving verifiable presentations from wallets, and verifying the authenticity and validity of those credentials.
 
-##### Example Scenario: Workforce Alignment
+**Example Scenario: Workforce Alignment**: An employer's applicant tracking system needs to verify that job applicants have the required skills and credentials for a data analyst position. The verifier system creates a credential request specifying the required credential types and attributes (e.g., data analytics micro-credentials), then sends this request to the applicant's digital wallet using VCALM Exchanges or OID4VP protocol. The wallet parses the request, asks the user for authorization, and packages the response as a verifiable presentation. When the verifier receives the presentation, it verifies the cryptographic signatures, validates the credential structure and schema compliance, checks credential status using Bitstring Status List, and validates the issuer's authorization through trust registries. This complete end-to-end workflow enables skills-based hiring, allowing employers to confidently identify qualified candidates based on verified competencies. Successful interoperability ensures that credentials issued by different training providers can be requested, presented, and verified consistently across various employer platforms.
 
-An employer's applicant tracking system needs to verify that job applicants have the required skills and credentials for a data analyst position. The verifier system creates a credential request specifying the required credential types and attributes (e.g., data analytics micro-credentials), then sends this request to the applicant's digital wallet using VCALM Exchanges or OID4VP protocol. The wallet parses the request, asks the user for authorization, and packages the response as a verifiable presentation. When the verifier receives the presentation, it verifies the cryptographic signatures, validates the credential structure and schema compliance, checks credential status using Bitstring Status List, and validates the issuer's authorization through trust registries. This complete end-to-end workflow enables skills-based hiring, allowing employers to confidently identify qualified candidates based on verified competencies. Successful interoperability ensures that credentials issued by different training providers can be requested, presented, and verified consistently across various employer platforms.
+#### Implementation Requirements
 
-##### Participating Roles
-
-This workflow involves one primary role:
-- **Verifier**: The organization or system that requests and verifies credentials (e.g., employers, educational institutions, licensing boards, talent platforms)
-
-##### Quick Checklist Guide
-
-**For Verifier Systems:**
-- VCALM-EdDSA Profile: See [Credential Request and Verification Workflow](profiles/vcalm-eddsa.md#credential-request-and-verification-workflow) in VCALM-EdDSA profile
-- OID4-ECDSA Profile: See [Credential Request and Verification Workflow](profiles/oid4-ecdsa.md#credential-request-and-verification-workflow) in OID4-ECDSA profile
+This workflow is implemented by **verifier systems** as they interact with holder wallets. See implementation requirements in supported profiles:
+- VCALM-EdDSA Profile: See [Credential Request and Verification Workflow](profiles/vcalm-eddsa.md#credential-request-and-verification-workflow)
+- OID4-ECDSA Profile: See [Credential Request and Verification Workflow](profiles/oid4-ecdsa.md#credential-request-and-verification-workflow)
 
 ##### Step-by-Step Process Flow
 
@@ -232,12 +210,14 @@ This workflow involves one primary role:
    - Verifier prepares request using profile-specific protocol (VCALM Exchanges or OID4VP)
 
 2. **Request Delivery**
-   - Verifier sends credential request to holder's digital wallet using profile-specific protocol
-   - Request is delivered to wallet for processing (see Credential Presentation workflow for wallet's response)
+   - Verifier exposes credential request to holder's digital wallet using profile-specific protocol URL
+   - Holder wallet fetches the request and parses it. The holder wallet asks the user for permission to share the credentials requested.
+   - Holder wallet creates a verifiable presentation containing the requested credentials and proves control of their DID using the profile-specific cryptographic suite.
 
 3. **Presentation Reception**
    - Verifier receives verifiable presentation from holder wallet in response to the request
    - Verifier validates presentation structure and format
+   - Verifier validates the presentation proof signature, creation date, challenge and expiration if present
    - Verifier extracts credentials from the presentation
 
 4. **Credential Verification**
@@ -249,6 +229,7 @@ This workflow involves one primary role:
    - Verify Open Badges 3.0 schema compliance
    - Check required fields and data types
    - Validate credential expiration dates
+   - Validate recipient identifiers in each credential matches holder DID
 
 5. **Status Verification**
    - Retrieve current status list from issuer
@@ -266,20 +247,13 @@ This workflow involves one primary role:
 
 The credential presentation workflow defines how holders present credentials to verifiers in response to credential requests. This workflow focuses on the holder's role in responding to requests and presenting credentials using interoperability protocols.
 
-#### Example Scenario: Workforce Alignment
+**Example Scenario: Workforce Alignment**: A job seeker has completed a series of industry-recognized micro-credentials in data analytics through a workforce development program. When applying for a data analyst position, the employer's applicant tracking system requests verification of relevant skills and credentials. The job seeker uses their digital wallet to selectively share only the data analytics credentials that match the job requirements, maintaining privacy over other credentials. The employer's system receives the verifiable credentials and can immediately verify their authenticity and current status. This streamlined presentation process enables skills-based hiring, allowing employers to quickly identify qualified candidates based on verified competencies rather than relying solely on traditional resumes. Successful interoperability ensures that credentials issued by different training providers can be presented and verified consistently across various employer platforms.
 
-A job seeker has completed a series of industry-recognized micro-credentials in data analytics through a workforce development program. When applying for a data analyst position, the employer's applicant tracking system requests verification of relevant skills and credentials. The job seeker uses their digital wallet to selectively share only the data analytics credentials that match the job requirements, maintaining privacy over other credentials. The employer's system receives the verifiable credentials and can immediately verify their authenticity and current status. This streamlined presentation process enables skills-based hiring, allowing employers to quickly identify qualified candidates based on verified competencies rather than relying solely on traditional resumes. Successful interoperability ensures that credentials issued by different training providers can be presented and verified consistently across various employer platforms.
+#### Implementation Requirements
 
-#### Participating Roles
-
-This workflow involves one primary role:
-- **Holder**: The individual or system that presents credentials (e.g., learners, workers using digital wallets or persistence applications)
-
-#### Quick Checklist Guide
-
-**For Holder Wallets:**
-- VCALM-EdDSA Profile: See [Credential Presentation Workflow](profiles/vcalm-eddsa.md#credential-presentation-workflow) in VCALM-EdDSA profile
-- OID4-ECDSA Profile: See [Credential Presentation Workflow](profiles/oid4-ecdsa.md#credential-presentation-workflow) in OID4-ECDSA profile
+This workflow is implemented by **holder wallets** as they interact with verifier systems. See implementation requirements in supported profiles:
+- VCALM-EdDSA Profile: See [Credential Presentation Workflow](profiles/vcalm-eddsa.md#credential-presentation-workflow)
+- OID4-ECDSA Profile: See [Credential Presentation Workflow](profiles/oid4-ecdsa.md#credential-presentation-workflow)
 
 #### Step-by-Step Process Flow
 
@@ -297,6 +271,10 @@ This workflow involves one primary role:
    - Holder wallet delivers presentation to verifier using profile-specific protocol
    - Presentation is received and verified in the Credential Request and Verification workflow
 
+4. **Success Handling**
+   - Verifier presents success message to user or follows redirect URI
+   - User receives confirmation of successful credential presentation
+
 ### Standalone Operations
 
 Standalone operations enable credential issuance and verification without protocol-based delivery, supporting direct file download, copy-paste JSON, and upload workflows.
@@ -305,19 +283,12 @@ Standalone operations enable credential issuance and verification without protoc
 
 The direct credential issuance workflow defines how issuers create and deliver credentials directly as downloadable files or copy-paste JSON without protocol-based delivery. This workflow focuses on the issuer's role in creating, signing, and providing credentials that recipients can download or copy directly.
 
-##### Example Scenario: Micro-Credentialing
+**Example Scenario: Micro-Credentialing**: A professional training organization offers industry-recognized micro-credentials in project management. When a professional completes a certification program, the organization's system creates a digital credential. The issuer system creates a W3C Verifiable Credential with Open Badges 3.0 schema, signs it using EdDSA cryptographic signatures, and provides it as a downloadable JSON file or copy-paste text. The recipient can download the credential file or copy the JSON text, then share it with employers or other verifiers who can verify its authenticity and status. This direct delivery approach enables simple credential issuance without requiring wallet integration.
 
-A professional training organization offers industry-recognized micro-credentials in project management. When a professional completes a certification program, the organization's system creates a digital credential. The issuer system creates a W3C Verifiable Credential with Open Badges 3.0 schema, signs it using EdDSA cryptographic signatures, and provides it as a downloadable JSON file or copy-paste text. The recipient can download the credential file or copy the JSON text, then share it with employers or other verifiers who can verify its authenticity and status. This direct delivery approach enables simple credential issuance without requiring wallet integration.
+#### Implementation Requirements
 
-##### Participating Roles
-
-This workflow is implemented by the issuer:
-- **Issuer**: The organization or system that creates and delivers credentials (e.g., educational institutions, certification bodies, employers)
-
-##### Quick Checklist Guide
-
-**For Issuer Systems:**
-- OB 3.0 Direct Delivery Profile: See [Direct Credential Issuance Workflow](profiles/ob-3.0-direct-delivery.md#direct-credential-issuance-workflow) in OB 3.0 Direct Delivery profile
+This workflow is implemented by **issuer systems** as they deliver credentials to recipients directly. See implementation requirements in supported profiles:
+- OB 3.0 Direct Delivery Profile: See [Direct Credential Issuance Workflow](profiles/ob-3.0-direct-delivery.md#direct-credential-issuance-workflow)
 
 ##### Step-by-Step Process Flow
 
@@ -340,19 +311,12 @@ This workflow is implemented by the issuer:
 
 The direct credential verification workflow defines how verifiers validate credentials received as files or copy-paste JSON. This workflow focuses on the verifier's role in importing, validating, and verifying credentials that were delivered directly without protocol-based presentation.
 
-##### Example Scenario: Skills/Competency Articulation
+**Example Scenario: Skills/Competency Articulation**: An employer receives a credential file from a job applicant who downloaded it from their training provider. The verifier's system imports the credential JSON file, validates its structure, verifies the cryptographic signature, checks the credential status, and validates the issuer's authorization through trust registries. Once verified, the platform can use the credential data to match the applicant's skills to job requirements. This direct verification process enables employers to confidently accept credentials delivered through simple file sharing, supporting reliable skills-based hiring decisions.
 
-An employer receives a credential file from a job applicant who downloaded it from their training provider. The verifier's system imports the credential JSON file, validates its structure, verifies the cryptographic signature, checks the credential status, and validates the issuer's authorization through trust registries. Once verified, the platform can use the credential data to match the applicant's skills to job requirements. This direct verification process enables employers to confidently accept credentials delivered through simple file sharing, supporting reliable skills-based hiring decisions.
+#### Implementation Requirements
 
-##### Participating Roles
-
-This workflow involves one primary role:
-- **Verifier**: The organization or system that validates received credentials (e.g., employers, educational institutions, licensing boards, talent platforms)
-
-##### Quick Checklist Guide
-
-**For Verifier Systems:**
-- OB 3.0 Direct Delivery Profile: See [Direct Credential Verification Workflow](profiles/ob-3.0-direct-delivery.md#direct-credential-verification-workflow) in OB 3.0 Direct Delivery profile
+This workflow is implemented by **verifier systems** as they validate credentials received from recipients. See implementation requirements in supported profiles:
+- OB 3.0 Direct Delivery Profile: See [Direct Credential Verification Workflow](profiles/ob-3.0-direct-delivery.md#direct-credential-verification-workflow)
 
 ##### Step-by-Step Process Flow
 
@@ -379,7 +343,13 @@ This workflow involves one primary role:
    - Verify status list signature and freshness
    - Handle status service unavailability
 
-5. **Trust Registry Integration**
+5. **Recipient Identity Confirmation**
+   - Extract identifiers from credential (email addresses from credentialSubject)
+   - Compare extracted identifiers to authenticated identifiers for the user submitting the credential
+   - Send email confirmation codes if necessary for verification
+   - Handle cases where email verification is not possible
+
+6. **Trust Registry Integration**
    - Query trust registries for issuer authorization
    - Validate issuer credentials and accreditation
    - Check for issuer revocation or suspension
@@ -387,6 +357,8 @@ This workflow involves one primary role:
 ---
 
 ## Component Specifications
+
+These open standards and specifications are used by the interoperability profiles to ensure interoperability, freedom of implementation, and security.
 
 ### Credential Schema
 
@@ -482,11 +454,9 @@ All profiles MUST implement Bitstring Status List for credential status manageme
 - MUST handle status service unavailability
 - MUST cache status information appropriately
 
-### Trust Infrastructure
+### Issuer Identity Registries
 
-#### Trust Registry Integration
-
-All profiles require trust registry integration for issuer validation:
+All profiles require issuer identity registry integration for issuer validation:
 
 **Required Capabilities:**
 - Query issuer authorization status
@@ -495,9 +465,9 @@ All profiles require trust registry integration for issuer validation:
 - Maintain current trust registry data
 
 **Implementation Requirements:**
-- MUST implement trust registry query protocols
-- MUST cache trust registry data for performance
-- MUST handle trust registry unavailability
+- MUST implement issuer identity registry query protocols
+- MUST cache registry data for performance
+- MUST handle registry unavailability
 
 ---
 
