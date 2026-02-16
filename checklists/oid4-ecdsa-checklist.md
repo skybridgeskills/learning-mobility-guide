@@ -1,11 +1,12 @@
 ---
 title: OID4 ECDSA Profile
+description: An Open Badges 3.0 interoperability profile using OpenID for Verifiable Credentials (OID4VCI/OID4VP) for credential exchange with ECDSA signatures.
 ---
 
-An Open Badges 3.0 interoperability profile using OpenID for Verifiable Credentials (OID4VCI/OID4VP) for credential exchange with ECDSA signatures.
+{{ page.description }}
 
-**Profile ID:** oid4-ecdsa-v1  
-**Version:** 1.0.0  
+**Profile ID:** `oid4-ecdsa-v1`  
+**Version:** `1.0.0`  
 **Assessment Date:** [DATE]  
 **Vendor/Organization:** [VENDOR_NAME]  
 **Assessor:** [ASSESSOR_NAME]  

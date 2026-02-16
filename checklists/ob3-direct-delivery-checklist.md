@@ -1,11 +1,13 @@
 ---
 title: OB 3.0 Direct Delivery Profile
+description: An Open Badges 3.0 interoperability profile using EdDSA cryptographic signatures with Open Badges 3.0 schema for direct credential issuance and verification.
 ---
 
-An Open Badges 3.0 interoperability profile using EdDSA cryptographic signatures with Open Badges 3.0 schema for direct credential issuance and verification.
+{{ page.description }}
 
-**Profile ID:** ob3-direct-delivery-v1  
-**Version:** 1.0.0  
+
+**Profile ID:** `ob3-direct-delivery-v1`  
+**Version:** `1.0.0`  
 **Assessment Date:** [DATE]  
 **Vendor/Organization:** [VENDOR_NAME]  
 **Assessor:** [ASSESSOR_NAME]  

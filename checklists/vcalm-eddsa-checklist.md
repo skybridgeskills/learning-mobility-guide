@@ -1,11 +1,12 @@
 ---
 title: VCALM EdDSA Profile
+description: An Open Badges 3.0 interoperability profile using VCALM Exchanges for credential issuance and presentation with EdDSA signatures.  
 ---
 
-An Open Badges 3.0 interoperability profile using VCALM Exchanges for credential issuance and presentation with EdDSA signatures.
+{{ page.description }}
 
-**Profile ID:** vcalm-eddsa-v1  
-**Version:** 1.0.0  
+**Profile ID:** `vcalm-eddsa-v1`  
+**Version:** `1.0.0`  
 **Assessment Date:** [DATE]  
 **Vendor/Organization:** [VENDOR_NAME]  
 **Assessor:** [ASSESSOR_NAME]  
