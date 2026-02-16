@@ -1,6 +1,8 @@
-# Vendor Capability Assessment Checklist
+---
+title: OID4 ECDSA Profile
+---
 
-## Profile: OID4 ECDSA Profile
+An Open Badges 3.0 interoperability profile using OpenID for Verifiable Credentials (OID4VCI/OID4VP) for credential exchange with ECDSA signatures.
 
 **Profile ID:** oid4-ecdsa-v1  
 **Version:** 1.0.0  
@@ -14,6 +16,8 @@
 
 This checklist assesses vendor capabilities against the OID4 ECDSA Profile. This profile uses OpenID for Verifiable Credentials (OID4VCI/OID4VP) for credential exchange with ECDSA signatures, optimized for OAuth 2.0-based credential exchange workflows.
 
+Requirements are organized by workflow to clarify which capabilities can be tested via interoperability workflows versus those that are internal implementation details.
+
 For each requirement:
 - **MUST** requirements are mandatory for profile conformance
 - **SHOULD** requirements are recommended for best practices
@@ -21,20 +25,27 @@ For each requirement:
 
 ---
 
-## Role Assessment
+## Workflow Assessment
 
-**Please indicate which roles your system supports:**
-- [ ] Issuer System
-- [ ] Holder Wallet/Credential Management System
-- [ ] Verifier System
+**Please indicate which workflows your system participates in:**
+- [ ] Credential Issuance (Issuer role)
+- [ ] Credential Acceptance (Holder role)
+- [ ] Credential Request and Verification (Verifier role)
+- [ ] Credential Presentation (Holder role)
 
 ---
 
-## Capability Assessment
+## Workflow Requirements
 
-### Issuer System Requirements
+### Credential Issuance Workflow
 
-#### Credential Creation
+**Participating Role:** Issuer
+
+This workflow focuses on the issuer's ability to create, sign, and deliver credentials using OID4VCI protocol.
+
+#### Interoperability Requirements
+
+##### Credential Creation
 
 **Description:** Create W3C Verifiable Credentials with Open Badges 3.0 schema
 
@@ -50,7 +61,7 @@ For each requirement:
 [Please provide detailed technical information about your credential creation implementation]
 ```
 
-#### Cryptographic Signing
+##### Cryptographic Signing
 
 **Description:** Sign credentials using ECDSA with RDF Dataset Canonicalization
 
@@ -59,14 +70,13 @@ For each requirement:
 - [ ] MUST use P-256 signature algorithm
 - [ ] MUST include proof creation date in Data Integrity proof
 - [ ] MUST include verification method reference in proof
-- [ ] MUST support key rotation and revocation
 
 **Implementation Details:**
 ```
 [Please provide detailed technical information about your cryptographic signing implementation]
 ```
 
-#### OID4VCI
+##### OID4VCI
 
 **Description:** Implement OID4VCI v1.0 for credential issuance
 
@@ -84,7 +94,7 @@ For each requirement:
 [Please provide detailed technical information about your OID4VCI implementation]
 ```
 
-#### Status Management
+##### Status Management
 
 **Description:** Implement Bitstring Status List for credential status
 
@@ -92,15 +102,13 @@ For each requirement:
 - [ ] MUST maintain current Bitstring Status List
 - [ ] MUST sign status list with issuer key
 - [ ] MUST provide status list endpoint
-- [ ] MUST update status list when credentials are revoked
-- [ ] MUST handle status list versioning
 
 **Implementation Details:**
 ```
 [Please provide detailed technical information about your status management implementation]
 ```
 
-#### DID Management
+##### DID Management
 
 **Description:** Manage issuer identity using supported DID methods
 
@@ -109,49 +117,48 @@ For each requirement:
 - [ ] MUST maintain current DID document
 - [ ] MUST include verification methods for P-256 keys
 - [ ] MUST support DID resolution
+- [ ] MAY support DID documents with multiple verification methods
 
 **Implementation Details:**
 ```
 [Please provide detailed technical information about your DID management implementation]
 ```
 
-### Holder Wallet Requirements
+##### Encryption in Transit
 
-#### Credential Storage
-
-**Description:** Securely store and manage verifiable credentials
+**Description:** Ensure secure transmission of credentials
 
 **Requirements:**
-- [ ] MUST provide secure storage for W3C Verifiable Credentials
-- [ ] MUST preserve original credential proofs and signatures
-- [ ] MUST support credential organization and categorization
-- [ ] MUST implement credential backup and recovery
-- [ ] MUST provide credential sharing controls
+- [ ] MUST implement data encryption in transit
 
 **Implementation Details:**
 ```
-[Please provide detailed technical information about your credential storage implementation]
+[Please provide detailed technical information about your encryption implementation]
 ```
 
-#### Credential Display
+#### Internal Practices
 
-**Description:** Display Open Badges 3.0 credentials to users
+**Note:** These requirements cannot be tested via interoperability workflows but may be important for procurement.
 
-**Requirements:**
-- [ ] MUST render Open Badges 3.0 credentials with proper formatting
-- [ ] MUST display credential metadata and evidence
-- [ ] MUST show credential status and expiration
-- [ ] MUST provide credential sharing interface
-- [ ] MUST support credential export in standard formats
+- [ ] SHOULD implement key rotation policies
+- [ ] SHOULD implement secure key backup and recovery
+- [ ] SHOULD support hardware security module integration
+- [ ] SHOULD handle status list versioning
+- [ ] SHOULD update status list when credentials are revoked
 
-**Implementation Details:**
-```
-[Please provide detailed technical information about your credential display implementation]
-```
+---
 
-#### OID4VCI
+### Credential Acceptance Workflow
 
-**Description:** Implement OID4VCI v1.0 for credential reception
+**Participating Role:** Holder
+
+This workflow focuses on the holder's ability to receive, verify, and accept credentials from issuers.
+
+#### Interoperability Requirements
+
+##### Credential Reception
+
+**Description:** Receive credentials via OID4VCI protocol
 
 **Requirements:**
 - [ ] MUST implement OID4VCI v1.0 specification
@@ -161,30 +168,14 @@ For each requirement:
 - [ ] MUST implement OAuth 2.0 client functionality
 - [ ] MUST process credential responses
 - [ ] MUST implement proper error handling
-
-**Implementation Details:**
-```
-[Please provide detailed technical information about your OID4VCI implementation]
-```
-
-#### OID4VP
-
-**Description:** Implement OID4VP v1.0 for credential presentation
-
-**Requirements:**
-- [ ] MUST implement OID4VP v1.0 specification
-- [ ] MUST support authorization code flow
-- [ ] MUST handle presentation requests from verifiers
-- [ ] MUST provide credential presentation interface
 - [ ] MUST implement user consent mechanisms
-- [ ] MUST support selective disclosure
 
 **Implementation Details:**
 ```
-[Please provide detailed technical information about your OID4VP implementation]
+[Please provide detailed technical information about your credential reception implementation]
 ```
 
-#### Signature Verification
+##### Signature Verification
 
 **Description:** Verify ECDSA signatures on received credentials
 
@@ -199,7 +190,7 @@ For each requirement:
 [Please provide detailed technical information about your signature verification implementation]
 ```
 
-#### Status Checking
+##### Status Checking
 
 **Description:** Check credential status using Bitstring Status List
 
@@ -214,7 +205,20 @@ For each requirement:
 [Please provide detailed technical information about your status checking implementation]
 ```
 
-#### DID Management
+##### Credential Export
+
+**Description:** Export credentials in standard formats
+
+**Requirements:**
+- [ ] MUST support credential export in standard formats
+- [ ] MUST preserve original credential proofs and signatures
+
+**Implementation Details:**
+```
+[Please provide detailed technical information about your credential export implementation]
+```
+
+##### DID Management
 
 **Description:** Manage holder identity using supported DID methods
 
@@ -229,9 +233,72 @@ For each requirement:
 [Please provide detailed technical information about your DID management implementation]
 ```
 
-### Verifier System Requirements
+##### Encryption in Transit
 
-#### Credential Validation
+**Description:** Ensure secure transmission of credentials
+
+**Requirements:**
+- [ ] MUST implement data encryption in transit
+
+**Implementation Details:**
+```
+[Please provide detailed technical information about your encryption implementation]
+```
+
+#### Internal Practices
+
+**Note:** These requirements cannot be tested via interoperability workflows but may be important for procurement.
+
+- [ ] SHOULD provide secure storage for W3C Verifiable Credentials
+- [ ] SHOULD support credential organization and categorization
+- [ ] SHOULD provide credential sharing controls
+- [ ] SHOULD render Open Badges 3.0 credentials with proper formatting
+- [ ] SHOULD display credential metadata and evidence
+- [ ] SHOULD show credential status and expiration
+- [ ] SHOULD provide credential sharing interface
+
+---
+
+### Credential Request and Verification Workflow
+
+**Participating Role:** Verifier
+
+This workflow focuses on the verifier's complete end-to-end role in requesting credentials from holders and validating received credentials, including request creation, presentation reception, credential verification, and trust registry integration.
+
+#### Interoperability Requirements
+
+##### Request Creation
+
+**Description:** Create and send presentation requests
+
+**Requirements:**
+- [ ] MUST implement OID4VP v1.0 specification
+- [ ] MUST support authorization code flow
+- [ ] MUST generate presentation requests with proper scopes
+- [ ] MUST provide presentation request endpoint
+- [ ] MUST implement proper error handling and status codes
+- [ ] MUST construct presentation requests asking for specific credential types and attributes
+
+**Implementation Details:**
+```
+[Please provide detailed technical information about your presentation request implementation]
+```
+
+##### Presentation Reception
+
+**Description:** Receive verifiable presentations from holders
+
+**Requirements:**
+- [ ] MUST handle credential presentations from wallets
+- [ ] MUST validate presentation structure and format
+- [ ] MUST extract credentials from presentations
+
+**Implementation Details:**
+```
+[Please provide detailed technical information about your presentation reception implementation]
+```
+
+##### Credential Verification
 
 **Description:** Validate received verifiable credentials
 
@@ -247,7 +314,7 @@ For each requirement:
 [Please provide detailed technical information about your credential validation implementation]
 ```
 
-#### Signature Verification
+##### Signature Verification
 
 **Description:** Verify ECDSA signatures on received credentials
 
@@ -256,31 +323,13 @@ For each requirement:
 - [ ] MUST resolve issuer DIDs to obtain verification keys
 - [ ] MUST validate proof creation dates and expiration
 - [ ] MUST handle signature verification failures gracefully
-- [ ] MUST implement proper error logging and reporting
 
 **Implementation Details:**
 ```
 [Please provide detailed technical information about your signature verification implementation]
 ```
 
-#### OID4VP
-
-**Description:** Implement OID4VP v1.0 for credential requests
-
-**Requirements:**
-- [ ] MUST implement OID4VP v1.0 specification
-- [ ] MUST support authorization code flow
-- [ ] MUST generate presentation requests with proper scopes
-- [ ] MUST handle credential presentations from wallets
-- [ ] MUST implement proper error handling and status codes
-- [ ] MUST provide presentation request endpoint
-
-**Implementation Details:**
-```
-[Please provide detailed technical information about your OID4VP implementation]
-```
-
-#### Status Verification
+##### Status Verification
 
 **Description:** Verify credential status using Bitstring Status List
 
@@ -296,7 +345,7 @@ For each requirement:
 [Please provide detailed technical information about your status verification implementation]
 ```
 
-#### Trust Registry Integration
+##### Trust Registry Integration
 
 **Description:** Integrate with trust registries for issuer validation
 
@@ -304,13 +353,145 @@ For each requirement:
 - [ ] MUST query trust registries for issuer authorization
 - [ ] MUST validate issuer credentials and accreditation
 - [ ] MUST check for issuer revocation or suspension
-- [ ] MUST maintain current trust registry data
 - [ ] MUST implement trust registry query protocols
 
 **Implementation Details:**
 ```
 [Please provide detailed technical information about your trust registry integration implementation]
 ```
+
+##### Threat Mitigation
+
+**Description:** Protect against common attacks
+
+**Requirements:**
+- [ ] MUST implement protection against replay attacks
+- [ ] MUST implement protection against credential forgery
+- [ ] MUST implement protection against status list manipulation
+
+**Implementation Details:**
+```
+[Please provide detailed technical information about your threat mitigation implementation]
+```
+
+##### Encryption in Transit
+
+**Description:** Ensure secure transmission of requests and credentials
+
+**Requirements:**
+- [ ] MUST implement data encryption in transit
+
+**Implementation Details:**
+```
+[Please provide detailed technical information about your encryption implementation]
+```
+
+#### Internal Practices
+
+**Note:** These requirements cannot be tested via interoperability workflows but may be important for procurement.
+
+- [ ] SHOULD implement proper error logging and reporting
+- [ ] SHOULD maintain current trust registry data
+
+---
+
+### Credential Presentation Workflow
+
+**Participating Role:** Holder
+
+This workflow focuses on the holder's ability to create and send credential presentations to verifiers.
+
+#### Interoperability Requirements
+
+##### Presentation Creation
+
+**Description:** Create and send credential presentations
+
+**Requirements:**
+- [ ] MUST implement OID4VP v1.0 specification
+- [ ] MUST support authorization code flow
+- [ ] MUST handle presentation requests from verifiers
+- [ ] MUST provide credential presentation interface
+- [ ] MUST implement user consent mechanisms
+- [ ] MUST create verifiable presentations with ECDSA signatures
+
+**Implementation Details:**
+```
+[Please provide detailed technical information about your credential presentation implementation]
+```
+
+##### DID Management
+
+**Description:** Manage holder identity for presentations
+
+**Requirements:**
+- [ ] MUST support did:web or did:key DID methods
+- [ ] MUST generate and manage P-256 key pairs for presentations
+- [ ] MUST maintain current DID document
+- [ ] MUST support DID resolution
+
+**Implementation Details:**
+```
+[Please provide detailed technical information about your DID management implementation]
+```
+
+##### Encryption in Transit
+
+**Description:** Ensure secure transmission of presentations
+
+**Requirements:**
+- [ ] MUST implement data encryption in transit
+
+**Implementation Details:**
+```
+[Please provide detailed technical information about your encryption implementation]
+```
+
+#### Internal Practices
+
+**Note:** These requirements cannot be tested via interoperability workflows but may be important for procurement.
+
+None specified for this workflow.
+
+---
+
+## Internal Operation Requirements
+
+**Note:** These requirements cannot be tested via interoperability workflows but may be important for procurement and internal system quality.
+
+### Issuer Internal Requirements
+
+- [ ] SHOULD support key rotation and revocation policies
+- [ ] SHOULD implement secure key backup and recovery
+- [ ] SHOULD support hardware security module integration
+- [ ] SHOULD update status list when credentials are revoked
+- [ ] SHOULD handle status list versioning
+- [ ] SHOULD implement data encryption at rest
+- [ ] SHOULD implement proper access controls
+- [ ] SHOULD implement audit logging
+
+### Holder Internal Requirements
+
+- [ ] SHOULD provide secure storage for W3C Verifiable Credentials
+- [ ] SHOULD support credential organization and categorization
+- [ ] SHOULD provide credential sharing controls
+- [ ] SHOULD render Open Badges 3.0 credentials with proper formatting
+- [ ] SHOULD display credential metadata and evidence
+- [ ] SHOULD show credential status and expiration
+- [ ] SHOULD provide credential sharing interface
+- [ ] SHOULD implement data encryption at rest
+- [ ] SHOULD implement proper access controls
+- [ ] SHOULD implement data minimization
+- [ ] SHOULD comply with applicable privacy regulations
+
+### Verifier Internal Requirements
+
+- [ ] SHOULD implement data encryption at rest
+- [ ] SHOULD implement proper access controls
+- [ ] SHOULD implement proper error logging and reporting
+- [ ] SHOULD maintain current trust registry data
+- [ ] SHOULD implement data minimization
+- [ ] SHOULD comply with applicable privacy regulations
 
 ---
 
@@ -347,7 +528,6 @@ For each requirement:
 - [ ] Presentation request generation
 - [ ] Credential presentation interface
 - [ ] User consent mechanisms
-- [ ] Selective disclosure
 - [ ] Presentation response handling
 
 **Implementation Details:**
@@ -386,9 +566,9 @@ For each requirement:
 **Key Management:**
 - [ ] Key generation
 - [ ] Key storage
-- [ ] Key rotation
-- [ ] Key revocation
-- [ ] Hardware security module support
+- [ ] Key rotation (internal practice)
+- [ ] Key revocation (internal practice)
+- [ ] Hardware security module support (internal practice)
 
 ### DID Support
 
@@ -401,6 +581,9 @@ For each requirement:
 - [ ] Full DID resolution support
 - [ ] Partial DID resolution support
 - [ ] Planned implementation
+
+**DID Document Structure:**
+- [ ] MAY support DID documents with multiple verification methods
 
 ### Status Management
 
@@ -419,21 +602,32 @@ For each requirement:
 ## Security and Compliance
 
 ### Data Protection
-- [ ] Encryption at rest
+
+**Interoperability-Testable:**
 - [ ] Encryption in transit
+
+**Internal Practices:**
+- [ ] Encryption at rest
 - [ ] Access controls
 
 ### Privacy
-- [ ] User consent mechanisms
-- [ ] Selective disclosure
+
+**Interoperability-Testable:**
+- [ ] User consent mechanisms (via protocol flow)
+
+**Internal Practices:**
 - [ ] Data minimization
 - [ ] Privacy regulation compliance
 
 ### Threat Mitigation
+
+**Interoperability-Testable:**
 - [ ] Replay attack protection
 - [ ] Credential forgery protection
-- [ ] Key compromise protection
 - [ ] Status list manipulation protection
+
+**Internal Practices:**
+- [ ] Key compromise protection
 
 ---
 
@@ -449,10 +643,14 @@ For each requirement:
 ## Trust Infrastructure
 
 ### Trust Registry Integration
+
+**Interoperability-Testable:**
 - [ ] Trust registry query support
 - [ ] Issuer authorization validation
-- [ ] Trust registry data maintenance
 - [ ] Trust registry protocols support
+
+**Internal Practices:**
+- [ ] Trust registry data maintenance
 
 ---
 
