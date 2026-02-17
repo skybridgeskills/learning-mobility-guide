@@ -1,9 +1,11 @@
 ---
-title: Main Guide
+title: Interoperability Guide for Learning Mobility
 description: A technical guide to organizing interoperable digital credentialing systems that power learning mobility. Defines standardized interoperability profiles for seamless credential exchange across vendors and platforms.
 layout: default
 permalink: /
 ---
+
+# {{ site.title }}
 
 ## Table of Contents
 
@@ -90,7 +92,7 @@ The digital credentials ecosystem consists of three primary roles:
 
 ### Skills-Based Hiring and Advancement with Digital Credentials
 
-Digital credentials enable skills-based hiring by providing verifiable, machine-readable evidence of skills or competencies that can be matched to job requirements. Different organizations may use different terms to describe related concepts like skills, competencies, or capabilities. For the purpose of this guide, we may use these terms interchangeably to describe a person's capability that could be recognized using a digital credential or that may be required to perform a particular job role. 
+Digital credentials enable skills-based hiring by providing verifiable, machine-readable evidence of skills or competencies that can be matched to job requirements. Different organizations may use different terms to describe related concepts like skills, competencies, or capabilities. For the purpose of this guide, we may use these terms interchangeably to describe a person's capability that could be recognized using a digital credential or that may be required to perform a particular job role.
 
 Unlike traditional resumes or degree requirements, verifiable credentials enable skills-based hiring in more powerful ways:
 
@@ -99,7 +101,7 @@ Unlike traditional resumes or degree requirements, verifiable credentials enable
 - Support some forms of selective disclosure, allowing candidates to share relevant credentials without necessarily exposing less relevant data.
 - Maintain integrity across different hiring platforms and applicant tracking systems
 
-When hiring systems implement an interoperability profile in a verifier role, they can confidently accept and verify credentials from diverse issuers—educational institutions, training providers, and certification bodies that use that profile. 
+When hiring systems implement an interoperability profile in a verifier role, they can confidently accept and verify credentials from diverse issuers—educational institutions, training providers, and certification bodies that use that profile.
 
 ### Interoperability Profiles
 
@@ -110,10 +112,11 @@ Interoperability profiles solve the challenge of ensuring that different systems
 Interoperability profiles emerge from real-world implementation patterns. When multiple organizations implement digital credentials using similar combinations of standards and protocols, and those implementations successfully enable credential exchange, a pattern emerges that can be codified into an interoperability profile. New profiles are typically proposed and documented by communities of implementers who have successfully demonstrated interoperability using a particular combination of standards. These profiles are then validated through real-world testing and may be incorporated into guides like this one to enable broader adoption.
 
 Each profile includes:
+
 - **Mandatory requirements**: Features that MUST be implemented for conformance
 - **Optional extensions**: Features that MAY be implemented for enhanced functionality
 
-As the ecosystem matures, more interoperability profiles will be created to cover specific use cases and requirements as well as to take advantage of new standards and protocols that are developed, such as cryptographic signatures with more advanced protections against quantum computing attacks. 
+As the ecosystem matures, more interoperability profiles will be created to cover specific use cases and requirements as well as to take advantage of new standards and protocols that are developed, such as cryptographic signatures with more advanced protections against quantum computing attacks.
 
 ### Conformance vs. Compatibility
 
@@ -128,17 +131,17 @@ This guide focuses on role-based conformance requirements to ensure reliable int
 
 This table provides a quick reference for learning mobility coordinators to identify which workflows are relevant to their projects, which roles participate in each workflow, which profiles support each workflow, and where to find the corresponding checklists.
 
-| Workflow | Role | Use Cases (Learning Mobility Framework verticals) | Profile Support |
-|----------|-------------------|--------------------------------------|----------------|
-| **Issue to Wallet** | | | |
-| Credential Issuance | Issuer | Creating and delivering credentials to holders (Micro-Credentialing, Workforce Alignment) | [VCALM-EdDSA](profiles/vcalm-eddsa.md#credential-issuance-workflow), [OID4-ECDSA](profiles/oid4-ecdsa.md#credential-issuance-workflow) |
-| Credential Acceptance | Holder | Receiving and accepting credentials from issuers (Transfer & Credit Mobility, Credit for Prior Learning) | [VCALM-EdDSA](profiles/vcalm-eddsa.md#credential-acceptance-workflow), [OID4-ECDSA](profiles/oid4-ecdsa.md#credential-acceptance-workflow) |
-| **Verify from Wallet** | | | |
+| Workflow                            | Role     | Use Cases (Learning Mobility Framework verticals)                                                                                                                        | Profile Support                                                                                                                                                        |
+| ----------------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Issue to Wallet**                 |          |                                                                                                                                                                          |                                                                                                                                                                        |
+| Credential Issuance                 | Issuer   | Creating and delivering credentials to holders (Micro-Credentialing, Workforce Alignment)                                                                                | [VCALM-EdDSA](profiles/vcalm-eddsa.md#credential-issuance-workflow), [OID4-ECDSA](profiles/oid4-ecdsa.md#credential-issuance-workflow)                                 |
+| Credential Acceptance               | Holder   | Receiving and accepting credentials from issuers (Transfer & Credit Mobility, Credit for Prior Learning)                                                                 | [VCALM-EdDSA](profiles/vcalm-eddsa.md#credential-acceptance-workflow), [OID4-ECDSA](profiles/oid4-ecdsa.md#credential-acceptance-workflow)                             |
+| **Verify from Wallet**              |          |                                                                                                                                                                          |                                                                                                                                                                        |
 | Credential Request and Verification | Verifier | Requesting credentials from holders and validating received credentials (Workforce Alignment, Transfer & Credit Mobility, Skills/Competency Articulation, All verticals) | [VCALM-EdDSA](profiles/vcalm-eddsa.md#credential-request-and-verification-workflow), [OID4-ECDSA](profiles/oid4-ecdsa.md#credential-request-and-verification-workflow) |
-| Credential Presentation | Holder | Presenting credentials to verifiers (Workforce Alignment, Transfer & Credit Mobility) | [VCALM-EdDSA](profiles/vcalm-eddsa.md#credential-presentation-workflow), [OID4-ECDSA](profiles/oid4-ecdsa.md#credential-presentation-workflow) |
-| **Standalone Operations** | | | |
-| Direct Credential Issuance | Issuer | Creating and delivering credentials as downloadable files or copy-paste JSON (Micro-Credentialing, Workforce Alignment) | [OB 3.0 Direct Delivery](profiles/ob-3.0-direct-delivery.md#direct-credential-issuance-workflow) |
-| Direct Credential Verification | Verifier | Validating credentials received as files or copy-paste JSON (Skills/Competency Articulation, All verticals) | [OB 3.0 Direct Delivery](profiles/ob-3.0-direct-delivery.md#direct-credential-verification-workflow) |
+| Credential Presentation             | Holder   | Presenting credentials to verifiers (Workforce Alignment, Transfer & Credit Mobility)                                                                                    | [VCALM-EdDSA](profiles/vcalm-eddsa.md#credential-presentation-workflow), [OID4-ECDSA](profiles/oid4-ecdsa.md#credential-presentation-workflow)                         |
+| **Standalone Operations**           |          |                                                                                                                                                                          |                                                                                                                                                                        |
+| Direct Credential Issuance          | Issuer   | Creating and delivering credentials as downloadable files or copy-paste JSON (Micro-Credentialing, Workforce Alignment)                                                  | [OB 3.0 Direct Delivery](profiles/ob-3.0-direct-delivery.md#direct-credential-issuance-workflow)                                                                       |
+| Direct Credential Verification      | Verifier | Validating credentials received as files or copy-paste JSON (Skills/Competency Articulation, All verticals)                                                              | [OB 3.0 Direct Delivery](profiles/ob-3.0-direct-delivery.md#direct-credential-verification-workflow)                                                                   |
 
 ### Issue to Wallet
 
@@ -153,6 +156,7 @@ The credential issuance workflow defines how credentials are created and deliver
 #### Implementation Requirements
 
 This workflow is implemented by **issuer systems** as they interact with holder wallets. See implementation requirements in supported profiles:
+
 - VCALM-EdDSA Profile: See [Credential Issuance Workflow](profiles/vcalm-eddsa.md#credential-issuance-workflow)
 - OID4-ECDSA Profile: See [Credential Issuance Workflow](profiles/oid4-ecdsa.md#credential-issuance-workflow)
 
@@ -183,6 +187,7 @@ This workflow defines how holders receive and accept credentials from issuers. T
 #### Implementation Requirements
 
 This workflow is implemented by **holder wallets** as they interact with issuer systems. See implementation requirements in supported profiles:
+
 - VCALM-EdDSA Profile: See [Credential Acceptance Workflow](profiles/vcalm-eddsa.md#credential-acceptance-workflow)
 - OID4-ECDSA Profile: See [Credential Acceptance Workflow](profiles/oid4-ecdsa.md#credential-acceptance-workflow)
 
@@ -199,6 +204,7 @@ The credential request and verification workflow defines the end-to-end process 
 #### Implementation Requirements
 
 This workflow is implemented by **verifier systems** as they interact with holder wallets. See implementation requirements in supported profiles:
+
 - VCALM-EdDSA Profile: See [Credential Request and Verification Workflow](profiles/vcalm-eddsa.md#credential-request-and-verification-workflow)
 - OID4-ECDSA Profile: See [Credential Request and Verification Workflow](profiles/oid4-ecdsa.md#credential-request-and-verification-workflow)
 
@@ -252,6 +258,7 @@ The credential presentation workflow defines how holders present credentials to 
 #### Implementation Requirements
 
 This workflow is implemented by **holder wallets** as they interact with verifier systems. See implementation requirements in supported profiles:
+
 - VCALM-EdDSA Profile: See [Credential Presentation Workflow](profiles/vcalm-eddsa.md#credential-presentation-workflow)
 - OID4-ECDSA Profile: See [Credential Presentation Workflow](profiles/oid4-ecdsa.md#credential-presentation-workflow)
 
@@ -288,6 +295,7 @@ The direct credential issuance workflow defines how issuers create and deliver c
 #### Implementation Requirements
 
 This workflow is implemented by **issuer systems** as they deliver credentials to recipients directly. See implementation requirements in supported profiles:
+
 - OB 3.0 Direct Delivery Profile: See [Direct Credential Issuance Workflow](profiles/ob-3.0-direct-delivery.md#direct-credential-issuance-workflow)
 
 ##### Step-by-Step Process Flow
@@ -316,6 +324,7 @@ The direct credential verification workflow defines how verifiers validate crede
 #### Implementation Requirements
 
 This workflow is implemented by **verifier systems** as they validate credentials received from recipients. See implementation requirements in supported profiles:
+
 - OB 3.0 Direct Delivery Profile: See [Direct Credential Verification Workflow](profiles/ob-3.0-direct-delivery.md#direct-credential-verification-workflow)
 
 ##### Step-by-Step Process Flow
@@ -365,6 +374,7 @@ This workflow is implemented by **verifier systems** as they validate credential
 **Description:** This profile uses VCALM Exchanges for credential issuance and presentation with EdDSA cryptographic signatures.
 
 **Key Components:**
+
 - **Exchange Protocol:** VCALM Exchanges
 - **Cryptographic Suite:** eddsa-rdfc-2022 (EdDSA with RDF Dataset Canonicalization)
 - **Credential Format:** W3C Verifiable Credentials Data Model 2.0
@@ -373,6 +383,7 @@ This workflow is implemented by **verifier systems** as they validate credential
 - **DID Methods:** did:web, did:key
 
 **Use Cases:**
+
 - Browser-based credential exchange
 - Educational credential issuance and verification
 - Skills-based hiring workflows
@@ -385,6 +396,7 @@ This workflow is implemented by **verifier systems** as they validate credential
 **Description:** This profile uses OpenID for Verifiable Credentials (OID4VCI/OID4VP) for credential exchange with ECDSA cryptographic signatures.
 
 **Key Components:**
+
 - **Exchange Protocols:** OID4VCI v1.0 (issuance), OID4VP v1.0 (presentation)
 - **Cryptographic Suite:** ecdsa-rdfc-2019 (ECDSA with RDF Dataset Canonicalization)
 - **Credential Format:** W3C Verifiable Credentials Data Model 2.0
@@ -393,6 +405,7 @@ This workflow is implemented by **verifier systems** as they validate credential
 - **DID Methods:** did:web, did:key
 
 **Use Cases:**
+
 - OAuth 2.0-based credential exchange
 - Enterprise credential management systems
 - Mobile wallet applications
@@ -405,6 +418,7 @@ This workflow is implemented by **verifier systems** as they validate credential
 **Description:** This profile uses EdDSA cryptographic signatures with Open Badges 3.0 schema for direct credential issuance and verification. It supports direct-download/copy JSON and upload/paste workflows without protocol-based delivery, using email address-based identifiers for recipients in credentialSubject.
 
 **Key Components:**
+
 - **Exchange Protocol:** None (direct file download/copy-paste)
 - **Cryptographic Suite:** eddsa-rdfc-2022 (EdDSA with RDF Dataset Canonicalization)
 - **Credential Format:** W3C Verifiable Credentials Data Model 2.0
@@ -414,6 +428,7 @@ This workflow is implemented by **verifier systems** as they validate credential
 - **Recipient Identifiers:** Email address-based (per Open Badges 3.0 spec)
 
 **Use Cases:**
+
 - Direct credential download and file sharing
 - Email-based credential delivery
 - Copy-paste credential workflows
@@ -487,15 +502,15 @@ When coordinating a learning mobility ecosystem, selecting the right interoperab
 
 ### Profile Comparison
 
-| Component | Profile 1 (VCALM-EdDSA) | Profile 2 (OID4-ECDSA) | Profile 3 (OB 3.0 Direct Delivery) |
-|-----------|-------------------------|------------------------|-------------------------------------|
-| Exchange Protocol | VCALM Exchanges | OID4VCI/OID4VP | None (direct file/copy-paste) |
-| Cryptographic Suite | eddsa-rdfc-2022 | ecdsa-rdfc-2019 | eddsa-rdfc-2022 |
-| Credential Format | VC Data Model 2.0 | VC Data Model 2.0 | VC Data Model 2.0 |
-| Credential Schema | Open Badges 3.0 | Open Badges 3.0 | Open Badges 3.0 |
-| Status Method | Bitstring Status List | Bitstring Status List | Bitstring Status List |
-| DID Methods | did:web, did:key | did:web, did:key | did:web, did:key |
-| Recipient Identifiers | DID-based | DID-based | Email-based |
+| Component             | Profile 1 (VCALM-EdDSA) | Profile 2 (OID4-ECDSA) | Profile 3 (OB 3.0 Direct Delivery) |
+| --------------------- | ----------------------- | ---------------------- | ---------------------------------- |
+| Exchange Protocol     | VCALM Exchanges         | OID4VCI/OID4VP         | None (direct file/copy-paste)      |
+| Cryptographic Suite   | eddsa-rdfc-2022         | ecdsa-rdfc-2019        | eddsa-rdfc-2022                    |
+| Credential Format     | VC Data Model 2.0       | VC Data Model 2.0      | VC Data Model 2.0                  |
+| Credential Schema     | Open Badges 3.0         | Open Badges 3.0        | Open Badges 3.0                    |
+| Status Method         | Bitstring Status List   | Bitstring Status List  | Bitstring Status List              |
+| DID Methods           | did:web, did:key        | did:web, did:key       | did:web, did:key                   |
+| Recipient Identifiers | DID-based               | DID-based              | Email-based                        |
 
 **Note:** While all profiles use the same credential format and schema, they are not directly interoperable due to different exchange protocols (or lack thereof) and cryptographic suites. Profile 3 (OB 3.0 Direct Delivery) uses email-based identifiers for recipients, while Profiles 1 and 2 use DID-based identifiers.
 
@@ -524,7 +539,7 @@ When incorporating this guide into procurement documents:
 
 ### Assessing Your Capabilities
 
-This section describes how to assess vendor capabilities using workflow-by-role checklists. Often each technology provider will self-assess, but the same items could be documented by  learning mobility coordinator through an interview process. Interoperability profiles are organized into workflows (such as Credential Issuance, Credential Acceptance, Credential Request and Verification, Credential Presentation) and for each workflow, there are role-specific checklists that define the requirements for each system participating in that workflow.
+This section describes how to assess vendor capabilities using workflow-by-role checklists. Often each technology provider will self-assess, but the same items could be documented by learning mobility coordinator through an interview process. Interoperability profiles are organized into workflows (such as Credential Issuance, Credential Acceptance, Credential Request and Verification, Credential Presentation) and for each workflow, there are role-specific checklists that define the requirements for each system participating in that workflow.
 
 #### How to Select Interoperability Profile Checklists
 
@@ -575,34 +590,33 @@ When coordinating multiple vendors and platforms in a learning mobility network,
 **Example Network Documentation:**
 Here is a set of fictitious product names and how you might track their support for the profiles and roles in the workflows. With this example set of vendors, the learning mobility coordinator would likely identify `VCALM-EdDSA` as the best fit profile for the network.
 
-| Vendor | Profile Support | Issuer role | Holder role | Verifier role | Notes |
-|--------|----------------|-------------|-------------|--------------|-------|
-| ExampleCreds | VCALM-EdDSA | ✓ Full | ✓ Full | - | Primary issuer platform with integrated wallet |
-| ExampleCreds | OID4-ECDSA | ✓ Full | - | - | Implements OID4 alternative flow only as issuer |
-| TalentWallet | VCALM-EdDSA | - | ✓ Full | ✓ Full | Wallet + verifier/talent marketplace |
-| SkillAssessX | OID4-ECDSA | ✓ Partial | - | - | Needs wallet integration |
+| Vendor       | Profile Support | Issuer role | Holder role | Verifier role | Notes                                           |
+| ------------ | --------------- | ----------- | ----------- | ------------- | ----------------------------------------------- |
+| ExampleCreds | VCALM-EdDSA     | ✓ Full      | ✓ Full      | -             | Primary issuer platform with integrated wallet  |
+| ExampleCreds | OID4-ECDSA      | ✓ Full      | -           | -             | Implements OID4 alternative flow only as issuer |
+| TalentWallet | VCALM-EdDSA     | -           | ✓ Full      | ✓ Full        | Wallet + verifier/talent marketplace            |
+| SkillAssessX | OID4-ECDSA      | ✓ Partial   | -           | -             | Needs wallet integration                        |
 
 #### Self-Testing Conformance
 
 Vendors can self-test their conformance with a profile by following these steps:
 
 1. **Select the Appropriate Checklist**
-
    - Choose the interoperability profile your system needs to support or the profiles that the learning mobility coordinator is considering for the project
-   - Map the learning mobility vertical to digital credentials workflows described in the profile. For example, recognizing that a Credit for Prior Learning (CPL) project may involve an institution issuing fresh credentials to learners based on documentation of their past experience and it may also involve that institution verifying previously issued credentials held by the learner. 
+   - Map the learning mobility vertical to digital credentials workflows described in the profile. For example, recognizing that a Credit for Prior Learning (CPL) project may involve an institution issuing fresh credentials to learners based on documentation of their past experience and it may also involve that institution verifying previously issued credentials held by the learner.
    - Identify which workflows and which roles in those workflows your system participates in
    - Select the role-specific checklists for your system's role(s) in each workflow
 
 2. **Complete the Self-Assessment**
 
 For each requirement in the selected checklists, document:
-   - Implementation status (Implemented/Planned/Not Supported)
-   - Any relevant notes or technical details of your implementation or plan; keep it brief to ensure it is quick to complete and review
-   - Timeline for planned implementations
-   - Any limitations or constraints
+
+- Implementation status (Implemented/Planned/Not Supported)
+- Any relevant notes or technical details of your implementation or plan; keep it brief to ensure it is quick to complete and review
+- Timeline for planned implementations
+- Any limitations or constraints
 
 3. **Test End-to-End Workflows**
-
    - Demonstrate each workflow your system participates in:
      - **For Issuers**: Show credential creation and delivery to a holder
      - **For Holders**: Show credential reception, storage, and presentation to a verifier
@@ -616,44 +630,48 @@ For each requirement in the selected checklists, document:
 
 #### Case Study: Learner Control Over Credential Sharing
 
-   To illustrate how this works, consider the principle of learner control over credential sharing. A SkillsFWD assessment was drafted to verify that learners can share credentials in VC format without substantial restrictions, which supports this principle. The assessment plan included an item to verify that learners can share or export credentials in VC format without substantial restrictions.
+To illustrate how this works, consider the principle of learner control over credential sharing. A SkillsFWD assessment was drafted to verify that learners can share credentials in VC format without substantial restrictions, which supports this principle. The assessment plan included an item to verify that learners can share or export credentials in VC format without substantial restrictions.
 
-   These assessment items are organized into modular checklists for each workflow role. For example, in the Credential Presentation workflow, holder systems were assessed on their ability to share credentials, while in the Credential Acceptance workflow, holder systems were assessed on their ability to receive and export credentials. This modular approach allows projects to demonstrate compliance even when credential persistence platforms are integrated into the same software as issuer systems—the assessment verifies that workflows involving learners exporting credentials in interoperable formats can still occur, regardless of system architecture.
+These assessment items are organized into modular checklists for each workflow role. For example, in the Credential Presentation workflow, holder systems were assessed on their ability to share credentials, while in the Credential Acceptance workflow, holder systems were assessed on their ability to receive and export credentials. This modular approach allows projects to demonstrate compliance even when credential persistence platforms are integrated into the same software as issuer systems—the assessment verifies that workflows involving learners exporting credentials in interoperable formats can still occur, regardless of system architecture.
 
-   The SkillsFWD program accommodated various workflow configurations, including fully integrated systems where issuer, holder, and verifier roles all exist within a single platform. Even in these cases, the assessment ensured that learners could still export credentials in standardized formats (such as JSON or baked PNG/SVG images) so they could share credentials with verifiers beyond the original project ecosystem. For detailed information on the SkillsFWD assessment methodology and modular checklist approach, see the [SkillsFWD Interoperability Assessment Guide](https://docs.google.com/document/d/1MQ5RNTsOqmrkExzbRIK_nLmI-LVIzN8asYcOO3wFgys/edit?tab=t.0) and [SkillsFWD Technical Interoperability Assessment Plan](https://docs.google.com/document/d/1QvCWeleKYGUtVl5vE-4Qw-fNiwXuyk7_ecFjS1M_ScM/edit?tab=t.0#heading=h.2ilmtyerr4i).
+The SkillsFWD program accommodated various workflow configurations, including fully integrated systems where issuer, holder, and verifier roles all exist within a single platform. Even in these cases, the assessment ensured that learners could still export credentials in standardized formats (such as JSON or baked PNG/SVG images) so they could share credentials with verifiers beyond the original project ecosystem. For detailed information on the SkillsFWD assessment methodology and modular checklist approach, see the [SkillsFWD Interoperability Assessment Guide](https://docs.google.com/document/d/1MQ5RNTsOqmrkExzbRIK_nLmI-LVIzN8asYcOO3wFgys/edit?tab=t.0) and [SkillsFWD Technical Interoperability Assessment Plan](https://docs.google.com/document/d/1QvCWeleKYGUtVl5vE-4Qw-fNiwXuyk7_ecFjS1M_ScM/edit?tab=t.0#heading=h.2ilmtyerr4i).
 
 #### Example: State Workforce Agency Micro-Credentialing Initiative
 
-   Consider a state workforce agency planning to execute a learning mobility strategy focused on micro-credentialing for employment. The agency is gathering both higher education institutions and professional continuing learning organizations to offer skills-based micro-credentials that will be consumed within employer and applicant-facing talent marketplace tools.
+Consider a state workforce agency planning to execute a learning mobility strategy focused on micro-credentialing for employment. The agency is gathering both higher education institutions and professional continuing learning organizations to offer skills-based micro-credentials that will be consumed within employer and applicant-facing talent marketplace tools.
 
-   **Step 1: Identify Project Goals and Required Workflows**
-   The agency identifies that their micro-credentialing initiative requires:
-   - Credential Issuance workflow (institutions issue micro-credentials to learners)
-   - Credential Presentation workflow (learners present credentials to talent marketplace tools)
-   - Credential Request and Verification workflow (talent marketplace tools request and verify credentials)
+**Step 1: Identify Project Goals and Required Workflows**
+The agency identifies that their micro-credentialing initiative requires:
 
-   **Step 2: Map Participants to Workflow Roles**
-   The agency identifies:
-   - **Issuers**: Higher education institutions and professional continuing learning organizations
-   - **Holders**: Learners/workers who earn micro-credentials
-   - **Verifiers**: Talent marketplace platforms used by employers and applicants
+- Credential Issuance workflow (institutions issue micro-credentials to learners)
+- Credential Presentation workflow (learners present credentials to talent marketplace tools)
+- Credential Request and Verification workflow (talent marketplace tools request and verify credentials)
 
-   **Step 3: Inventory Existing Technology Platforms**
-   The agency surveys participating institutions and organizations to identify:
-   - Which technology platforms they already use for credential issuance
-   - Whether any platforms integrate multiple roles (e.g., issuer + wallet in same system)
-   - What capabilities existing platforms already support
+**Step 2: Map Participants to Workflow Roles**
+The agency identifies:
 
-   **Step 4: Vet and Recommend Technology Partners**
-   The agency identifies two candidate interoperability profiles that could work for their ecosystem. They vet several interested vendors that might be recommended to organizations needing a technology partner. For each vendor, the agency:
-   - Identifies which workflows the vendor's platform participates in
-   - Maps each platform to the roles it needs to fill in the identified workflows
-   - Invites vendors to self-assess against the role-specific checklists for both candidate profiles
+- **Issuers**: Higher education institutions and professional continuing learning organizations
+- **Holders**: Learners/workers who earn micro-credentials
+- **Verifiers**: Talent marketplace platforms used by employers and applicants
 
-   **Step 5: Select Profile and Establish Commitments**
-   After reviewing vendor self-assessments, the agency finds that one interoperability profile has wider support across existing platforms and candidate vendors. This reduces implementation effort and increases the likelihood of successful adoption. The agency then drafts memoranda of understanding (MOUs) with participating institutions, specifying that they must support all requirements of the relevant role-specific checklists by the program launch date.
+**Step 3: Inventory Existing Technology Platforms**
+The agency surveys participating institutions and organizations to identify:
 
-   This approach ensures that the agency's learning mobility goal—enabling learners to share skills-based micro-credentials with talent marketplace tools—can be accomplished through interoperable credential exchange, while accommodating the diverse technology platforms already in use across participating organizations.
+- Which technology platforms they already use for credential issuance
+- Whether any platforms integrate multiple roles (e.g., issuer + wallet in same system)
+- What capabilities existing platforms already support
+
+**Step 4: Vet and Recommend Technology Partners**
+The agency identifies two candidate interoperability profiles that could work for their ecosystem. They vet several interested vendors that might be recommended to organizations needing a technology partner. For each vendor, the agency:
+
+- Identifies which workflows the vendor's platform participates in
+- Maps each platform to the roles it needs to fill in the identified workflows
+- Invites vendors to self-assess against the role-specific checklists for both candidate profiles
+
+**Step 5: Select Profile and Establish Commitments**
+After reviewing vendor self-assessments, the agency finds that one interoperability profile has wider support across existing platforms and candidate vendors. This reduces implementation effort and increases the likelihood of successful adoption. The agency then drafts memoranda of understanding (MOUs) with participating institutions, specifying that they must support all requirements of the relevant role-specific checklists by the program launch date.
+
+This approach ensures that the agency's learning mobility goal—enabling learners to share skills-based micro-credentials with talent marketplace tools—can be accomplished through interoperable credential exchange, while accommodating the diverse technology platforms already in use across participating organizations.
 
 #### Vendor Evaluation Process
 
