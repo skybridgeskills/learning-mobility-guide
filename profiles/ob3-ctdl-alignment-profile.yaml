@@ -1,0 +1,141 @@
+profile_id: ob3-ctdl-alignment-v1
+profile_name: OB3 CTDL Alignment Profile
+version: 0.0.1
+profile_type: content
+description: |
+  Additive content profile for Open Badges 3.0 credentials that links issued credentials
+  to records in the Credential Engine Registry using the Credential Transparency Description
+  Language (CTDL) alignment schema. Applied alongside any base OB3 exchange profile.
+
+last_updated: 2026-03-02
+status: draft
+
+# Profile metadata
+metadata:
+  profile_type_note: |
+    This is a content profile, not an exchange protocol profile. It defines what data
+    must appear inside an Open Badge credential. It is additive to the three core exchange
+    profiles (vcalm-eddsa-v1, oid4-ecdsa-v1, ob3-direct-delivery-v1).
+  use_cases:
+    - linking issued credentials to Credential Engine Registry records
+    - enabling verifier access to extended credential metadata via credentialfinder.org
+    - supporting ecosystem-wide credential discovery through shared registry identifiers
+  target_audience:
+    - credential issuers publishing to the Credential Engine Registry
+    - verifier systems that consume enriched credential metadata
+    - learning mobility platforms seeking registry-linked credentials
+  compliance_notes:
+    - '"MUST" indicates mandatory requirements for conformance'
+    - '"SHOULD" indicates recommended practices'
+    - '"MAY" indicates optional capabilities'
+    - This profile adds requirements on top of the base exchange profile in use.
+    - Holder/wallet systems that satisfy a base OB3 exchange profile require no changes for this profile.
+
+# Workflow-based requirements
+workflows:
+  ctdl_alignment_issuance:
+    description: "Workflow for issuers to publish a credential to the Credential Engine Registry and embed CTDL alignment data in issued Open Badges"
+    participating_roles: [issuer]
+    interoperability_requirements:
+      issuer:
+        - registry_publication:
+            description: "Publish credential definition to Credential Engine Registry and obtain CTID"
+            requirements:
+              - MUST publish the credential definition to the Credential Engine Registry before issuing credentials under this profile
+              - MUST retain the CTID assigned by the Registry for use in issued credentials
+              - MUST use the credentialfinder.org/resources/<CTID> URL as the canonical reference
+        - alignment_embedding:
+            description: "Embed CTDL alignment object in the achievement field of issued OpenBadgeCredentials"
+            requirements:
+              - MUST include an alignment array in the achievement object of each issued OpenBadgeCredential
+              - MUST include an Alignment type entry with targetName matching the credential name in the Registry
+              - MUST set targetUrl to https://credentialfinder.org/resources/<CTID>
+              - MUST set targetDescription to "Additional information powered by the Credential Registry."
+              - MUST set targetFramework to "Credential Transparency Description Language"
+              - MUST set targetCode to the CTID value
+    internal_practices:
+      issuer:
+        - registry_maintenance:
+            description: "Keeping the registry record current with the issued credential"
+            requirements:
+              - SHOULD update the registry record when significant changes are made to the credential's learning outcomes or award criteria
+              - SHOULD use only one CTDL alignment entry per credential unless the credential maps to multiple distinct registry records
+    protocols: []
+
+  ctdl_alignment_verification:
+    description: "Workflow for verifiers to optionally retrieve enriched credential metadata from the Credential Engine Registry"
+    participating_roles: [verifier]
+    interoperability_requirements:
+      verifier:
+        - alignment_acceptance:
+            description: "Accept and process credentials containing CTDL alignment data"
+            requirements:
+              - MUST accept and validate OpenBadgeCredential credentials that include a CTDL alignment entry in achievement.alignment
+              - MUST NOT reject credentials solely because they contain alignment entries
+        - registry_dereferencing:
+            description: "Optionally retrieve metadata from Credential Engine Registry"
+            requirements:
+              - SHOULD dereference targetUrl to retrieve full credential metadata when richer metadata is needed for trust or compliance decisions
+              - SHOULD treat a resolvable credentialfinder.org URL as a positive signal of registry publication
+              - SHOULD handle registry URL unavailability without blocking standard credential verification
+    internal_practices:
+      verifier:
+        - error_logging:
+            description: "Internal error logging and reporting"
+            requirements:
+              - SHOULD implement proper error logging and reporting for registry dereferencing failures
+    protocols: []
+
+# Internal operation requirements
+internal_operation_requirements:
+  issuer:
+    - registry_record_quality:
+        description: "Maintaining high-quality registry records"
+        requirements:
+          - SHOULD provide complete learning outcome descriptions in the registry record
+          - SHOULD include quality assurance and accreditation information if applicable
+          - SHOULD keep contact and issuer organization information current in the registry
+  verifier:
+    - metadata_caching:
+        description: "Caching registry metadata to reduce latency"
+        requirements:
+          - SHOULD cache retrieved registry metadata with appropriate TTL
+          - SHOULD implement fallback behavior when registry is unavailable
+
+# Technical specifications
+credential_format:
+  data_model: "W3C Verifiable Credentials Data Model 2.0"
+  credential_type: "Open Badges 3.0 OpenBadgeCredential"
+  alignment_schema: "Open Badges 3.0 Alignment"
+
+  alignment_required_fields:
+    - "type: [\"Alignment\"]"
+    - "targetName"
+    - "targetUrl"
+    - "targetDescription"
+    - "targetFramework"
+    - "targetCode"
+
+  alignment_fixed_values:
+    targetDescription: "Additional information powered by the Credential Registry."
+    targetFramework: "Credential Transparency Description Language"
+    targetUrl_pattern: "https://credentialfinder.org/resources/<CTID>"
+    targetCode_pattern: "ce-XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX"
+
+# Testing and validation
+testing:
+  interoperability_testing:
+    issuer:
+      - MUST demonstrate issuance of OpenBadgeCredential with conforming CTDL alignment entry
+      - MUST demonstrate that targetUrl resolves to a valid Credential Engine Registry record
+    verifier:
+      - MUST demonstrate acceptance of credentials containing CTDL alignment entries
+      - SHOULD demonstrate optional retrieval of registry metadata via targetUrl
+
+# Implementation notes
+implementation_notes:
+  - "This profile adds no exchange protocol requirements; it governs credential content only."
+  - "Holder/wallet systems passing any base OB3 exchange profile automatically support this profile."
+  - "The Credential Engine Registry publication step must precede issuance under this profile."
+  - "CTIDs are stable identifiers; once assigned, a CTID should not be changed."
+  - "A single credential may have multiple alignment entries for different frameworks; the CTDL entry is identified by targetFramework value."

@@ -1,0 +1,240 @@
+profile_id: ob3-ler-rs-v1
+profile_name: OB3 LER-RS (Trusted Career Profile) Packaging Profile
+version: 0.0.1
+profile_type: packaging
+description: |
+  Packaging profile for assembling Open Badges 3.0 credentials into an HR Open Standards
+  Learning and Employment Record – Résumé Standard (LER-RS) document. Supports delivery as
+  plain JSON or as a platform-signed Verifiable Credential. Applied alongside any base OB3
+  exchange profile used to retrieve the underlying Open Badge credentials.
+
+last_updated: 2026-03-02
+status: draft
+
+# Profile metadata
+metadata:
+  profile_type_note: |
+    This is a packaging profile, not an exchange protocol profile. It defines how Open Badge
+    credentials are assembled into an LER-RS résumé document and delivered to receivers.
+    Underlying credentials must be obtained via a core OB3 exchange profile. Learner self-signing
+    of the LER-RS VC wrapper is out of scope for version 1.
+  use_cases:
+    - assembling Open Badge credentials into structured résumé documents for job applications
+    - delivering verified skill and learning records to employer systems and ATS
+    - creating platform-attested learning portfolios from distributed credential sources
+    - supporting cross-platform credential portability in hiring workflows
+  target_audience:
+    - résumé builder platforms and career services applications
+    - employer systems and applicant tracking software
+    - talent development and workforce platforms
+  reference_scenario: |
+    A résumé builder platform authenticates a learner, retrieves their Open Badge credentials
+    using a base exchange profile, assembles them into an LER-RS JSON document, and delivers
+    the document (or a platform-signed VC wrapping it) to a downstream receiver such as an ATS.
+  compliance_notes:
+    - '"MUST" indicates mandatory requirements for conformance'
+    - '"SHOULD" indicates recommended practices'
+    - '"MAY" indicates optional capabilities'
+    - Platform-signed VC wrapping is optional; plain JSON delivery is also conformant.
+    - Receivers MUST independently verify embedded Open Badge credentials via original issuer proofs.
+
+# Workflow-based requirements
+workflows:
+  ler_rs_assembly:
+    description: "Workflow for platforms to collect Open Badge credentials and assemble an LER-RS document on behalf of a learner"
+    participating_roles: [platform]
+    interoperability_requirements:
+      platform:
+        - learner_authorization:
+            description: "Obtain explicit learner authorization before assembling credentials"
+            requirements:
+              - MUST obtain explicit learner authorization before retrieving or assembling credentials
+              - MUST present clear disclosure of which credentials will be retrieved and how the package will be delivered
+        - credential_retrieval:
+            description: "Retrieve Open Badge credentials using a conformant base exchange profile"
+            requirements:
+              - MUST retrieve credentials using any conformant base OB3 exchange profile (vcalm-eddsa-v1, oid4-ecdsa-v1, or ob3-direct-delivery-v1)
+              - MUST preserve each credential in its original signed form without modification
+        - ler_rs_construction:
+            description: "Construct an LER-RS JSON document conforming to HR Open Standards LER-RS 4.5 schema"
+            requirements:
+              - MUST produce LER-RS documents conforming to HR Open Standards LER-RS 4.5 schema
+              - MUST include each Open Badge credential as a verifiableCredential entry within educationAndLearning
+              - MUST NOT modify any field, proof, or signature of embedded credentials
+    internal_practices:
+      platform:
+        - credential_freshness:
+            description: "Ensuring credentials retrieved for assembly are current"
+            requirements:
+              - SHOULD check credential status before assembling to avoid including revoked credentials
+    protocols: []
+
+  ler_rs_delivery_plain:
+    description: "Workflow for delivering the assembled LER-RS document as plain JSON"
+    participating_roles: [platform]
+    interoperability_requirements:
+      platform:
+        - json_delivery:
+            description: "Deliver assembled LER-RS as a valid JSON file"
+            requirements:
+              - MUST deliver the assembled LER-RS document as a valid JSON file conforming to HR Open Standards LER-RS 4.5 schema
+    protocols: []
+
+  ler_rs_delivery_vc:
+    description: "Workflow for wrapping and delivering the LER-RS document as a platform-signed Verifiable Credential"
+    participating_roles: [platform]
+    interoperability_requirements:
+      platform:
+        - vc_wrapping:
+            description: "Wrap the LER-RS document as a platform-signed W3C Verifiable Credential"
+            requirements:
+              - MUST generate a W3C Verifiable Credentials Data Model 2.0 compliant VC envelope
+              - MUST set credential type to include LERRSCredential
+              - MUST include the LER-RS document structure as credentialSubject
+              - MUST sign with eddsa-rdfc-2022 using platform Ed25519 key from did:web or did:key DID
+              - MUST include proof creation date and verification method reference in the platform proof
+        - status_management:
+            description: "Maintain Bitstring Status List for issued LER-RS VCs"
+            requirements:
+              - MUST maintain a Bitstring Status List for issued LER-RS VCs
+              - MUST sign status list with the platform's issuer key
+              - MUST include credentialStatus entry in each issued LER-RS VC pointing to platform status list
+        - did_management:
+            description: "Manage platform identity for VC signing"
+            requirements:
+              - MUST use did:web or did:key platform identifier
+              - MUST maintain current DID document with Ed25519 verification method
+              - MUST support DID resolution of the platform DID
+    protocols: []
+
+  ler_rs_ingestion:
+    description: "Workflow for receivers to ingest and verify an LER-RS package"
+    participating_roles: [receiver]
+    interoperability_requirements:
+      receiver:
+        - document_parsing:
+            description: "Parse and validate the received LER-RS document"
+            requirements:
+              - MUST accept LER-RS documents as JSON files or via HTTP delivery
+              - MUST validate LER-RS document structure against HR Open Standards LER-RS 4.5 schema
+              - MUST extract verifiableCredential entries from educationAndLearning
+        - platform_vc_verification:
+            description: "Verify the platform signature when LER-RS is delivered as a VC"
+            requirements:
+              - MUST verify the platform's eddsa-rdfc-2022 signature when receiving a platform-signed VC
+              - MUST resolve the platform DID to obtain verification key
+              - MUST check the Bitstring Status List entry for the LER-RS VC
+        - embedded_credential_verification:
+            description: "Independently verify each embedded Open Badge credential"
+            requirements:
+              - MUST independently verify each embedded OpenBadgeCredential using the credential's original issuer proof
+              - MUST resolve each embedded credential's issuer DID
+              - MUST verify each embedded credential's signature and status
+              - MUST NOT rely solely on the platform wrapper signature for trust in individual embedded credentials
+    internal_practices:
+      receiver:
+        - error_reporting:
+            description: "Report verification failures to the submitting learner"
+            requirements:
+              - SHOULD report to the learner when embedded credential verification fails rather than silently rejecting
+    protocols: []
+
+  wallet_acceptance_and_presentation:
+    description: "Workflow for holder wallets to accept and re-present a platform-signed LER-RS credential"
+    participating_roles: [holder]
+    interoperability_requirements:
+      holder:
+        - credential_acceptance:
+            description: "Accept a LERRSCredential VC via a conformant base exchange protocol"
+            requirements:
+              - SHOULD accept a platform-signed LERRSCredential credential type without error via any conformant base exchange protocol
+              - MUST preserve original credential proofs and signatures when storing
+        - credential_presentation:
+            description: "Respond to presentation requests for LERRSCredential type"
+            requirements:
+              - SHOULD respond to a presentation request for LERRSCredential type by presenting the credential without error
+              - MUST preserve original credential proofs and signatures when including in a Verifiable Presentation
+    internal_practices:
+      holder: []
+    protocols: []
+
+# Internal operation requirements
+internal_operation_requirements:
+  platform:
+    - data_protection:
+        description: "Internal data protection for assembled résumé documents"
+        requirements:
+          - SHOULD implement data minimization in assembled LER-RS documents
+          - SHOULD implement proper access controls for stored LER-RS documents
+    - credential_freshness:
+        description: "Internal credential currency practices"
+        requirements:
+          - SHOULD allow learners to refresh or update individual credentials in an assembled package
+  receiver:
+    - data_protection:
+        description: "Internal data protection for received LER-RS documents"
+        requirements:
+          - SHOULD implement data minimization when storing LER-RS contents
+          - SHOULD comply with applicable privacy regulations
+
+# Technical specifications
+credential_format:
+  container_schema: "HR Open Standards LER-RS 4.5"
+  container_schema_url: "https://schema.hropenstandards.org/4.5/recruiting/json/VerifiableCredentialLER-RSType.json"
+  embedded_credential_type: "Open Badges 3.0 OpenBadgeCredential"
+  vc_wrapper:
+    credential_type: "LERRSCredential"
+    data_model: "W3C Verifiable Credentials Data Model 2.0"
+    proof_type: "DataIntegrityProof"
+    cryptographic_suite: "eddsa-rdfc-2022"
+
+# Cryptographic specifications (VC wrapping only)
+cryptography:
+  signature_algorithm: "EdDSA"
+  curve: "Ed25519"
+  proof_suite: "eddsa-rdfc-2022"
+  applies_to: "platform-signed VC wrapper only; embedded credentials use their original proof suites"
+
+# DID specifications (platform signing)
+did_methods:
+  platform_identifier:
+    supported:
+      - method: "did:web"
+        requirements:
+          - MUST resolve to HTTPS URLs
+          - MUST serve DID documents with proper content-type headers
+          - MUST include verification methods for Ed25519 keys
+      - method: "did:key"
+        requirements:
+          - MUST use Ed25519 keys
+          - MUST follow did:key specification for key encoding
+
+# Status management (VC wrapping only)
+status_method:
+  type: "Bitstring Status List"
+  specification: "https://www.w3.org/TR/vc-bitstring-status-list/"
+  applies_to: "platform-signed LER-RS VC wrappers"
+
+# Testing and validation
+testing:
+  interoperability_testing:
+    platform:
+      - MUST demonstrate assembly of LER-RS document with at least one embedded OpenBadgeCredential
+      - MUST demonstrate delivery of plain JSON LER-RS document
+      - SHOULD demonstrate delivery of platform-signed LER-RS VC with verifiable platform signature
+    receiver:
+      - MUST demonstrate ingestion and schema validation of a received LER-RS document
+      - MUST demonstrate independent verification of embedded Open Badge credentials
+      - SHOULD demonstrate verification of platform-signed VC wrapper
+    holder:
+      - SHOULD demonstrate acceptance of LERRSCredential type without error
+      - SHOULD demonstrate presentation of LERRSCredential in response to a presentation request without error
+
+# Implementation notes
+implementation_notes:
+  - "This profile adds no new credential exchange protocol requirements; it governs packaging and delivery."
+  - "Underlying Open Badge credentials must be obtained via a conformant base OB3 exchange profile."
+  - "Platform-signed VC wrapping is optional; plain JSON delivery is a valid conformant option."
+  - "Learner self-signing of the LER-RS VC wrapper is out of scope for version 1."
+  - "Receivers must independently verify embedded credentials and must not rely solely on the platform wrapper."
+  - "Holder/wallet testing for this profile is pass-through: accept and present without error."

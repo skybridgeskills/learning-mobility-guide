@@ -23,6 +23,11 @@ permalink: /
      - [Direct Credential Verification Workflow](#direct-credential-verification-workflow)
 4. [Component Specifications](#component-specifications)
 5. [Interoperability Profiles](#interoperability-profiles)
+   - [Profile 1: VCALM-EdDSA](#profile-1-vcalm-eddsa-profile)
+   - [Profile 2: OID4-ECDSA](#profile-2-oid4-ecdsa-profile)
+   - [Profile 3: OB3 Direct Delivery](#profile-3-ob-30-direct-delivery-profile)
+   - [Profile 4: OB3 CTDL Alignment](#profile-4-ob3-ctdl-alignment-profile) *(content profile)*
+   - [Profile 5: OB3 LER-RS](#profile-5-ob3-ler-rs-trusted-career-profile-packaging-profile) *(packaging profile)*
 6. [Implementation Guidance](#implementation-guidance)
    - [Using Profiles in RFPs](#using-profiles-in-rfps)
    - [Assessing Your Capabilities](#assessing-your-capabilities)
@@ -433,6 +438,49 @@ This workflow is implemented by **verifier systems** as they validate credential
 - Email-based credential delivery
 - Copy-paste credential workflows
 - Simple credential issuance without wallet integration
+
+### Profile 4: OB3 CTDL Alignment Profile
+
+**Profile Identifier:** `ob3-ctdl-alignment-v1`
+
+**Description:** An additive content profile that links issued Open Badge credentials to records in the Credential Engine Registry using CTDL alignment data. Applied alongside any of the three core exchange profiles.
+
+**Profile Type:** Content (additive — governs credential content, not exchange protocol)
+
+**Key Components:**
+
+- **Applies To:** Any `OpenBadgeCredential` issued under any core exchange profile
+- **Registry:** Credential Engine Registry / Credential Finder
+- **Alignment Schema:** Open Badges 3.0 `achievement.alignment`
+- **Identifier Type:** CTID (Credential Transparency Identifier)
+
+**Use Cases:**
+
+- Connecting issued credentials to quality assurance and accreditation signals in the Credential Engine Registry
+- Enabling verifier systems to retrieve extended credential metadata via credentialfinder.org
+- Supporting credential discovery and comparability through shared registry identifiers
+
+### Profile 5: OB3 LER-RS (Trusted Career Profile) Packaging Profile
+
+**Profile Identifier:** `ob3-ler-rs-v1`
+
+**Description:** A packaging profile for assembling Open Badge credentials into an HR Open Standards Learning and Employment Record – Résumé Standard (LER-RS) document. Supports delivery as plain JSON or as a platform-signed Verifiable Credential. Applied alongside any core exchange profile used to retrieve the underlying credentials.
+
+**Profile Type:** Packaging (governs credential assembly and delivery, not exchange protocol)
+
+**Key Components:**
+
+- **Container Schema:** HR Open Standards LER-RS 4.5
+- **Embedded Credential Format:** Open Badges 3.0 `OpenBadgeCredential`
+- **Optional VC Wrapper:** W3C Verifiable Credentials Data Model 2.0, signed by platform
+- **Wrapper Cryptographic Suite:** eddsa-rdfc-2022 (Ed25519)
+- **Status Method (VC wrapper):** Bitstring Status List
+
+**Use Cases:**
+
+- Assembling Open Badge credentials into structured résumé documents for job applications
+- Delivering verified skill and learning records to employer systems and applicant tracking software
+- Creating platform-attested learning portfolios from distributed credential sources
 
 ### Selecting an Interoperability Profile for Your Community
 
