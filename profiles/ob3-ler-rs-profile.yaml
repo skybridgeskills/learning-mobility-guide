@@ -1,12 +1,13 @@
 profile_id: ob3-ler-rs-v1
-profile_name: OB3 LER-RS (Trusted Career Profile) Packaging Profile
+profile_name: OB3 TCP (Trusted Career Profile) Packaging Profile
 version: 0.0.1
 profile_type: packaging
 description: |
   Packaging profile for assembling Open Badges 3.0 credentials into an HR Open Standards
-  Learning and Employment Record – Résumé Standard (LER-RS) document. Supports delivery as
-  plain JSON or as a platform-signed Verifiable Credential. Applied alongside any base OB3
-  exchange profile used to retrieve the underlying Open Badge credentials.
+  Trusted Career Profile (TCP) document, using the Learning and Employment Record – Résumé
+  Standard (LER-RS) 4.5 schema. Supports delivery as plain JSON or as a platform-signed
+  Verifiable Credential. Applied alongside any base OB3 exchange profile used to retrieve
+  the underlying Open Badge credentials.
 
 last_updated: 2026-03-02
 status: draft
@@ -15,9 +16,9 @@ status: draft
 metadata:
   profile_type_note: |
     This is a packaging profile, not an exchange protocol profile. It defines how Open Badge
-    credentials are assembled into an LER-RS résumé document and delivered to receivers.
+    credentials are assembled into a TCP (LER-RS) résumé document and delivered to receivers.
     Underlying credentials must be obtained via a core OB3 exchange profile. Learner self-signing
-    of the LER-RS VC wrapper is out of scope for version 1.
+    of the TCP VC wrapper is out of scope for version 1.
   use_cases:
     - assembling Open Badge credentials into structured résumé documents for job applications
     - delivering verified skill and learning records to employer systems and ATS
@@ -29,19 +30,19 @@ metadata:
     - talent development and workforce platforms
   reference_scenario: |
     A résumé builder platform authenticates a learner, retrieves their Open Badge credentials
-    using a base exchange profile, assembles them into an LER-RS JSON document, and delivers
+    using a base exchange profile, assembles them into a TCP (LER-RS) JSON document, and delivers
     the document (or a platform-signed VC wrapping it) to a downstream receiver such as an ATS.
   compliance_notes:
     - '"MUST" indicates mandatory requirements for conformance'
     - '"SHOULD" indicates recommended practices'
     - '"MAY" indicates optional capabilities'
-    - Platform-signed VC wrapping is optional; plain JSON delivery is also conformant.
+    - Platform-signed VC wrapping of the TCP document is optional; plain JSON delivery is also conformant.
     - Receivers MUST independently verify embedded Open Badge credentials via original issuer proofs.
 
 # Workflow-based requirements
 workflows:
   ler_rs_assembly:
-    description: "Workflow for platforms to collect Open Badge credentials and assemble an LER-RS document on behalf of a learner"
+    description: "Workflow for platforms to collect Open Badge credentials and assemble a TCP (LER-RS) document on behalf of a learner"
     participating_roles: [platform]
     interoperability_requirements:
       platform:
@@ -58,7 +59,7 @@ workflows:
         - ler_rs_construction:
             description: "Construct an LER-RS JSON document conforming to HR Open Standards LER-RS 4.5 schema"
             requirements:
-              - MUST produce LER-RS documents conforming to HR Open Standards LER-RS 4.5 schema
+              - MUST produce TCP documents conforming to HR Open Standards LER-RS 4.5 schema
               - MUST include each Open Badge credential as a verifiableCredential entry within educationAndLearning
               - MUST NOT modify any field, proof, or signature of embedded credentials
     internal_practices:
@@ -70,18 +71,18 @@ workflows:
     protocols: []
 
   ler_rs_delivery_plain:
-    description: "Workflow for delivering the assembled LER-RS document as plain JSON"
+    description: "Workflow for delivering the assembled TCP (LER-RS) document as plain JSON"
     participating_roles: [platform]
     interoperability_requirements:
       platform:
         - json_delivery:
             description: "Deliver assembled LER-RS as a valid JSON file"
             requirements:
-              - MUST deliver the assembled LER-RS document as a valid JSON file conforming to HR Open Standards LER-RS 4.5 schema
+              - MUST deliver the assembled TCP document as a valid JSON file conforming to HR Open Standards LER-RS 4.5 schema
     protocols: []
 
   ler_rs_delivery_vc:
-    description: "Workflow for wrapping and delivering the LER-RS document as a platform-signed Verifiable Credential"
+    description: "Workflow for wrapping and delivering the TCP (LER-RS) document as a platform-signed Verifiable Credential"
     participating_roles: [platform]
     interoperability_requirements:
       platform:
@@ -108,15 +109,15 @@ workflows:
     protocols: []
 
   ler_rs_ingestion:
-    description: "Workflow for receivers to ingest and verify an LER-RS package"
+    description: "Workflow for receivers to ingest and verify a TCP package"
     participating_roles: [receiver]
     interoperability_requirements:
       receiver:
         - document_parsing:
             description: "Parse and validate the received LER-RS document"
             requirements:
-              - MUST accept LER-RS documents as JSON files or via HTTP delivery
-              - MUST validate LER-RS document structure against HR Open Standards LER-RS 4.5 schema
+              - MUST accept TCP (LER-RS) documents as JSON files or via HTTP delivery
+              - MUST validate TCP document structure against HR Open Standards LER-RS 4.5 schema
               - MUST extract verifiableCredential entries from educationAndLearning
         - platform_vc_verification:
             description: "Verify the platform signature when LER-RS is delivered as a VC"
@@ -234,7 +235,8 @@ testing:
 implementation_notes:
   - "This profile adds no new credential exchange protocol requirements; it governs packaging and delivery."
   - "Underlying Open Badge credentials must be obtained via a conformant base OB3 exchange profile."
+  - "TCP is the human-readable name for this profile; the underlying schema is HR Open Standards LER-RS 4.5."
   - "Platform-signed VC wrapping is optional; plain JSON delivery is a valid conformant option."
-  - "Learner self-signing of the LER-RS VC wrapper is out of scope for version 1."
+  - "Learner self-signing of the TCP VC wrapper is out of scope for version 1."
   - "Receivers must independently verify embedded credentials and must not rely solely on the platform wrapper."
   - "Holder/wallet testing for this profile is pass-through: accept and present without error."

@@ -27,7 +27,7 @@ permalink: /
    - [Profile 2: OID4-ECDSA](#profile-2-oid4-ecdsa-profile)
    - [Profile 3: OB3 Direct Delivery](#profile-3-ob-30-direct-delivery-profile)
    - [Profile 4: OB3 CTDL Alignment](#profile-4-ob3-ctdl-alignment-profile) *(content profile)*
-   - [Profile 5: OB3 LER-RS](#profile-5-ob3-ler-rs-trusted-career-profile-packaging-profile) *(packaging profile)*
+   - [Profile 5: OB3 TCP](#profile-5-ob3-tcp-trusted-career-profile-packaging-profile) *(packaging profile)*
 6. [Implementation Guidance](#implementation-guidance)
    - [Using Profiles in RFPs](#using-profiles-in-rfps)
    - [Assessing Your Capabilities](#assessing-your-capabilities)
@@ -460,11 +460,11 @@ This workflow is implemented by **verifier systems** as they validate credential
 - Enabling verifier systems to retrieve extended credential metadata via credentialfinder.org
 - Supporting credential discovery and comparability through shared registry identifiers
 
-### Profile 5: OB3 LER-RS (Trusted Career Profile) Packaging Profile
+### Profile 5: OB3 TCP (Trusted Career Profile) Packaging Profile
 
 **Profile Identifier:** `ob3-ler-rs-v1`
 
-**Description:** A packaging profile for assembling Open Badge credentials into an HR Open Standards Learning and Employment Record – Résumé Standard (LER-RS) document. Supports delivery as plain JSON or as a platform-signed Verifiable Credential. Applied alongside any core exchange profile used to retrieve the underlying credentials.
+**Description:** A packaging profile for assembling Open Badge credentials into an HR Open Standards Trusted Career Profile (TCP) document, using the Learning and Employment Record – Résumé Standard (LER-RS) 4.5 schema. Supports delivery as plain JSON or as a platform-signed Verifiable Credential. Applied alongside any core exchange profile used to retrieve the underlying credentials.
 
 **Profile Type:** Packaging (governs credential assembly and delivery, not exchange protocol)
 

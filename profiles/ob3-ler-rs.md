@@ -1,6 +1,6 @@
 ---
-title: OB3 LER-RS (Trusted Career Profile) Packaging Profile
-description: An Open Badges 3.0 packaging profile for assembling credentials into an HR Open Standards Learning and Employment Record – Résumé Standard (LER-RS) document, with optional platform-signed Verifiable Credential wrapping.
+title: OB3 TCP (Trusted Career Profile) Packaging Profile
+description: An Open Badges 3.0 packaging profile for assembling credentials into an HR Open Standards Learning and Employment Record – Résumé Standard (LER-RS) Trusted Career Profile (TCP) document, with optional platform-signed Verifiable Credential wrapping.
 updated: 2026-03-02
 ---
 
@@ -14,15 +14,15 @@ updated: 2026-03-02
 
 ---
 
-## OB3 LER-RS Packaging Profile
+## OB3 TCP (Trusted Career Profile) Packaging Profile
 
-This document defines a *packaging profile* — a specification for assembling Open Badges 3.0 credentials into an [HR Open Standards LER-RS](https://hropenstandards.org/) (Learning and Employment Record – Résumé Standard) document, also known as a Trusted Career Profile (TCP). It does not define a new credential exchange protocol. Open Badge credentials assembled into an LER-RS document must have been obtained using one of the three core exchange profiles: [VCALM-EdDSA]({{ "/profiles/vcalm-eddsa/" | relative_url }}), [OID4-ECDSA]({{ "/profiles/oid4-ecdsa/" | relative_url }}), or [OB3 Direct Delivery]({{ "/profiles/ob-3.0-direct-delivery/" | relative_url }}).
+This document defines a *packaging profile* — a specification for assembling Open Badges 3.0 credentials into an [HR Open Standards Trusted Career Profile (TCP)](https://hropenstandards.org/), the Learning and Employment Record – Résumé Standard (LER-RS). It does not define a new credential exchange protocol. Open Badge credentials assembled into a TCP document must have been obtained using one of the three core exchange profiles: [VCALM-EdDSA]({{ "/profiles/vcalm-eddsa/" | relative_url }}), [OID4-ECDSA]({{ "/profiles/oid4-ecdsa/" | relative_url }}), or [OB3 Direct Delivery]({{ "/profiles/ob-3.0-direct-delivery/" | relative_url }}).
 
 ### Purpose and Scope
 
-The OB3 LER-RS Packaging Profile enables résumé builder platforms and similar applications to collect Open Badge credentials on behalf of a learner and assemble them into a structured résumé document that employer systems and applicant tracking systems (ATS) can ingest. Optionally, the assembled LER-RS document can be wrapped as a Verifiable Credential signed by the platform, providing downstream verifiability for the entire package.
+The OB3 TCP Packaging Profile enables résumé builder platforms and similar applications to collect Open Badge credentials on behalf of a learner and assemble them into a structured résumé document that employer systems and applicant tracking systems (ATS) can ingest. Optionally, the assembled TCP document can be wrapped as a Verifiable Credential signed by the platform, providing downstream verifiability for the entire package.
 
-**Reference Scenario:** A résumé builder platform authenticates a learner, retrieves their Open Badge credentials from one or more issuers (using any of the core exchange protocols), assembles those credentials into an LER-RS JSON document following the HR Open Standards 4.5 schema, and delivers the document to a downstream receiver — either as a direct file download, or wrapped as a platform-signed Verifiable Credential. The receiver (employer system, ATS, transcript service) ingests the document and validates its contents.
+**Reference Scenario:** A résumé builder platform authenticates a learner, retrieves their Open Badge credentials from one or more issuers (using any of the core exchange protocols), assembles those credentials into a TCP (LER-RS) JSON document following the HR Open Standards 4.5 schema, and delivers the document to a downstream receiver — either as a direct file download, or wrapped as a platform-signed Verifiable Credential. The receiver (employer system, ATS, transcript service) ingests the document and validates its contents.
 
 This profile is designed for use cases including:
 
@@ -37,26 +37,26 @@ Conformance with this profile is not tested or certified by any official body at
 
 **Platform Signing vs. Learner Signing**
 
-This profile defines requirements for *platform-signed* LER-RS Verifiable Credentials, where the résumé builder platform is the `issuer` of the VC wrapper and signs it with its own key. This is the most common deployment pattern. Learner self-signing (where the credential subject signs the VC wrapper with their own DID key) is a future direction and is out of scope for version 1.
+This profile defines requirements for *platform-signed* TCP Verifiable Credentials, where the résumé builder platform is the `issuer` of the VC wrapper and signs it with its own key. This is the most common deployment pattern. Learner self-signing (where the credential subject signs the VC wrapper with their own DID key) is a future direction and is out of scope for version 1.
 
 **Underlying Credential Trust**
 
-The LER-RS document embeds Open Badge credentials in their original signed form. Receivers should independently verify each embedded credential against its original issuer, not rely solely on the platform's wrapping signature for trust in the individual credentials.
+The TCP document embeds Open Badge credentials in their original signed form. Receivers should independently verify each embedded credential against its original issuer, not rely solely on the platform's wrapping signature for trust in the individual credentials.
 
 ### Specifications Used
 
 This packaging profile builds on the following specifications:
 
-#### HR Open Standards LER-RS 4.5
+#### HR Open Standards Trusted Career Profile (LER-RS) 4.5
 
-**Purpose:** Defines the structure of the résumé document that serves as the packaging container for Open Badge credentials.
+**Purpose:** Defines the structure of the TCP résumé document that serves as the packaging container for Open Badge credentials.
 
-**Version:** [HR Open Standards LER-RS 4.5](https://hropenstandards.org/)
+**Version:** [HR Open Standards TCP (LER-RS) 4.5](https://hropenstandards.org/)
 
 **Schema Reference:** `https://schema.hropenstandards.org/4.5/recruiting/json/VerifiableCredentialLER-RSType.json`
 
 **Profile Requirements:**
-- MUST produce LER-RS documents conforming to the HR Open Standards LER-RS 4.5 schema
+- MUST produce TCP documents conforming to the HR Open Standards LER-RS 4.5 schema
 - MUST include embedded credentials in the `educationAndLearning` section as `verifiableCredential` entries
 - MUST preserve each embedded Open Badge credential in its original signed form
 
@@ -99,21 +99,21 @@ This packaging profile builds on the following specifications:
 
 - [ ] MUST retrieve Open Badge credentials for the learner using any conformant base OB3 exchange profile
 - [ ] MUST preserve each retrieved credential in its original signed form — no modification of credential data or proofs
-- [ ] MUST assemble credentials into an LER-RS JSON document conforming to the HR Open Standards LER-RS 4.5 schema
+- [ ] MUST assemble credentials into a TCP (LER-RS) JSON document conforming to the HR Open Standards LER-RS 4.5 schema
 - [ ] MUST include each credential as a `verifiableCredential` entry within the `educationAndLearning` section
-- [ ] MUST obtain explicit learner authorization before assembling credentials into an LER-RS document
-- [ ] MUST deliver the assembled LER-RS document to the receiver as either a plain JSON file download or a platform-signed VC (see below)
-- [ ] **When delivering as a platform-signed VC:** MUST wrap the LER-RS document as a W3C Verifiable Credential with the platform as issuer, signed using `eddsa-rdfc-2022` with an Ed25519 key from a `did:web` or `did:key` DID
-- [ ] **When delivering as a platform-signed VC:** MUST maintain a Bitstring Status List for issued LER-RS VCs, signed with the platform's key
+- [ ] MUST obtain explicit learner authorization before assembling credentials into a TCP document
+- [ ] MUST deliver the assembled TCP document to the receiver as either a plain JSON file download or a platform-signed VC (see below)
+- [ ] **When delivering as a platform-signed VC:** MUST wrap the TCP document as a W3C Verifiable Credential with the platform as issuer, signed using `eddsa-rdfc-2022` with an Ed25519 key from a `did:web` or `did:key` DID
+- [ ] **When delivering as a platform-signed VC:** MUST maintain a Bitstring Status List for issued TCP VCs, signed with the platform's key
 
 #### Verifier / Receiver Requirements
 
-- [ ] MUST accept LER-RS documents as JSON files or via HTTP delivery
-- [ ] MUST validate the LER-RS document structure against the HR Open Standards LER-RS 4.5 schema
+- [ ] MUST accept TCP (LER-RS) documents as JSON files or via HTTP delivery
+- [ ] MUST validate the TCP document structure against the HR Open Standards LER-RS 4.5 schema
 - [ ] MUST extract and independently verify each embedded Open Badge credential using the credential's original issuer proof, not relying solely on the platform wrapper signature
-- [ ] **When receiving a platform-signed VC:** MUST verify the platform's `eddsa-rdfc-2022` signature on the VC wrapper
+- [ ] **When receiving a platform-signed VC:** MUST verify the platform's `eddsa-rdfc-2022` signature on the TCP VC wrapper
 - [ ] **When receiving a platform-signed VC:** MUST resolve the platform's DID to obtain the platform's verification key
-- [ ] **When receiving a platform-signed VC:** MUST check the VC wrapper's Bitstring Status List entry
+- [ ] **When receiving a platform-signed VC:** MUST check the TCP VC wrapper's Bitstring Status List entry
 - [ ] SHOULD report to the learner when embedded credential verification fails rather than silently rejecting the package
 
 #### Holder / Wallet Note
@@ -124,7 +124,7 @@ A wallet that is conformant with either of the wallet-supporting base exchange p
 
 ## Examples
 
-### LER-RS Document with Embedded Open Badge
+### TCP Document with Embedded Open Badge
 
 The following shows a minimal LER-RS JSON document with one embedded Open Badge credential in the `educationAndLearning` section. The `verifiableCredential` value is an abbreviated representation of the full signed `OpenBadgeCredential`.
 
@@ -194,9 +194,9 @@ The following shows a minimal LER-RS JSON document with one embedded Open Badge 
 
 ---
 
-### Platform-Signed LER-RS Verifiable Credential
+### Platform-Signed TCP Verifiable Credential
 
-The following shows an LER-RS document wrapped as a platform-signed Verifiable Credential. The `credentialSubject` contains the LER-RS content; the outer `proof` is the platform's signature over the entire package.
+The following shows a TCP document wrapped as a platform-signed Verifiable Credential. The `credentialSubject` contains the TCP (LER-RS) content; the outer `proof` is the platform's signature over the entire package.
 
 ```json
 {
@@ -247,11 +247,11 @@ The following shows an LER-RS document wrapped as a platform-signed Verifiable C
 
 ## Workflows
 
-### LER-RS Assembly Workflow
+### TCP Assembly Workflow
 
 **Primary Role:** Platform
 
-This workflow covers how a résumé builder platform retrieves credentials and assembles an LER-RS document on behalf of a learner.
+This workflow covers how a résumé builder platform retrieves credentials and assembles a TCP document on behalf of a learner.
 
 #### Step 1: Authenticate Learner and Obtain Authorization
 
@@ -281,16 +281,16 @@ This workflow covers how a résumé builder platform retrieves credentials and a
 - Place each retrieved Open Badge credential as a `verifiableCredential` entry within the relevant `educationAndLearning` item
 
 **Requirements Checklist:**
-- [ ] MUST produce LER-RS documents conforming to HR Open Standards LER-RS 4.5 schema
+- [ ] MUST produce TCP documents conforming to HR Open Standards LER-RS 4.5 schema
 - [ ] MUST include embedded credentials as `verifiableCredential` entries in `educationAndLearning`
 
 ---
 
-### LER-RS Delivery Workflow
+### TCP Delivery Workflow
 
 **Primary Role:** Platform
 
-This workflow covers the two delivery options: plain JSON and platform-signed VC.
+This workflow covers the two delivery options for the assembled TCP document: plain JSON and platform-signed VC.
 
 #### Option A: Plain JSON File Delivery
 
@@ -299,7 +299,7 @@ This workflow covers the two delivery options: plain JSON and platform-signed VC
 - Deliver via direct file download, email attachment, or API endpoint as appropriate
 
 **Requirements Checklist:**
-- [ ] MUST deliver the assembled LER-RS document as a valid JSON file
+- [ ] MUST deliver the assembled TCP document as a valid JSON file
 
 #### Option B: Platform-Signed VC Delivery
 
@@ -316,11 +316,11 @@ This workflow covers the two delivery options: plain JSON and platform-signed VC
 
 ---
 
-### LER-RS Ingestion and Verification Workflow
+### TCP Ingestion and Verification Workflow
 
 **Primary Role:** Verifier / Receiver
 
-This workflow describes how a receiver (employer system, ATS, transcript service) ingests and validates an LER-RS package.
+This workflow describes how a receiver (employer system, ATS, transcript service) ingests and validates a TCP package.
 
 #### Step 1: Receive and Parse LER-RS Document
 
@@ -330,8 +330,8 @@ This workflow describes how a receiver (employer system, ATS, transcript service
 - Extract embedded `verifiableCredential` entries from `educationAndLearning`
 
 **Requirements Checklist:**
-- [ ] MUST accept LER-RS documents as JSON files or via HTTP delivery
-- [ ] MUST validate LER-RS document structure against HR Open Standards LER-RS 4.5 schema
+- [ ] MUST accept TCP (LER-RS) documents as JSON files or via HTTP delivery
+- [ ] MUST validate TCP document structure against HR Open Standards LER-RS 4.5 schema
 
 #### Step 2: Verify Platform VC Wrapper (if applicable)
 
@@ -339,8 +339,8 @@ This workflow describes how a receiver (employer system, ATS, transcript service
 - If delivered as a platform-signed VC: resolve the platform's DID, verify `eddsa-rdfc-2022` signature, check Bitstring Status List entry
 
 **Requirements Checklist:**
-- [ ] **When receiving a platform-signed VC:** MUST verify the platform's `eddsa-rdfc-2022` signature
-- [ ] **When receiving a platform-signed VC:** MUST resolve the platform DID and check Bitstring Status List
+- [ ] **When receiving a platform-signed VC:** MUST verify the platform's `eddsa-rdfc-2022` signature on the TCP VC
+- [ ] **When receiving a platform-signed VC:** MUST resolve the platform DID and check TCP VC Bitstring Status List
 
 #### Step 3: Verify Embedded Open Badge Credentials
 

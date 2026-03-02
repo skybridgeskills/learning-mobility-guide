@@ -6,15 +6,17 @@
       </a>
       <a class="site-title text-primary text-lg hover:text-accent transition-colors leading-tight sm:leading-normal" rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
     </div>
-    
+
     {%- if page.description or site.description -%}
     <p class="site-description text-sm text-gray-600 mt-1 mb-4">{{ page.description | default: site.description | escape }}</p>
     {%- endif -%}
-    
+
     <nav class="custom-nav">
       <section class="bg-gradient-to-br from-primary via-secondary to-accent text-white py-6 lg:py-8 rounded-lg mt-4 sm:block">
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-7 gap-4 w-full px-4 md:max-w-7xl md:mx-auto">
-          
+
+        <!-- Primary nav: guide home + core exchange profiles -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-4 w-full px-4 md:max-w-5xl md:mx-auto">
+
           <!-- Learning Mobility Collaborative Card -->
           <a href="https://learningmobilitycollaborative.org/" class="key-tile bg-primary/90 backdrop-blur rounded-xl p-4 lg:p-5 text-center group hover:bg-white/30 hover:-translate-y-1 hover:shadow-lg hover:no-underline transition-all duration-200 w-full sm:w-auto">
             <div class="w-12 h-12 bg-white/20 rounded-lg hidden sm:flex items-center justify-center mx-auto mb-3 group-hover:bg-white/30 transition text-white">
@@ -25,7 +27,7 @@
             <h3 class="font-semibold text-white text-sm group-hover:text-white">Learning Mobility</h3>
             <p class="text-white/70 text-xs mt-1 group-hover:text-white/70">Framework and principles</p>
           </a>
-          
+
           <!-- Interoperability Guide Card -->
           <a href="{{ "/" | relative_url }}" class="key-tile bg-secondary/90 backdrop-blur rounded-xl p-4 lg:p-5 text-center group hover:bg-white/30 hover:-translate-y-1 hover:shadow-lg hover:no-underline transition-all duration-200 w-full sm:w-auto">
             <div class="w-12 h-12 bg-white/20 rounded-lg hidden sm:flex items-center justify-center mx-auto mb-3 group-hover:bg-white/30 transition text-white">
@@ -36,7 +38,7 @@
             <h3 class="font-semibold text-white text-sm group-hover:text-white">Guide Home</h3>
             <p class="text-white/70 text-xs mt-1 group-hover:text-white/70">Technical specifications</p>
           </a>
-          
+
           <!-- VCALM-EdDSA Profile Card -->
           <a href="{{ "/profiles/vcalm-eddsa/" | relative_url }}" class="key-tile bg-accent/90 backdrop-blur rounded-xl p-4 lg:p-5 text-center group hover:bg-white/30 hover:-translate-y-1 hover:shadow-lg hover:no-underline transition-all duration-200 w-full sm:w-auto">
             <div class="w-12 h-12 bg-white/20 rounded-lg hidden sm:flex items-center justify-center mx-auto mb-3 group-hover:bg-white/30 transition text-white">
@@ -47,7 +49,7 @@
             <h3 class="font-semibold text-white text-sm group-hover:text-white">VCALM-EdDSA</h3>
             <p class="text-white/70 text-xs mt-1 group-hover:text-white/70">Interoperability Profile</p>
           </a>
-          
+
           <!-- OID4-ECDSA Profile Card -->
           <a href="{{ "/profiles/oid4-ecdsa/" | relative_url }}" class="key-tile bg-tertiary/90 backdrop-blur rounded-xl p-4 lg:p-5 text-center group hover:bg-white/30 hover:-translate-y-1 hover:shadow-lg hover:no-underline transition-all duration-200 w-full sm:w-auto">
             <div class="w-12 h-12 bg-white/20 rounded-lg hidden sm:flex items-center justify-center mx-auto mb-3 group-hover:bg-white/30 transition text-white">
@@ -58,7 +60,7 @@
             <h3 class="font-semibold text-white text-sm group-hover:text-white">OID4-ECDSA</h3>
             <p class="text-white/70 text-xs mt-1 group-hover:text-white/70">Interoperability Profile</p>
           </a>
-          
+
           <!-- OB 3.0 Direct Delivery Profile Card -->
           <a href="{{ "/profiles/ob-3.0-direct-delivery/" | relative_url }}" class="key-tile bg-purple-500/90 backdrop-blur rounded-xl p-4 lg:p-5 text-center group hover:bg-white/30 hover:-translate-y-1 hover:shadow-lg hover:no-underline transition-all duration-200 w-full sm:w-auto">
             <div class="w-12 h-12 bg-white/20 rounded-lg hidden sm:flex items-center justify-center mx-auto mb-3 group-hover:bg-white/30 transition text-white">
@@ -70,29 +72,34 @@
             <p class="text-white/70 text-xs mt-1 group-hover:text-white/70">Interoperability Profile</p>
           </a>
 
-          <!-- OB3 CTDL Alignment Profile Card -->
-          <a href="{{ "/profiles/ob3-ctdl-alignment/" | relative_url }}" class="key-tile bg-teal-600/90 backdrop-blur rounded-xl p-4 lg:p-5 text-center group hover:bg-white/30 hover:-translate-y-1 hover:shadow-lg hover:no-underline transition-all duration-200 w-full sm:w-auto">
-            <div class="w-12 h-12 bg-white/20 rounded-lg hidden sm:flex items-center justify-center mx-auto mb-3 group-hover:bg-white/30 transition text-white">
-              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        </div>
+
+        <!-- Secondary nav: additive content and packaging profiles -->
+        <div class="mt-3 px-4 md:max-w-5xl md:mx-auto">
+          <p class="text-white/50 text-xs mb-2 uppercase tracking-wide">Add-on profiles</p>
+          <div class="flex flex-wrap gap-3">
+
+            <!-- OB3 CTDL Alignment Profile -->
+            <a href="{{ "/profiles/ob3-ctdl-alignment/" | relative_url }}" class="inline-flex items-center gap-2 bg-teal-600/80 backdrop-blur rounded-lg px-4 py-2 text-white text-sm font-medium hover:bg-white/30 hover:no-underline transition-all duration-200">
+              <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path>
               </svg>
-            </div>
-            <h3 class="font-semibold text-white text-sm group-hover:text-white">CTDL Alignment</h3>
-            <p class="text-white/70 text-xs mt-1 group-hover:text-white/70">Content Profile</p>
-          </a>
+              CTDL Alignment
+              <span class="text-white/60 text-xs font-normal">Content profile</span>
+            </a>
 
-          <!-- OB3 LER-RS Profile Card -->
-          <a href="{{ "/profiles/ob3-ler-rs/" | relative_url }}" class="key-tile bg-orange-600/90 backdrop-blur rounded-xl p-4 lg:p-5 text-center group hover:bg-white/30 hover:-translate-y-1 hover:shadow-lg hover:no-underline transition-all duration-200 w-full sm:w-auto">
-            <div class="w-12 h-12 bg-white/20 rounded-lg hidden sm:flex items-center justify-center mx-auto mb-3 group-hover:bg-white/30 transition text-white">
-              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <!-- OB3 TCP Profile -->
+            <a href="{{ "/profiles/ob3-ler-rs/" | relative_url }}" class="inline-flex items-center gap-2 bg-orange-600/80 backdrop-blur rounded-lg px-4 py-2 text-white text-sm font-medium hover:bg-white/30 hover:no-underline transition-all duration-200">
+              <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
               </svg>
-            </div>
-            <h3 class="font-semibold text-white text-sm group-hover:text-white">LER-RS / TCP</h3>
-            <p class="text-white/70 text-xs mt-1 group-hover:text-white/70">Packaging Profile</p>
-          </a>
+              TCP (Trusted Career Profile)
+              <span class="text-white/60 text-xs font-normal">Packaging profile</span>
+            </a>
 
+          </div>
         </div>
+
       </section>
     </nav>
   </div>
