@@ -71,8 +71,8 @@ export class HttpExchangeClient implements ExchangeClient {
   }
 
   async fetchProtocols(exchangeId: string): Promise<Record<string, string>> {
-    // TODO: this interactions URL pattern is not locked. We may need to be
-    // provided an interaction URL directly rather than just an exchange ID.
+    // Note: interactions URL pattern may evolve; implementations may need to
+    // provide an interaction URL directly rather than derive from exchange ID.
     const url = `${this.baseUrl}/interactions/${exchangeId}?iuv=1`;
     const headers = this.buildHeaders({ Accept: "application/json" });
     const res = await fetch(url, this.fetchOptions(headers));

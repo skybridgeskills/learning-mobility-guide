@@ -19,9 +19,19 @@ declare module '@digitalbazaar/eddsa-rdfc-2022-cryptosuite' {
 }
 
 declare module '@digitalbazaar/ed25519-multikey' {
-  export function generate(): Promise<{
-    controller: string;
-    signer(): () => {sign: (args: unknown) => Promise<unknown>};
+  export function generate(options?: {
+    id?: string;
+    controller?: string;
+    seed?: Uint8Array;
+  }): Promise<{
+    controller?: string;
+    id?: string;
+    signer(): (args: unknown) => Promise<unknown>;
+    export(options?: {
+      publicKey?: boolean;
+      secretKey?: boolean;
+      includeContext?: boolean;
+    }): Promise<{id: string; controller?: string; [key: string]: unknown}>;
   }>;
 }
 
@@ -40,7 +50,11 @@ declare module '@digitalbazaar/ed25519-signature-2020' {
 }
 
 declare module '@digitalcredentials/security-document-loader' {
-  export function securityLoader(): {
+  export function securityLoader(options?: {
+    fetchRemoteContexts?: boolean;
+    useOBv3BetaContext?: boolean;
+  }): {
+    addStatic(url: string, doc: unknown): void;
     build(): (url: string) => Promise<{document: unknown}>;
   };
 }

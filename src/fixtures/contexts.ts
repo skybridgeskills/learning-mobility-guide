@@ -5,7 +5,7 @@
 
 export const CONTEXTS = {
   VC_2_0: 'https://www.w3.org/ns/credentials/v2',
-  OB_3_0: 'https://purl.imsglobal.org/spec/ob/v3p0/context-3.0.3.jsonld',
+  OB_3_0: 'https://purl.imsglobal.org/spec/ob/v3p0/context-3.0.3.json',
   DATA_INTEGRITY: 'https://w3id.org/security/data-integrity/v2',
   ED25519_2020: 'https://w3id.org/security/suites/ed25519-2020/v1',
 } as const;

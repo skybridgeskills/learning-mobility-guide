@@ -9,7 +9,6 @@ import {cryptosuite as eddsaRdfc2022Cryptosuite} from '@digitalbazaar/eddsa-rdfc
 import * as Ed25519Multikey from '@digitalbazaar/ed25519-multikey';
 import {securityLoader} from '@digitalcredentials/security-document-loader';
 import {CONTEXTS, CREDENTIAL_TYPES} from '../fixtures/contexts.ts';
-import {documentLoader as baseDocumentLoader} from './did.ts';
 
 export interface BaseCredentialTemplate {
   '@context': string[];
@@ -86,7 +85,7 @@ export async function generateOb3Credential(input: CredentialInput): Promise<unk
   const credential = await issue({
     credential: template,
     suite,
-    documentLoader: baseDocumentLoader,
+    documentLoader,
   });
 
   return credential;
@@ -126,11 +125,12 @@ export async function validateCredential(credential: unknown): Promise<{
     return {valid: false, errors};
   }
 
+  const verifyLoader = securityLoader({fetchRemoteContexts: true}).build();
   try {
     const result = await verifyCredential({
       credential: cred,
       suite: [new DataIntegrityProof({cryptosuite: eddsaRdfc2022Cryptosuite})],
-      documentLoader,
+      documentLoader: verifyLoader,
     });
     return {valid: result.verified};
   } catch (e) {
