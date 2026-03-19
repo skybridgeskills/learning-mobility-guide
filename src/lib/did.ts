@@ -44,4 +44,26 @@ export async function createDidAuthPresentation(
   });
 }
 
+/**
+ * Build a signed Verifiable Presentation containing the given credentials.
+ * Used when presenting to a verifier in the verification exchange flow.
+ */
+export async function createPresentationWithCredentials(
+  holderDid: string,
+  credentials: unknown[],
+  challenge: string,
+  suite: Ed25519Signature2020
+): Promise<unknown> {
+  const presentation = createPresentation({
+    holder: holderDid,
+    verifiableCredential: credentials,
+  });
+  return signPresentation({
+    presentation,
+    suite,
+    challenge,
+    documentLoader,
+  });
+}
+
 export {documentLoader};

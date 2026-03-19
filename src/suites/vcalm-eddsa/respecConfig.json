@@ -1,0 +1,9 @@
+{
+  "specStatus": "unofficial",
+  "shortName": "vcalm-eddsa-test-suite",
+  "subtitle": "VCALM-EdDSA Interoperability Report",
+  "github": "https://github.com/ler-ecosystem/ler-ecosystem-coordination-guide",
+  "edDraftURI": "https://ler-ecosystem.github.io/ler-ecosystem-coordination-guide/reports/vcalm-eddsa/",
+  "doJsonLd": true,
+  "includePermalinks": false
+}

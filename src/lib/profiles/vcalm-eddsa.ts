@@ -4,7 +4,7 @@
  */
 
 import type {ExchangeClient, ExchangeProtocols} from '../exchange.ts';
-import {generateKeyPair, createDidAuthPresentation} from '../did.ts';
+import {generateKeyPair, createDidAuthPresentation, createPresentationWithCredentials} from '../did.ts';
 import {validateCredential} from '../credentials.ts';
 import type {Endpoint} from '../types.ts';
 
@@ -86,13 +86,13 @@ export interface VerifierFlowResult {
 }
 
 /**
- * Run the verifier exchange flow: create exchange → present credential → confirm acceptance.
+ * Run the verifier exchange flow: create exchange → get challenge → present signed VP → confirm acceptance.
  */
 export async function runVerifierFlow(
   client: ExchangeClient,
   endpoint: Endpoint,
   variables: Record<string, unknown>,
-  presentation: unknown
+  credential: unknown
 ): Promise<VerifierFlowResult> {
   const workflowId = endpoint.workflowId ?? 'verify';
 
@@ -102,6 +102,28 @@ export async function runVerifierFlow(
   if (!vcapiUrl) {
     return {protocols, error: 'No vcapi URL in protocols'};
   }
+
+  const initRes = await fetch(vcapiUrl, {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({}),
+  });
+  if (!initRes.ok) {
+    return {protocols, accepted: false, error: `Init failed: HTTP ${initRes.status}`};
+  }
+  const initResult = (await initRes.json()) as Record<string, unknown>;
+  const challenge = extractChallengeFromVprResponse(initResult);
+  if (!challenge) {
+    return {protocols, error: 'No challenge in VPR response'};
+  }
+
+  const {suite, did} = await generateKeyPair();
+  const presentation = await createPresentationWithCredentials(
+    did,
+    [credential],
+    challenge,
+    suite
+  );
 
   const res = await fetch(vcapiUrl, {
     method: 'POST',

@@ -7,8 +7,9 @@ import {issue, verifyCredential} from '@digitalbazaar/vc';
 import {DataIntegrityProof} from '@digitalbazaar/data-integrity';
 import {cryptosuite as eddsaRdfc2022Cryptosuite} from '@digitalbazaar/eddsa-rdfc-2022-cryptosuite';
 import * as Ed25519Multikey from '@digitalbazaar/ed25519-multikey';
+import {securityLoader} from '@digitalcredentials/security-document-loader';
 import {CONTEXTS, CREDENTIAL_TYPES} from '../fixtures/contexts.ts';
-import {documentLoader} from './did.ts';
+import {documentLoader as baseDocumentLoader} from './did.ts';
 
 export interface BaseCredentialTemplate {
   '@context': string[];
@@ -39,7 +40,7 @@ export function createBaseOb3Template(issuer: string): BaseCredentialTemplate {
 }
 
 export interface CredentialInput {
-  issuer: string;
+  issuer?: string;
   subjectDid?: string;
   achievementName?: string;
   achievementDescription?: string;
@@ -49,8 +50,21 @@ export interface CredentialInput {
  * Generate a valid Open Badges 3.0 Verifiable Credential signed with eddsa-rdfc-2022.
  */
 export async function generateOb3Credential(input: CredentialInput): Promise<unknown> {
-  const keyPair = await Ed25519Multikey.generate();
-  const issuer = input.issuer ?? keyPair.controller;
+  const controller = input.issuer ?? 'https://example.edu/issuers/test';
+  const keyPair = await Ed25519Multikey.generate({controller});
+  const publicKey = await keyPair.export({publicKey: true, includeContext: true}) as {id: string; controller?: string};
+  const issuer = publicKey.controller ?? controller;
+
+  const loader = securityLoader({fetchRemoteContexts: true});
+  loader.addStatic(publicKey.id, publicKey);
+  const controllerDoc = {
+    id: issuer,
+    '@context': ['https://www.w3.org/ns/did/v1', 'https://w3id.org/security/multikey/v1'],
+    assertionMethod: [publicKey],
+  };
+  loader.addStatic(issuer, controllerDoc);
+  const documentLoader = loader.build();
+
   const template = createBaseOb3Template(issuer);
   if (input.subjectDid) {
     (template.credentialSubject as Record<string, unknown>).id = input.subjectDid;
@@ -72,7 +86,7 @@ export async function generateOb3Credential(input: CredentialInput): Promise<unk
   const credential = await issue({
     credential: template,
     suite,
-    documentLoader,
+    documentLoader: baseDocumentLoader,
   });
 
   return credential;

@@ -1,7 +1,10 @@
 declare module '@digitalbazaar/vc' {
   export function issue(options: unknown): Promise<unknown>;
   export function verifyCredential(options: unknown): Promise<{verified: boolean}>;
-  export function createPresentation(options?: {holder?: string}): unknown;
+  export function createPresentation(options?: {
+    holder?: string;
+    verifiableCredential?: unknown[];
+  }): unknown;
   export function signPresentation(options: unknown): Promise<unknown>;
 }
 
