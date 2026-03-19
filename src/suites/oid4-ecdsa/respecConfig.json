@@ -1,0 +1,9 @@
+{
+  "specStatus": "unofficial",
+  "shortName": "oid4-ecdsa-test-suite",
+  "subtitle": "OID4-ECDSA Interoperability Report",
+  "github": "https://github.com/ler-ecosystem/ler-ecosystem-coordination-guide",
+  "edDraftURI": "https://ler-ecosystem.github.io/ler-ecosystem-coordination-guide/reports/oid4-ecdsa/",
+  "doJsonLd": true,
+  "includePermalinks": false
+}

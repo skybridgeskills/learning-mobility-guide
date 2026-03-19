@@ -7,6 +7,18 @@
       "endpoint": "https://example.com",
       "tags": ["vcalm-eddsa"],
       "workflowId": "issue-badge"
+    },
+    {
+      "id": "did:key:z6MkExampleOid4",
+      "endpoint": "https://example.com/oid4",
+      "tags": ["oid4-ecdsa"],
+      "workflowId": "issue-badge"
+    },
+    {
+      "id": "did:key:z6MkExampleOb3",
+      "endpoint": "https://example.com/ob3",
+      "tags": ["ob3-direct-delivery"],
+      "workflowId": "issue-badge"
     }
   ],
   "verifiers": [

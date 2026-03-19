@@ -1,0 +1,9 @@
+{
+  "specStatus": "unofficial",
+  "shortName": "ob3-direct-delivery-test-suite",
+  "subtitle": "OB 3.0 Direct Delivery Interoperability Report",
+  "github": "https://github.com/ler-ecosystem/ler-ecosystem-coordination-guide",
+  "edDraftURI": "https://ler-ecosystem.github.io/ler-ecosystem-coordination-guide/reports/ob3-direct-delivery/",
+  "doJsonLd": true,
+  "includePermalinks": false
+}
