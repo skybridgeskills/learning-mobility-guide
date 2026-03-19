@@ -5,3 +5,12 @@ docs/feedback
 .cursor-rules
 _site
 Gemfile.lock
+
+# Node / test suite
+node_modules/
+dist/
+reports/**/index.json
+reports/**/index.html
+reports/**/suite.log
+.env.local
+localConfig.cjs

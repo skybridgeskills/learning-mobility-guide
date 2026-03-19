@@ -1,0 +1,4 @@
+node-option:
+  - import=tsx
+timeout: 15000
+preserve-symlinks: true

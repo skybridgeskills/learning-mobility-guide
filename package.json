@@ -1,0 +1,29 @@
+{
+  "name": "ler-ecosystem-test-suites",
+  "version": "0.1.0",
+  "description": "Interoperability test suites for LER ecosystem coordination profiles.",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "npm run test:vcalm-eddsa && npm run test:oid4-ecdsa && npm run test:ob3-direct-delivery",
+    "test:vcalm-eddsa": "mocha src/suites/vcalm-eddsa/**/*.test.ts --reporter @digitalbazaar/mocha-w3c-interop-reporter --reporter-options abstract=\"$PWD/src/suites/vcalm-eddsa/abstract.hbs\",reportDir=\"$PWD/reports/vcalm-eddsa\",respec=\"$PWD/src/suites/vcalm-eddsa/respecConfig.json\",suiteLog='./reports/vcalm-eddsa/suite.log',templateData=\"$PWD/reports/vcalm-eddsa/index.json\",title=\"VCALM-EdDSA Interoperability Report 1.0\" --timeout 15000 --preserve-symlinks",
+    "test:oid4-ecdsa": "mocha src/suites/oid4-ecdsa/**/*.test.ts --reporter @digitalbazaar/mocha-w3c-interop-reporter --reporter-options abstract=\"$PWD/src/suites/oid4-ecdsa/abstract.hbs\",reportDir=\"$PWD/reports/oid4-ecdsa\",respec=\"$PWD/src/suites/oid4-ecdsa/respecConfig.json\",suiteLog='./reports/oid4-ecdsa/suite.log',templateData=\"$PWD/reports/oid4-ecdsa/index.json\",title=\"OID4-ECDSA Interoperability Report 1.0\" --timeout 15000 --preserve-symlinks",
+    "test:ob3-direct-delivery": "mocha src/suites/ob3-direct-delivery/**/*.test.ts --reporter @digitalbazaar/mocha-w3c-interop-reporter --reporter-options abstract=\"$PWD/src/suites/ob3-direct-delivery/abstract.hbs\",reportDir=\"$PWD/reports/ob3-direct-delivery\",respec=\"$PWD/src/suites/ob3-direct-delivery/respecConfig.json\",suiteLog='./reports/ob3-direct-delivery/suite.log',templateData=\"$PWD/reports/ob3-direct-delivery/index.json\",title=\"OB 3.0 Direct Delivery Interoperability Report 1.0\" --timeout 15000 --preserve-symlinks",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@digitalbazaar/mocha-w3c-interop-reporter": "^1.5.0",
+    "chai": "^4.3.6",
+    "dotenv": "^16.4.7",
+    "klona": "^2.0.5",
+    "mocha": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.20",
+    "@types/mocha": "^10.0.10",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}

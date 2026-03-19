@@ -33,6 +33,15 @@ exclude:
   - vendor
   - docker-compose.yml
   - docs
+  - src
+  - implementations
+  - reports
+  - package.json
+  - pnpm-lock.yaml
+  - tsconfig.json
+  - .mocharc.yml
+  - .env.example
+  - .env.local
 
 # Include files that start with underscore
 include:
