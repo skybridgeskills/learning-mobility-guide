@@ -1,0 +1,20 @@
+{
+  "name": "Skybridge Skills",
+  "implementation": "DCC Transaction Service",
+  "issuers": [
+    {
+      "id": "did:web:vverify.ngrok.io",
+      "endpoint": "https://vverify.ngrok.io",
+      "tags": ["vcalm-eddsa"],
+      "workflowId": "issue-badge"
+    }
+  ],
+  "verifiers": [
+    {
+      "id": "did:web:vverify.ngrok.io",
+      "endpoint": "https://vverify.ngrok.io",
+      "tags": ["vcalm-eddsa"],
+      "workflowId": "verify-badge"
+    }
+  ]
+}

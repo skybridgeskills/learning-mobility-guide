@@ -14,8 +14,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
 
 function loadJsonFiles(): ImplementationConfig[] {
+  // Load all .json files in the local directory except example template(s)
   const files = readdirSync(__dirname)
-    .filter(f => f.endsWith('.json'));
+    .filter(f => f.endsWith('.json') && !f.endsWith('.template.json'));
   return files.map(f => {
     const content = readFileSync(join(__dirname, f), 'utf-8');
     return JSON.parse(content) as ImplementationConfig;
