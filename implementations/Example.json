@@ -1,0 +1,20 @@
+{
+  "name": "Example Corp",
+  "implementation": "Example Platform",
+  "issuers": [
+    {
+      "id": "did:key:z6MkExample",
+      "endpoint": "https://example.com",
+      "tags": ["vcalm-eddsa"],
+      "workflowId": "issue-badge"
+    }
+  ],
+  "verifiers": [
+    {
+      "id": "did:key:z6MkExample",
+      "endpoint": "https://example.com",
+      "tags": ["vcalm-eddsa"],
+      "workflowId": "verify-badge"
+    }
+  ]
+}
